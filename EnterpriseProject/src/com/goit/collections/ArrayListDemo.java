@@ -19,6 +19,8 @@ public class ArrayListDemo {
         long[] averageRemoveTimes = getArrayTimeResultArrayListRemove();
         System.out.println("Test ArrayList.remove(): " + Arrays.toString(averageRemoveTimes));
 
+        long[] averageContainsTimes = getArrayTimeResultArrayListContains();
+        System.out.println("Test ArrayList.contains(): " + Arrays.toString(averageContainsTimes));
     }
 
     private static long[] getArrayTimeResultArrayListAdd() {
@@ -143,6 +145,41 @@ public class ArrayListDemo {
 
         for (int i = 0; i < COUNT_OPERATIONS; i++) {
             array1000k[i] = removeElementFromArrayList(VOLUME_1000K);
+        }
+        averageTimes[2] = getAverageTime(array1000k);
+
+        return averageTimes;
+    }
+
+    private static long containsElementInArrayList(int count) {
+        ArrayList<Integer> list = randomArrayListFilling(count);
+
+        long startTime = System.nanoTime();
+        boolean retval = list.contains(Math.random() * VOLUME_1000K);
+        long endTime = System.nanoTime();
+
+        return endTime - startTime;
+    }
+
+    private static long[] getArrayTimeResultArrayListContains() {
+        long[] averageTimes = new long[3];
+
+        long[] array10k   = new long[COUNT_OPERATIONS];
+        long[] array100k  = new long[COUNT_OPERATIONS];
+        long[] array1000k = new long[COUNT_OPERATIONS];
+
+        for (int i = 0; i < COUNT_OPERATIONS; i++) {
+            array10k[i] = containsElementInArrayList(VOLUME_10K);
+        }
+        averageTimes[0] = getAverageTime(array10k);
+
+        for (int i = 0; i < COUNT_OPERATIONS; i++) {
+            array100k[i] = containsElementInArrayList(VOLUME_100K);
+        }
+        averageTimes[1] = getAverageTime(array100k);
+
+        for (int i = 0; i < COUNT_OPERATIONS; i++) {
+            array1000k[i] = containsElementInArrayList(VOLUME_1000K);
         }
         averageTimes[2] = getAverageTime(array1000k);
 
