@@ -1,4 +1,6 @@
-package com.goit.collections;
+package com.goit.collections.set;
+
+import com.goit.collections.set.SetDemo;
 
 import java.util.HashSet;
 

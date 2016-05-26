@@ -1,4 +1,4 @@
-package com.goit.collections;
+package com.goit.collections.set;
 
 import java.util.Set;
 

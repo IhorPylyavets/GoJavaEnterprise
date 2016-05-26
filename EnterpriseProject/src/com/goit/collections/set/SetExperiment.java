@@ -1,4 +1,4 @@
-package com.goit.collections;
+package com.goit.collections.set;
 
 public interface SetExperiment {
     public long addExperiment();

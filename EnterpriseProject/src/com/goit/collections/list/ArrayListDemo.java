@@ -1,4 +1,6 @@
-package com.goit.collections;
+package com.goit.collections.list;
+
+import com.goit.collections.list.ListDemo;
 
 import java.util.ArrayList;
 

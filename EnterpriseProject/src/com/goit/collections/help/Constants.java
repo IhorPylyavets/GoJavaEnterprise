@@ -1,4 +1,4 @@
-package com.goit.collections;
+package com.goit.collections.help;
 
 public class Constants {
     public static int VOLUME_10K = 10_000;

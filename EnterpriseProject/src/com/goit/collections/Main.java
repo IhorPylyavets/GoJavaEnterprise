@@ -1,5 +1,9 @@
 package com.goit.collections;
 
+import com.goit.collections.help.Constants;
+import com.goit.collections.list.ArrayListDemo;
+import com.goit.collections.list.LinkedListDemo;
+
 public class Main {
     public static void main(String[] args) {
         int size = Constants.VOLUME_1000K;
