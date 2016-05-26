@@ -1,6 +1,7 @@
 package com.goit.collections;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class ArrayListDemo implements ListExperiment{
     private ArrayList arrayList;
@@ -81,12 +82,33 @@ public class ArrayListDemo implements ListExperiment{
 
     @Override
     public long iteratorAddExperiment() {
-        return 0;
+        long[] timesArray = new long[Constants.COUNT_EXPERIMENT];
+        ListIterator<Integer> iterator = this.arrayList.listIterator();
+
+        for (int i = 0; i < Constants.COUNT_EXPERIMENT; i++) {
+            long startTime = System.nanoTime();
+            iterator.add(0);
+            long endTime = System.nanoTime();
+            timesArray[i] = endTime - startTime;
+        }
+
+        return getAverageTime(timesArray);
     }
 
     @Override
     public long iteratorRemoveExperiment() {
-        return 0;
+        long[] timesArray = new long[Constants.COUNT_EXPERIMENT];
+        ListIterator<Integer> iterator = this.arrayList.listIterator();
+
+        for (int i = 0; i < Constants.COUNT_EXPERIMENT; i++) {
+            long startTime = System.nanoTime();
+            iterator.next();
+            iterator.remove();
+            long endTime = System.nanoTime();
+            timesArray[i] = endTime - startTime;
+        }
+
+        return getAverageTime(timesArray);
     }
 
     private long getAverageTime(long[] timesArray) {
