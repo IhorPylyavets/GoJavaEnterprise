@@ -7,6 +7,4 @@ public class ArrayListDemo extends ListDemo {
     public ArrayListDemo() {
         super(new ArrayList<>());
     }
-
-
 }
