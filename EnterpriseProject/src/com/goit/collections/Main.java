@@ -1,16 +1,18 @@
 package com.goit.collections;
 
-import com.goit.collections.help.Constants;
+import com.goit.collections.common.Constants;
 import com.goit.collections.list.ArrayListDemo;
 import com.goit.collections.list.LinkedListDemo;
+import com.goit.collections.set.HashSetDemo;
+import com.goit.collections.set.TreeSetDemo;
 
 public class Main {
     public static void main(String[] args) {
         int size = Constants.VOLUME_1000K;
 
-        ArrayListDemo arrayListDemo = new ArrayListDemo();
-
         System.out.println("Tests for size: " + size);
+
+        ArrayListDemo arrayListDemo = new ArrayListDemo();
         System.out.println("Test ArrayList.populate():       " + arrayListDemo.populateExperiment(size) + " nanoseconds");
         System.out.println("Test ArrayList.add():            " + arrayListDemo.addExperiment() + " nanoseconds");
         System.out.println("Test ArrayList.get():            " + arrayListDemo.getExperiment() + " nanoseconds");
@@ -21,8 +23,6 @@ public class Main {
         System.out.println();
 
         LinkedListDemo linkedListDemo = new LinkedListDemo();
-
-        System.out.println("Tests for size: " + size);
         System.out.println("Test LinkedList.populate():       " + linkedListDemo.populateExperiment(size) + " nanoseconds");
         System.out.println("Test LinkedList.add():            " + linkedListDemo.addExperiment() + " nanoseconds");
         System.out.println("Test LinkedList.get():            " + linkedListDemo.getExperiment() + " nanoseconds");
@@ -30,6 +30,19 @@ public class Main {
         System.out.println("Test LinkedList.contains():       " + linkedListDemo.containsExperiment() + " nanoseconds");
         System.out.println("Test LinkedList.iteratorAdd():    " + linkedListDemo.iteratorAddExperiment() + " nanoseconds");
         System.out.println("Test LinkedList.iteratorRemove(): " + linkedListDemo.iteratorRemoveExperiment() + " nanoseconds");
+        System.out.println();
 
+        HashSetDemo hashSetDemo = new HashSetDemo();
+        System.out.println("Test HashSet.populate(): " + hashSetDemo.populateExperiment(size) + " nanoseconds");
+        System.out.println("Test HashSet.add():      " + hashSetDemo.addExperiment() + " nanoseconds");
+        System.out.println("Test HashSet.remove():   " + hashSetDemo.removeExperiment() + " nanoseconds");
+        System.out.println("Test HashSet.contains(): " + hashSetDemo.containsExperiment() + " nanoseconds");
+        System.out.println();
+
+        TreeSetDemo treeSetDemo = new TreeSetDemo();
+        System.out.println("Test TreeSet.populate(): " + treeSetDemo.populateExperiment(size) + " nanoseconds");
+        System.out.println("Test TreeSet.add():      " + treeSetDemo.addExperiment() + " nanoseconds");
+        System.out.println("Test TreeSet.remove():   " + treeSetDemo.removeExperiment() + " nanoseconds");
+        System.out.println("Test TreeSet.contains(): " + treeSetDemo.containsExperiment() + " nanoseconds");
     }
 }

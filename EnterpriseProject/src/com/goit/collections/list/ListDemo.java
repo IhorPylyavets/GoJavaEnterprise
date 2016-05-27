@@ -1,6 +1,7 @@
 package com.goit.collections.list;
 
-import com.goit.collections.help.Constants;
+import com.goit.collections.common.Avarage;
+import com.goit.collections.common.Constants;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -23,7 +24,7 @@ public abstract class ListDemo<T extends List> implements ListExperiment {
             timesArray[i] = endTime - startTime;
         }
 
-        return getAverageTime(timesArray);
+        return Avarage.getAverageTime(timesArray);
     }
 
     @Override
@@ -37,7 +38,7 @@ public abstract class ListDemo<T extends List> implements ListExperiment {
             timesArray[i] = endTime - startTime;
         }
 
-        return getAverageTime(timesArray);
+        return Avarage.getAverageTime(timesArray);
     }
 
     @Override
@@ -51,7 +52,7 @@ public abstract class ListDemo<T extends List> implements ListExperiment {
             timesArray[i] = endTime - startTime;
         }
 
-        return getAverageTime(timesArray);
+        return Avarage.getAverageTime(timesArray);
     }
 
     @Override
@@ -65,7 +66,7 @@ public abstract class ListDemo<T extends List> implements ListExperiment {
             timesArray[i] = endTime - startTime;
         }
 
-        return getAverageTime(timesArray);
+        return Avarage.getAverageTime(timesArray);
     }
 
     @Override
@@ -79,7 +80,7 @@ public abstract class ListDemo<T extends List> implements ListExperiment {
             timesArray[i] = endTime - startTime;
         }
 
-        return getAverageTime(timesArray);
+        return Avarage.getAverageTime(timesArray);
     }
 
     @Override
@@ -94,7 +95,7 @@ public abstract class ListDemo<T extends List> implements ListExperiment {
             timesArray[i] = endTime - startTime;
         }
 
-        return getAverageTime(timesArray);
+        return Avarage.getAverageTime(timesArray);
     }
 
     @Override
@@ -110,16 +111,6 @@ public abstract class ListDemo<T extends List> implements ListExperiment {
             timesArray[i] = endTime - startTime;
         }
 
-        return getAverageTime(timesArray);
-    }
-
-    private long getAverageTime(long[] timesArray) {
-        long resultTime = 0;
-
-        for (long tempTime : timesArray) {
-            resultTime += tempTime;
-        }
-
-        return  resultTime/timesArray.length;
+        return Avarage.getAverageTime(timesArray);
     }
 }
