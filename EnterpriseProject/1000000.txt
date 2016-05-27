@@ -1,0 +1,27 @@
+Tests for size: 1000000
+
+Test ArrayList.populate():       108 nanoseconds
+Test ArrayList.add():            196 nanoseconds
+Test ArrayList.get():            602 nanoseconds
+Test ArrayList.remove():         718 nanoseconds
+Test ArrayList.contains():       2361914 nanoseconds
+Test ArrayList.iteratorAdd():    842526 nanoseconds
+Test ArrayList.iteratorRemove(): 761130 nanoseconds
+
+Test LinkedList.populate():       148 nanoseconds
+Test LinkedList.add():            188 nanoseconds
+Test LinkedList.get():            1663 nanoseconds
+Test LinkedList.remove():         2018 nanoseconds
+Test LinkedList.contains():       5862339 nanoseconds
+Test LinkedList.iteratorAdd():    684 nanoseconds
+Test LinkedList.iteratorRemove(): 2955 nanoseconds
+
+Test HashSet.populate(): 1320 nanoseconds
+Test HashSet.add():      196 nanoseconds
+Test HashSet.remove():   782 nanoseconds
+Test HashSet.contains(): 748 nanoseconds
+
+Test TreeSet.populate(): 761 nanoseconds
+Test TreeSet.add():      1334 nanoseconds
+Test TreeSet.remove():   1817 nanoseconds
+Test TreeSet.contains(): 2540 nanoseconds

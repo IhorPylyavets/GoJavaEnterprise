@@ -1,48 +1,58 @@
 package com.goit.collections;
 
 import com.goit.collections.common.Constants;
+import com.goit.collections.common.FileWriterDemo;
 import com.goit.collections.list.ArrayListDemo;
 import com.goit.collections.list.LinkedListDemo;
 import com.goit.collections.set.HashSetDemo;
 import com.goit.collections.set.TreeSetDemo;
 
+import java.io.*;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int size = Constants.VOLUME_1000K;
 
-        System.out.println("Tests for size: " + size);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Tests for size: " + size + "\r\n");
+        stringBuilder.append("\r\n");
 
         ArrayListDemo arrayListDemo = new ArrayListDemo();
-        System.out.println("Test ArrayList.populate():       " + arrayListDemo.populateExperiment(size) + " nanoseconds");
-        System.out.println("Test ArrayList.add():            " + arrayListDemo.addExperiment() + " nanoseconds");
-        System.out.println("Test ArrayList.get():            " + arrayListDemo.getExperiment() + " nanoseconds");
-        System.out.println("Test ArrayList.remove():         " + arrayListDemo.removeExperiment() + " nanoseconds");
-        System.out.println("Test ArrayList.contains():       " + arrayListDemo.containsExperiment() + " nanoseconds");
-        System.out.println("Test ArrayList.iteratorAdd():    " + arrayListDemo.iteratorAddExperiment() + " nanoseconds");
-        System.out.println("Test ArrayList.iteratorRemove(): " + arrayListDemo.iteratorRemoveExperiment() + " nanoseconds");
-        System.out.println();
+        stringBuilder.append("Test ArrayList.populate():       " + arrayListDemo.populateExperiment(size) + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test ArrayList.add():            " + arrayListDemo.addExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test ArrayList.get():            " + arrayListDemo.getExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test ArrayList.remove():         " + arrayListDemo.removeExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test ArrayList.contains():       " + arrayListDemo.containsExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test ArrayList.iteratorAdd():    " + arrayListDemo.iteratorAddExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test ArrayList.iteratorRemove(): " + arrayListDemo.iteratorRemoveExperiment() + " nanoseconds"+ "\r\n");
+        stringBuilder.append("\r\n");
 
         LinkedListDemo linkedListDemo = new LinkedListDemo();
-        System.out.println("Test LinkedList.populate():       " + linkedListDemo.populateExperiment(size) + " nanoseconds");
-        System.out.println("Test LinkedList.add():            " + linkedListDemo.addExperiment() + " nanoseconds");
-        System.out.println("Test LinkedList.get():            " + linkedListDemo.getExperiment() + " nanoseconds");
-        System.out.println("Test LinkedList.remove():         " + linkedListDemo.removeExperiment() + " nanoseconds");
-        System.out.println("Test LinkedList.contains():       " + linkedListDemo.containsExperiment() + " nanoseconds");
-        System.out.println("Test LinkedList.iteratorAdd():    " + linkedListDemo.iteratorAddExperiment() + " nanoseconds");
-        System.out.println("Test LinkedList.iteratorRemove(): " + linkedListDemo.iteratorRemoveExperiment() + " nanoseconds");
-        System.out.println();
+        stringBuilder.append("Test LinkedList.populate():       " + linkedListDemo.populateExperiment(size) + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test LinkedList.add():            " + linkedListDemo.addExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test LinkedList.get():            " + linkedListDemo.getExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test LinkedList.remove():         " + linkedListDemo.removeExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test LinkedList.contains():       " + linkedListDemo.containsExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test LinkedList.iteratorAdd():    " + linkedListDemo.iteratorAddExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test LinkedList.iteratorRemove(): " + linkedListDemo.iteratorRemoveExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("\r\n");
 
         HashSetDemo hashSetDemo = new HashSetDemo();
-        System.out.println("Test HashSet.populate(): " + hashSetDemo.populateExperiment(size) + " nanoseconds");
-        System.out.println("Test HashSet.add():      " + hashSetDemo.addExperiment() + " nanoseconds");
-        System.out.println("Test HashSet.remove():   " + hashSetDemo.removeExperiment() + " nanoseconds");
-        System.out.println("Test HashSet.contains(): " + hashSetDemo.containsExperiment() + " nanoseconds");
-        System.out.println();
+        stringBuilder.append("Test HashSet.populate(): " + hashSetDemo.populateExperiment(size) + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test HashSet.add():      " + hashSetDemo.addExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test HashSet.remove():   " + hashSetDemo.removeExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test HashSet.contains(): " + hashSetDemo.containsExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("\r\n");
 
         TreeSetDemo treeSetDemo = new TreeSetDemo();
-        System.out.println("Test TreeSet.populate(): " + treeSetDemo.populateExperiment(size) + " nanoseconds");
-        System.out.println("Test TreeSet.add():      " + treeSetDemo.addExperiment() + " nanoseconds");
-        System.out.println("Test TreeSet.remove():   " + treeSetDemo.removeExperiment() + " nanoseconds");
-        System.out.println("Test TreeSet.contains(): " + treeSetDemo.containsExperiment() + " nanoseconds");
+        stringBuilder.append("Test TreeSet.populate(): " + treeSetDemo.populateExperiment(size) + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test TreeSet.add():      " + treeSetDemo.addExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test TreeSet.remove():   " + treeSetDemo.removeExperiment() + " nanoseconds" + "\r\n");
+        stringBuilder.append("Test TreeSet.contains(): " + treeSetDemo.containsExperiment() + " nanoseconds" + "\r\n");
+
+        FileWriterDemo fileWriterDemo = new FileWriterDemo();
+        fileWriterDemo.writeDataToFile(size + ".txt", stringBuilder.toString());
+
+        System.out.println("Read experiment results in txt file");
     }
 }
