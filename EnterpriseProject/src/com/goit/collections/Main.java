@@ -50,9 +50,9 @@ public class Main {
         stringBuilder.append("Test TreeSet.remove():   " + treeSetDemo.removeExperiment() + " nanoseconds" + "\r\n");
         stringBuilder.append("Test TreeSet.contains(): " + treeSetDemo.containsExperiment() + " nanoseconds" + "\r\n");
 
+        System.out.println(stringBuilder.toString());
+
         FileWriterDemo fileWriterDemo = new FileWriterDemo();
         fileWriterDemo.writeDataToFile(size + ".txt", stringBuilder.toString());
-
-        System.out.println("Read experiment results in txt file");
     }
 }
