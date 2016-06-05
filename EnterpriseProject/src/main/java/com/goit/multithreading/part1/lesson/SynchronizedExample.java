@@ -27,7 +27,7 @@ public class SynchronizedExample {
         return counter++;
     }
     */
-    
+
     public int increment() {
         synchronized (lock) {
             return counter++;
