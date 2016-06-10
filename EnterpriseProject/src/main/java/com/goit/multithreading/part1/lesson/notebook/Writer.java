@@ -1,4 +1,4 @@
-package com.goit.multithreading.part1.hw;
+package com.goit.multithreading.part1.lesson.notebook;
 
 public class Writer {
 
