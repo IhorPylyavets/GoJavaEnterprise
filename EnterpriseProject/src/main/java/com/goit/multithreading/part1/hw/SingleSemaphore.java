@@ -12,18 +12,22 @@ public class SingleSemaphore implements Semaphore{
     }
 
     @Override
-    public void acquire() throws InterruptedException {
+    public void acquire() {
         synchronized (this) {
             if (this.permits > 0) {
                 this.permits -= 1;
             } else {
-                this.wait();
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
     @Override
-    public void acquire(int permits) throws InterruptedException {
+    public void acquire(int permits) {
         if (permits < 0 ) {
             throw new IllegalArgumentException();
         }
@@ -35,7 +39,11 @@ public class SingleSemaphore implements Semaphore{
                 if (this.permits > 0) {
                     this.notify();
                 }
-                this.wait();
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
