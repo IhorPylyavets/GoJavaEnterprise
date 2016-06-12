@@ -39,11 +39,14 @@ public class Runner {
             }
         }
 
-        public void writing(List<Author> authors, int countLines) throws InterruptedException {
+        private void writing(List<Author> authors, int countLines) throws InterruptedException {
             int id = random.nextInt(authors.size());
-
             Author author = authors.get(id);
 
+            write(author, countLines);
+        }
+
+        private void write(Author author, int countLines) throws InterruptedException {
             if (author.getCapacityInkForSingleLine() == 0) {
                 System.out.println(String.format("%s: I don't have enough ink", author.getNameAuthor()));
             } else if (author.getCapacityInkForSingleLine() <= countLines) {
