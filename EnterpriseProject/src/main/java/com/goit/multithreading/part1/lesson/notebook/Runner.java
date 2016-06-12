@@ -17,23 +17,6 @@ public class Runner {
         new Thread(new Notebook(authors)).start();
     }
 
-    public static void write(List<Author> authors, int countLines) {
-        int id = random.nextInt(authors.size());
-
-        Author author = authors.get(id);
-
-        if (author.getCapacityInkForSingleLine() == 0) {
-            System.out.println(String.format("%s: I don't have enough ink", author.getNameAuthor()));
-        } else if (author.getCapacityInkForSingleLine() <= countLines) {
-            author.makeSameNote(author.getCapacityInkForSingleLine());
-            System.out.println(String.format("%s: My ink ran out", author.getNameAuthor()));
-            authors.remove(author);
-        } else {
-            author.makeSameNote(countLines);
-        }
-
-    }
-
     public static class Notebook implements Runnable {
 
         private List<Author> authors;
@@ -45,10 +28,30 @@ public class Runner {
         @Override
         public void run() {
             while (true) {
-                write(authors, random.nextInt(4));
-                if (authors.size() == 0) {
-                    break;
+                try {
+                    writing(authors, random.nextInt(4));
+                    if (authors.size() == 0) {
+                        break;
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+            }
+        }
+
+        public void writing(List<Author> authors, int countLines) throws InterruptedException {
+            int id = random.nextInt(authors.size());
+
+            Author author = authors.get(id);
+
+            if (author.getCapacityInkForSingleLine() == 0) {
+                System.out.println(String.format("%s: I don't have enough ink", author.getNameAuthor()));
+            } else if (author.getCapacityInkForSingleLine() <= countLines) {
+                author.makeSameNote(author.getCapacityInkForSingleLine());
+                System.out.println(String.format("%s: My ink ran out", author.getNameAuthor()));
+                authors.remove(author);
+            } else {
+                author.makeSameNote(countLines);
             }
         }
     }

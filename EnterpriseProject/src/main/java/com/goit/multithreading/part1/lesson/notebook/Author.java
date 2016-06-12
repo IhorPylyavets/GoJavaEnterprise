@@ -24,13 +24,26 @@ public class Author {
         }
     }
 
-    public void makeSameNote(int countLine) {
+    public void await(int countLine) throws InterruptedException {
         synchronized (lock) {
-            for (int i = 0; i < countLine; i++) {
+            if (countLine > 0) {
+                lock.wait();
+            }
+        }
+    }
+
+    public void makeSameNote(int countLine) throws InterruptedException {
+        synchronized (lock) {
+            if (countLine > 0) {
                 String message = String.format("%s: it's my single line #%s",
                         this.getNameAuthor(), this.maxCapacity - this.getCapacityInkForSingleLine() + 1);
                 System.out.println(message);
+                countLine -= 1;
                 this.capacityInkForSingleLine -= 1;
+            }
+
+            if (countLine == 0) {
+                lock.notifyAll();
             }
         }
     }
