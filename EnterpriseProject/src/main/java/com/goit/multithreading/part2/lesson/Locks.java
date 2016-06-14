@@ -17,7 +17,7 @@ public class Locks {
     public void testLocks() {
         String threadName = Thread.currentThread().getName();
         System.out.println(threadName + " tries lock");
-        lock.lock();
+        lock.lock(); 
         try {
             System.out.println(threadName + " executing critical section");
             Thread.sleep(100);
