@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class ExecutorExample {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        new ExecutorExample().testScheduledAtFixedRate();
+        new ExecutorExample().test();
     }
 
     public void testExecute() {
@@ -118,6 +118,20 @@ public class ExecutorExample {
         }, 1, 1, TimeUnit.SECONDS);
 
         Thread.sleep(10000);
+
+        executorService.shutdown();
+    }
+
+    public void test() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<String> f = executorService.submit((Callable<String>) () -> {
+            throw new RuntimeException("Exception happened");
+        });
+        try {
+            System.out.println("result: " + f.get());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
         executorService.shutdown();
     }
