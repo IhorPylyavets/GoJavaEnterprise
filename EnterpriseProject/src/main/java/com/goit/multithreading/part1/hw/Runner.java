@@ -3,19 +3,12 @@ package com.goit.multithreading.part1.hw;
 public class Runner {
 
     public static void main(String[] args) {
-        Semaphore semaphore = new SingleSemaphore(10);
-        Semaphore semaphore2 = new SingleSemaphore(5);
+        SimpleSemaphore semaphore = new SimpleSemaphore(10);
 
-        synchronized (semaphore) {
-            int permits = semaphore.getAvailablePermits();
-            semaphore.release(10 - permits);
-        }
-
-        synchronized (semaphore2) {
-            int permits2 = semaphore2.getAvailablePermits();
-            semaphore2.release(10 - permits2);
-        }
-
+        new Thread(new Consumer(semaphore, 1)).start();
+        new Thread(new Consumer(semaphore, 5)).start();
+        new Thread(new Consumer(semaphore, 8)).start();
+        new Thread(new Consumer(semaphore, 4)).start();
     }
 
 }
