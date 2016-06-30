@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class  Bootstrap {
 
     private TaskProvider<Integer> taskProvider;
-    private ObjectFactory<Executor<Integer>>  executorFactory;
+    private ExecutorFactory  executorFactory;
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
@@ -21,7 +21,7 @@ public class  Bootstrap {
     }
 
     public void execute() {
-        Executor<Integer> executor = executorFactory.getObject();
+        Executor<Integer> executor = executorFactory.getIntegerExecutor();
 
         taskProvider.getAllTasks().forEach(executor::addTask);
         executor.execute();
@@ -36,8 +36,7 @@ public class  Bootstrap {
         this.taskProvider = taskProvider;
     }
 
-    @Autowired
-    public void setExecutorFactory(ObjectFactory<Executor<Integer>> executorFactory) {
+    public void setExecutorFactory(ExecutorFactory executorFactory) {
         this.executorFactory = executorFactory;
     }
 }
