@@ -1,33 +1,64 @@
-<project name="AntExample" basedir = ".">
+<project name="AntExample" basedir = "." default="main">
 
-    <property name="src" location="src" />
-    <property name="build" location="build" />
-    <property name="dist" location="dist" />
-    <property name="test.src" location="build" />
-    <property name="test.build" location="build.build" />
-    <property name="test.src" location="src" />
+    <property name="main.src.dir" location="src" />
+    <property name="main.build.dir" location="build/main" />
+    <property name="dist.dir" location="dist" />
+    <property name="test.build.dir" location="build/test" />
+    <property name="test.src.dir" location="test" />
+
+    <property name="main-class"  value="com.goit.enterprise.generics.Bootstrap"/>
 
     <target name="init" >
-        <mkdir dir = "${build}" />
-        <mkdir dir = "${dist}" />
+        <mkdir dir = "${main.build.dir}" />
+        <mkdir dir = "${dist.dir}" />
+        <mkdir dir = "${test.build.dir}" />
     </target>
 
     <target name="compile" depends="init">
-        <javac srcdir="${src}" destdir="${build}" source="1.8" target="1.8"/>
+        <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" source="1.8" target="1.8"/>
     </target>
 
-    <target name="dist" depends="compile" >
-        <jar destfile = "${dist}/AntExample.jar">
-            <fileset dir="${build}"/>
+    <path id="classpath.test">
+        <pathelement location="lib/junit-4.12.jar"/>
+        <pathelement location="lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="${main.build.dir}"/>
+    </path>
+
+    <target name="test-compile" depends="compile">
+        <mkdir dir="${test.build.dir}"/>
+        <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
+            <classpath refid="classpath.test"/>
+        </javac>
+    </target>
+
+    <target name="test" depends="test-compile">
+        <junit printsummary="on" haltonfailure="yes" fork="true">
+            <classpath>
+                <path refid="classpath.test"/>
+                <pathelement location="${test.build.dir}"/>
+            </classpath>
+            <formatter type="brief" usefile="false" />
+            <batchtest>
+                <fileset dir="${test.src.dir}" includes="**/*Test.java" />
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="dist" depends="test" >
+        <jar destfile = "${dist.dir}/AntExample.jar">
+            <fileset dir="${main.build.dir}"/>
             <manifest>
-                <attribute name="Main-Class" value="com.goit.enterprise.generics.Bootstrap"/>
+                <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
         </jar>
     </target>
 
     <target name="clean" >
-        <delete dir = "${build}" />
-        <delete dir = "${dist}" />
+        <delete dir = "${main.build.dir}" />
+        <delete dir = "${dist.dir}" />
+        <delete dir = "${test.build.dir}" />
     </target>
+
+    <target name="main" depends="clean, dist"/>
 
 </project>
