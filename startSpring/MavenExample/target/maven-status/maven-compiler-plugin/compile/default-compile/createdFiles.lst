@@ -1,0 +1,7 @@
+com\goit\Executor.class
+com\goit\SerialExecutor.class
+com\goit\AddTask.class
+com\goit\SerialExecutor$TaskAndValidator.class
+com\goit\Validator.class
+com\goit\Task.class
+com\goit\Bootstrap.class
