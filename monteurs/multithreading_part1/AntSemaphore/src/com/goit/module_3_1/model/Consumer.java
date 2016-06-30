@@ -1,6 +1,9 @@
-package com.goit.multithreading.part1.hw;
+package com.goit.module_3_1.model;
 
-public class Consumer implements Runnable{
+import com.goit.module_3_1.Semaphore;
+
+public class Consumer implements Runnable {
+
     public Semaphore semaphore;
     public int permitsRequired;
 
@@ -21,4 +24,5 @@ public class Consumer implements Runnable{
             e.printStackTrace();
         }
     }
+
 }
