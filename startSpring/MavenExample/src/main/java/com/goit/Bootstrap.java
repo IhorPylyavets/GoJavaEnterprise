@@ -1,9 +1,8 @@
 package com.goit;
 
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,7 +12,7 @@ public class  Bootstrap {
     private ExecutorFactory  executorFactory;
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         Bootstrap bootstrap = applicationContext.getBean("bootstrap", Bootstrap.class);
 
         bootstrap.execute();
