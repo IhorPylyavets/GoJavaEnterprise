@@ -6,5 +6,5 @@ package com.goit.multithreading.part2.hw;
 //Используя Phaser, дождаться результатов всех вычислений и сложить их, получив конечный результат.
 
 public interface SquareSum {
-    long getSquareSum(int[] values, int numberOfThreads);
+    public long getSquareSum(int[] values, int numberOfThreads);
 }
