@@ -10,7 +10,7 @@ public class SimpleSemaphoreTest {
     private SimpleSemaphore semaphore;
 
     @Before
-    public void initTest()throws Exception {
+    public void initTest() throws Exception {
         semaphore = new SimpleSemaphore(5);
         semaphore.acquire(2);
     }
