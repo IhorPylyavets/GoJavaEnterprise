@@ -7,4 +7,9 @@ public class NumberAdd implements BinaryOperation<Number> {
         return a.doubleValue() + b.doubleValue();
     }
 
+    @Override
+    public char getOperator() {
+        return '+';
+    }
+
 }

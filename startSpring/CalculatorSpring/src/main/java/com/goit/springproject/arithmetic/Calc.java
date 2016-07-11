@@ -1,8 +1,8 @@
 package com.goit.springproject.arithmetic;
 
-import com.goit.springproject.operation.binary.NumberAdd;
 import com.goit.springproject.operation.binary.BinaryOperation;
-import com.goit.springproject.operation.SubOperation;
+import com.goit.springproject.operation.binary.NumberAdd;
+import com.goit.springproject.operation.binary.NumberSub;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class Calc {
             operation = new NumberAdd();
             expressionList.set(2, Double.toString((Double) operation.eval(a, b)));
         } else {
-            operation = new SubOperation();
+            operation = new NumberSub();
             expressionList.set(2, Double.toString((Double) operation.eval(a, b)));
         }
 

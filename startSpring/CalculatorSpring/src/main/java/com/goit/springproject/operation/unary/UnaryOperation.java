@@ -1,5 +1,6 @@
 package com.goit.springproject.operation.unary;
 
 public interface UnaryOperation<T> {
-    T eval(T a);
+    public T eval(T a);
+    public char getOperator();
 }

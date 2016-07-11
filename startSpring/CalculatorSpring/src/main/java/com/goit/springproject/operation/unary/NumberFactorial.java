@@ -6,5 +6,10 @@ public class NumberFactorial implements UnaryOperation<Integer> {
         if (n == 0) return 1;
         return n * eval(n-1);
     }
+
+    @Override
+    public char getOperator() {
+        return '!';
+    }
 }
 
