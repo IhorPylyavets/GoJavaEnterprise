@@ -1,38 +1,23 @@
 package com.goit.springproject.arithmetic;
 
-import com.goit.springproject.operation.binary.BinaryOperation;
-import com.goit.springproject.operation.binary.NumberAdd;
-import com.goit.springproject.operation.binary.NumberSub;
-
-import java.util.List;
+import com.goit.springproject.operation.SimpleOperationProvider;
 
 public class Calc {
-    public static String execute(List<String> expressionList) {
 
-        while (expressionList.size() != 1) {
-            computeExpression(expressionList);
-        }
+    private SimpleOperationProvider simpleOperationProvider;
 
-        return expressionList.get(0);
+    public Calc(SimpleOperationProvider simpleOperationProvider) {
+        this.simpleOperationProvider = simpleOperationProvider;
     }
 
-    private static List<String> computeExpression(List<String> expressionList) {
-        BinaryOperation operation;
+    public /*String*/void execute(String expression) {
+        Parser parser = new OperationParser(this.simpleOperationProvider);
+        String[] expressions = parser.parse(expression);
 
-        double a = Double.parseDouble(expressionList.get(0));
-        double b = Double.parseDouble(expressionList.get(2));
-
-        if (expressionList.get(1).equals("+")) {
-            operation = new NumberAdd();
-            expressionList.set(2, Double.toString((Double) operation.eval(a, b)));
-        } else {
-            operation = new NumberSub();
-            expressionList.set(2, Double.toString((Double) operation.eval(a, b)));
-        }
-
-        expressionList.remove(1);
-        expressionList.remove(0);
-
-        return expressionList;
     }
+
+    public SimpleOperationProvider getSimpleOperationProvider() {
+        return simpleOperationProvider;
+    }
+
 }

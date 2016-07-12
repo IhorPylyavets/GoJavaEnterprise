@@ -1,7 +1,7 @@
 package com.goit.springproject;
 
-import com.goit.springproject.arithmetic.Calc;
-import com.goit.springproject.arithmetic.Parser;
+import com.goit.springproject.arithmetic.CalcOld;
+import com.goit.springproject.arithmetic.ParserOld;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
@@ -18,10 +18,10 @@ public class Bootstrap {
     }
 
     public void execute() {
-        Parser parser = new Parser();
+        ParserOld parser = new ParserOld();
         String expression = "-109.0998-93.009+8.09987";
         List<String> expressionList = parser.parse(expression);
 
-        System.out.println(expression + "=" + Calc.execute(expressionList));
+        System.out.println(expression + "=" + CalcOld.execute(expressionList));
     }
 }

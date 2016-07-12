@@ -5,7 +5,7 @@ import com.goit.springproject.operation.SimpleOperationProvider;
 
 import java.util.*;
 
-public class OperationParser {
+public class OperationParser implements Parser {
 
     private SimpleOperationProvider simpleOperationProvider;
     private Set<String> parserOperationSet = new HashSet<>();
@@ -18,17 +18,22 @@ public class OperationParser {
         }
     }
 
+    @Override
+    public SimpleOperationProvider getSimpleOperationProvider() {
+        return simpleOperationProvider;
+    }
+
+    @Override
     public String[] parse(String expression) {
         String[] expressionArray = expression.split(" ");
-
         expressionValidation(expressionArray);
-
+        bracketValidation(expressionArray);
         return expressionArray;
     }
 
     private void expressionValidation(String[] expressionArray) {
         for (String str : expressionArray) {
-            if (!parserOperationSet.contains(str) || !isNumber(str)) {
+            if (!parserOperationSet.contains(str) || !isNumber(str) || !isBracket(str)) {
                 throw new IllegalArgumentException("Your expression include bad operations");
             }
         }
@@ -51,6 +56,35 @@ public class OperationParser {
 
     private boolean isDigit(char c) {
         return "0123456789.".indexOf(c) != -1;
+    }
+
+    private boolean isBracket(String str) {
+        return (str.equals("(") || str.equals(")"));
+    }
+
+    private void bracketValidation(String[] expressionArray) {
+        if (!isCorrectCountBrackets(expressionArray)) {
+            throw new IllegalArgumentException("In your expression wrong amount bracket");
+        }
+    }
+
+    private boolean isCorrectCountBrackets(String[] expressionArray) {
+        int countBracket = 0;
+
+        for (String str : expressionArray) {
+            if (str.equals("(")) {
+                countBracket += 1;
+            }
+
+            if (str.equals(")")) {
+                countBracket -= 1;
+            }
+        }
+
+        if (countBracket != 0) {
+            return false;
+        }
+        return true;
     }
 
 }
