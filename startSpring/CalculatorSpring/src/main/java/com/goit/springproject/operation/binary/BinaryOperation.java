@@ -1,6 +1,7 @@
 package com.goit.springproject.operation.binary;
 
-public interface BinaryOperation<T> {
+import com.goit.springproject.operation.Operation;
+
+public interface BinaryOperation<T> extends Operation {
     public T eval(T a, T b);
-    public char getOperator();
 }

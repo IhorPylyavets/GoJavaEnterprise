@@ -8,8 +8,13 @@ public class NumberFactorial implements UnaryOperation<Integer> {
     }
 
     @Override
-    public char getOperator() {
-        return '!';
+    public int getPriority() {
+        return 3;
+    }
+
+    @Override
+    public String getOperator() {
+        return "!";
     }
 }
 
