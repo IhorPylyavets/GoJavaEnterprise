@@ -2,9 +2,15 @@ package com.goit.springproject.operation.binary;
 
 public class NumberSub implements BinaryOperation<Number> {
 
+    private int priority;
+
+    public NumberSub(int priority) {
+        this.priority = priority;
+    }
+
     @Override
     public int getPriority() {
-        return 1;
+        return priority;
     }
 
     @Override

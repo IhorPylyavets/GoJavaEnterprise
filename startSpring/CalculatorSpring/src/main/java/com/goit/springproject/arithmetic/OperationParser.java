@@ -27,13 +27,13 @@ public class OperationParser implements Parser {
     public String[] parse(String expression) {
         String[] expressionArray = expression.split(" ");
         expressionValidation(expressionArray);
-        bracketValidation(expressionArray);
+        //bracketValidation(expressionArray);
         return expressionArray;
     }
 
     private void expressionValidation(String[] expressionArray) {
         for (String str : expressionArray) {
-            if (!parserOperationSet.contains(str) || !isNumber(str) || !isBracket(str)) {
+            if (!parserOperationSet.contains(str) && !isNumber(str)/*&& !isBracket(str)*/) {
                 throw new IllegalArgumentException("Your expression include bad operations");
             }
         }
@@ -66,6 +66,9 @@ public class OperationParser implements Parser {
         if (!isCorrectCountBrackets(expressionArray)) {
             throw new IllegalArgumentException("In your expression wrong amount bracket");
         }
+        if (!isCorrectSequenceBracket(expressionArray)) {
+            throw new IllegalArgumentException("In your expression wrong sequence bracket");
+        }
     }
 
     private boolean isCorrectCountBrackets(String[] expressionArray) {
@@ -83,6 +86,25 @@ public class OperationParser implements Parser {
 
         if (countBracket != 0) {
             return false;
+        }
+        return true;
+    }
+
+    private boolean isCorrectSequenceBracket(String[] expressionArray) {
+        int count = 0;
+
+        for (String str : expressionArray) {
+            if (str.equals("(")) {
+                count += 1;
+            }
+
+            if (str.equals(")")) {
+                count -= 1;
+            }
+
+            if (count < 0) {
+                return false;
+            }
         }
         return true;
     }

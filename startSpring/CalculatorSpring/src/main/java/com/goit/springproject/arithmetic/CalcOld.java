@@ -23,10 +23,10 @@ public class CalcOld {
         double b = Double.parseDouble(expressionList.get(2));
 
         if (expressionList.get(1).equals("+")) {
-            operation = new NumberAdd();
+            operation = new NumberAdd(1);
             expressionList.set(2, Double.toString((Double) operation.eval(a, b)));
         } else {
-            operation = new NumberSub();
+            operation = new NumberSub(1);
             expressionList.set(2, Double.toString((Double) operation.eval(a, b)));
         }
 

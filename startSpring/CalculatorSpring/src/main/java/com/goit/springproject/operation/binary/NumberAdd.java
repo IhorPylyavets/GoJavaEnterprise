@@ -2,9 +2,15 @@ package com.goit.springproject.operation.binary;
 
 public class NumberAdd implements BinaryOperation<Number> {
 
+    private int priority;
+
+    public NumberAdd(int priority) {
+        this.priority = priority;
+    }
+
     @Override
     public int getPriority() {
-        return 1;
+        return priority;
     }
 
     @Override

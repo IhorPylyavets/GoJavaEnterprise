@@ -2,6 +2,8 @@ package com.goit.springproject.arithmetic;
 
 import com.goit.springproject.operation.SimpleOperationProvider;
 
+import java.util.Arrays;
+
 public class Calc {
 
     private SimpleOperationProvider simpleOperationProvider;
@@ -10,14 +12,18 @@ public class Calc {
         this.simpleOperationProvider = simpleOperationProvider;
     }
 
-    public /*String*/void execute(String expression) {
-        Parser parser = new OperationParser(this.simpleOperationProvider);
-        String[] expressions = parser.parse(expression);
-
-    }
-
     public SimpleOperationProvider getSimpleOperationProvider() {
         return simpleOperationProvider;
     }
+
+    public /*String*/void execute(String expression) {
+        Parser parser = new OperationParser(this.simpleOperationProvider);
+        String[] expressionArray = parser.parse(expression);
+
+        System.out.println("true expressionArray " + Arrays.toString(expressionArray));
+
+    }
+
+
 
 }
