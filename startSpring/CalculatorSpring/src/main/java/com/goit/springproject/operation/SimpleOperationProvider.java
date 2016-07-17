@@ -29,4 +29,14 @@ public class SimpleOperationProvider implements OperationProvider{
         operationList.add(operation);
     }
 
+    @Override
+    public Operation getOperationByOperator(String operator) {
+        for (Operation operation : operationList) {
+            if (operation.getOperator().equals(operator)) {
+                return operation;
+            }
+        }
+        return null;
+    }
+
 }

@@ -8,7 +8,7 @@ public class RunnerTests {
         SimpleOperationProvider simpleOperationProvider = new SimpleOperationProvider();
         Calc calc  = new Calc(simpleOperationProvider);
 
-        String expressions = "11.09.1998 - 93.0709 + -8.0987";
+        String expressions = "! 6 + 93.0709 + -8.0987";
         calc.execute(expressions);
 
     }

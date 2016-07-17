@@ -5,4 +5,5 @@ import java.util.List;
 public interface OperationProvider {
     List<Operation> getOperationList();
     void addOperation(Operation operation);
+    Operation getOperationByOperator(String operator);
 }

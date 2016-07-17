@@ -3,6 +3,7 @@ Example:
  5.89 + 9.13
  sqrt 16.0 - 98 + 8.9
  56 - sqr 3.1 / 9.61
+ ! 6
 
 
 Operation Priority:
