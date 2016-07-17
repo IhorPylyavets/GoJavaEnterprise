@@ -1,8 +1,9 @@
 package com.goit.springproject.arithmetic;
 
+import com.goit.springproject.arithmetic.expression.Element;
 import com.goit.springproject.operation.SimpleOperationProvider;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Calc {
 
@@ -18,9 +19,11 @@ public class Calc {
 
     public /*String*/void execute(String expression) {
         Parser parser = new OperationParser(this.simpleOperationProvider);
-        String[] expressionArray = parser.parse(expression);
+        List<Element> expressions = parser.parse(expression);
 
-        System.out.println("true expressionArray " + Arrays.toString(expressionArray));
+        for (Element el : expressions) {
+            System.out.println(el);
+        }
 
     }
 
