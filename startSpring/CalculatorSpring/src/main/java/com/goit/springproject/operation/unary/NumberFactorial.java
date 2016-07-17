@@ -23,5 +23,6 @@ public class NumberFactorial implements UnaryOperation<Integer> {
     public String getOperator() {
         return "!";
     }
+
 }
 
