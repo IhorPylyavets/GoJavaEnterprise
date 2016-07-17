@@ -7,11 +7,11 @@ import com.goit.springproject.operation.unary.UnaryOperation;
 
 import java.util.List;
 
-public class Calc {
+public class Calculator {
 
     private SimpleOperationProvider simpleOperationProvider;
 
-    public Calc(SimpleOperationProvider simpleOperationProvider) {
+    public Calculator(SimpleOperationProvider simpleOperationProvider) {
         this.simpleOperationProvider = simpleOperationProvider;
     }
 
@@ -23,9 +23,13 @@ public class Calc {
         Parser parser = new OperationParser(this.simpleOperationProvider);
         List<Element> expressionList = parser.parse(expression);
 
-        executeUnaryOperations(expressionList);
-        executeBinaryOperations(expressionList, 2);
-        executeBinaryOperations(expressionList, 1);
+        if (isExistDateOperation(expressionList)) {
+            executeDateOperations(expressionList);
+        } else {
+            executeUnaryOperations(expressionList);
+            executeBinaryOperations(expressionList, 2);
+            executeBinaryOperations(expressionList, 1);
+        }
 
         return makeStringResult(expression, expressionList.get(0).getValue());
     }
@@ -74,6 +78,19 @@ public class Calc {
             }
         }
         return false;
+    }
+
+    private boolean isExistDateOperation(List<Element> expressionList) {
+        for (Element element : expressionList) {
+            if (element.getCategory().equals(Element.Category.DATE)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void executeDateOperations(List<Element> expressionList) {
+        System.out.println("uuuxxxu");
     }
 
     private String makeStringResult(String expression, String result) {

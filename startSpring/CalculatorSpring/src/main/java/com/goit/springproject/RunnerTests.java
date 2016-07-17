@@ -1,17 +1,21 @@
 package com.goit.springproject;
 
-import com.goit.springproject.arithmetic.Calc;
+import com.goit.springproject.arithmetic.Calculator;
 import com.goit.springproject.operation.SimpleOperationProvider;
 
 public class RunnerTests {
     public static void main(String[] args) {
         SimpleOperationProvider simpleOperationProvider = new SimpleOperationProvider();
-        Calc calc  = new Calc(simpleOperationProvider);
+        Calculator calculator  = new Calculator(simpleOperationProvider);
 
-        String expressions = "! 6 + 93.0709 + -8.0987 - ! 3 + 4 - 3";
-        //String expressions = "3 + 4 * 3";
-        String res = calc.execute(expressions);
-        System.out.println(res);
+        System.out.println(calculator.execute("! 6 + 93.0709 + -8.0987 - ! 3 + 4 - 3"));
+        System.out.println(calculator.execute("3 - 98"));
+        System.out.println(calculator.execute("! 6"));
+        System.out.println(calculator.execute("78 + 87.09"));
+        System.out.println(calculator.execute("100.009 - 0.008"));
+
+        System.out.println(calculator.execute("12.03.1990 - 03.09.1989"));
+        System.out.println(calculator.execute("12.1990 + 9.1989"));
 
     }
 }
