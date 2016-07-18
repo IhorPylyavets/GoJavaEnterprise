@@ -90,13 +90,11 @@ public class Calculator {
     }
 
     private void executeDateOperations(List<Element> expressionList) {
-        System.out.println("uuuxxxu");
+
     }
 
     private String makeStringResult(String expression, String result) {
         return String.format("%s = %s", expression, result);
     }
-
-
 
 }
