@@ -9,14 +9,16 @@
 
     <bean class="com.goit.LogAspect" id="logAspect"/>
 
-    <aop:config>
+    <aop:aspectj-autoproxy/>
+
+   <!-- <aop:config>
         <aop:pointcut id="executorExecute" expression="execution( * com.goit.Executor.*(..))"/>
-                         <!--com.goit.Executor.*(..) - all methods interface Execute -->
-                         <!--com.goit.Executor.execute() - method execute() -->
-                         <!--com.goit.Executor.*(com.goit.Task)) - all methods with .Task in parameters -->
+                         &lt;!&ndash;com.goit.Executor.*(..) - all methods interface Execute &ndash;&gt;
+                         &lt;!&ndash;com.goit.Executor.execute() - method execute() &ndash;&gt;
+                         &lt;!&ndash;com.goit.Executor.*(com.goit.Task)) - all methods with .Task in parameters &ndash;&gt;
         <aop:aspect ref="logAspect">
             <aop:around pointcut-ref="executorExecute" method="onExecute"/>
         </aop:aspect>
-    </aop:config>
+    </aop:config>-->
 
 </beans>
