@@ -14,11 +14,12 @@ public class  Bootstrap {
 
     public static void main(String[] args) {
         //ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context_aop.xml");
+        ApplicationContext applicationContext
+                = new ClassPathXmlApplicationContext("application-context_aop.xml", "aop-context.xml");
         Bootstrap bootstrap = applicationContext.getBean("bootstrap", Bootstrap.class);
 
         bootstrap.execute();
-        bootstrap.execute();
+        //bootstrap.execute();
     }
 
     public void execute() {

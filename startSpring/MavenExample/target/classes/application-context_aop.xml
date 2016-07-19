@@ -16,9 +16,9 @@
         <lookup-method name="getIntegerExecutor" bean="serialExecutor"/>
     </bean>
 
-    <bean id="executorInterceptor" class="com.goit.ExecutorInterceptor"/>
+    <!--<bean id="executorInterceptor" class="com.goit.ExecutorInterceptor"/>
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames" value="*Executor"/>
         <property name="interceptorNames" value="executorInterceptor"/>
-    </bean>
+    </bean>-->
 </beans>
