@@ -8,13 +8,13 @@
     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
 
     <bean class="com.example.LogAspect" id="logAspect"/>
-   <!-- <aop:aspectj-autoproxy/>-->
+    <aop:aspectj-autoproxy/>
 
-    <aop:config>
+    <!--<aop:config>
         <aop:pointcut id="executorExecute" expression="execution( * com.goit.springproject.arithmetic.Calculator.execute(String))"/>
         <aop:aspect ref="logAspect">
             <aop:around method="onExecute" pointcut-ref="executorExecute"/>
         </aop:aspect>
-    </aop:config>
+    </aop:config>-->
 
 </beans>
