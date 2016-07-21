@@ -14,6 +14,7 @@ public class Main {
         EmployeeDao employeeDAO = new JdbcEmployeeDao();
         employeeDAO.getAllEmployee().forEach(System.out::println);
 
+        System.out.println("Employee with id=3");
         Employee employee = employeeDAO.load(3);
         System.out.println(employee);
     }
