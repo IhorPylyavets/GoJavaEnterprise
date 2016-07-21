@@ -22,11 +22,11 @@ public class AppConfig {
     @Bean
     @Scope("prototype")
     public SimpleOperationProvider simpleOperationProvider() {
-        SimpleOperationProvider simpleOperationProvider = new SimpleOperationProvider();
+        /*SimpleOperationProvider simpleOperationProvider = new SimpleOperationProvider();
         simpleOperationProvider.addOperation(new NumberDiv(2));
-        simpleOperationProvider.addOperation(new NumberMult(2));
+        simpleOperationProvider.addOperation(new NumberMult(2));*/
 
-        return simpleOperationProvider;
+        return new SimpleOperationProvider();
     }
 
     @Bean

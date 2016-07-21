@@ -3,6 +3,7 @@ package com.example;
 import com.example.operation.NumberDiv;
 import com.example.operation.NumberMult;
 import com.goit.springproject.arithmetic.Calculator;
+import com.goit.springproject.arithmetic.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,9 +21,8 @@ public class Bootstrap {
     private Calculator calculator;
 
     public static void main(String[] args) throws IOException {
-        //ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        ApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("application-context.xml", "aop-context.xml");
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        //ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml", "aop-context.xml");
         Bootstrap bootstrap = applicationContext.getBean("bootstrap", Bootstrap.class);
 
         consoleExecute(bootstrap);
@@ -62,5 +62,4 @@ public class Bootstrap {
         this.calculator.getSimpleOperationProvider().addOperation(new NumberDiv(2));
         this.calculator.getSimpleOperationProvider().addOperation(new NumberMult(2));
     }
-
 }
