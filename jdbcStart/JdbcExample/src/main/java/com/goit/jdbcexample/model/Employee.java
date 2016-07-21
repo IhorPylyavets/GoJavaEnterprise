@@ -1,4 +1,4 @@
-package com.goit.jdbcexample;
+package com.goit.jdbcexample.model;
 
 import java.time.LocalDateTime;
 

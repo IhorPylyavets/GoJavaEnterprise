@@ -1,56 +1,21 @@
 package com.goit.jdbcexample;
 
+import com.goit.jdbcexample.model.Employee;
+import com.goit.jdbcexample.model.jdbc.JdbcEmployeeDao;
+import com.goit.jdbcexample.model.jdbc.EmployeeDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.*;
-import java.time.LocalDateTime;
-
 
 public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        loadDriver();
-        LOGGER.info("Connection to DB");
-        String url = "jdbc:postgresql://localhost:5432/company";
-        String user = "user";
-        String password = "12345";
-        try ( Connection connection = DriverManager.getConnection(url, user, password);
-              Statement statement = connection.createStatement()){
+        EmployeeDao employeeDAO = new JdbcEmployeeDao();
+        employeeDAO.getAllEmployee().forEach(System.out::println);
 
-            LOGGER.info("Successfully connected to DB");
-
-            String sql = "SELECT * FROM EMPLOYEE";
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                Employee employee = new Employee();
-                employee.setId(resultSet.getInt("ID"));
-                employee.setName(resultSet.getString("NAME"));
-                employee.setAge(resultSet.getInt("AGE"));
-                employee.setAddress(resultSet.getString("ADDRESS"));
-                employee.setSalary(resultSet.getFloat("SALARY"));
-                employee.setJoinDate(resultSet.getString("JOIN_DATE"));
-
-                System.out.println(employee);
-            }
-
-        } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: " + url, e);
-        }
-    }
-
-    private static void loadDriver() {
-        try {
-            LOGGER.info("Loading JDBC driver: org.postgresql.Driver");
-            Class.forName("org.postgresql.Driver");
-            LOGGER.info("Driver successfully loaded");
-        } catch (ClassNotFoundException e) {
-            LOGGER.error("Cannot find driver: org.postgresql.Driver");
-            throw new RuntimeException(e);
-        }
+        Employee employee = employeeDAO.load(3);
+        System.out.println(employee);
     }
 
 }
