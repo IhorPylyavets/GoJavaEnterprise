@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.operation.NumberDiv;
+import com.example.operation.NumberMult;
 import com.goit.springproject.arithmetic.Calculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -56,6 +58,9 @@ public class Bootstrap {
     @Autowired
     public void setCalculator(Calculator calculator) {
         this.calculator = calculator;
+
+        this.calculator.getSimpleOperationProvider().addOperation(new NumberDiv(2));
+        this.calculator.getSimpleOperationProvider().addOperation(new NumberMult(2));
     }
 
 }
