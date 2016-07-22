@@ -89,8 +89,8 @@ public class Employee {
         return (o.getLastName().equals(getLastName()) &&
                 o.getFirstName().equals(getFirstName()) &&
                 o.getBirthday().equals(getBirthday()) &&
-                o.getPhone().equals(getPhone())/* &&
-                o.getPositionId().intValue() .(getPositionId() &&
-                o.getSalary().equals(getSalary()*/);
+                o.getPhone().equals(getPhone()) &&
+                (o.getPositionId() == getPositionId()) &&
+                (o.getSalary() ==getSalary()));
     }
 }
