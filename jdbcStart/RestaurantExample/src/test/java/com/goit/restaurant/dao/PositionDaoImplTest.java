@@ -6,13 +6,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class JdbcPositionDaoTest {
+public class PositionDaoImplTest {
 
-    private JdbcPositionDao positionDao;
+    private PositionDao positionDao;
 
     @Before
     public void init() {
-        positionDao = new JdbcPositionDao();
+        positionDao = new PositionDaoImpl();
     }
 
     @Test
@@ -26,7 +26,7 @@ public class JdbcPositionDaoTest {
     }
 
     @Test
-    public void testUpdate() throws Exception {
+    public void testUpdatePosition() throws Exception {
         String title = "qwerty";
         Position createPosition = positionDao.createPosition(title);
 
@@ -39,7 +39,7 @@ public class JdbcPositionDaoTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void testDelete() throws Exception {
+    public void testDeletePosition() throws Exception {
         String title = "qwerty";
         Position createPosition = positionDao.createPosition(title);
         positionDao.deletePosition(createPosition.getId());
@@ -47,7 +47,7 @@ public class JdbcPositionDaoTest {
     }
 
     @Test
-    public void testReadMetaData() throws Exception {
+    public void testPositionReadMetaData() throws Exception {
         String metaData = positionDao.readMetadata();
         System.out.println(metaData);
     }

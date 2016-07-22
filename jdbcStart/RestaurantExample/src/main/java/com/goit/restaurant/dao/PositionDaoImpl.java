@@ -8,11 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcPositionDao implements PositionDao {
+public class PositionDaoImpl implements PositionDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcPositionDao.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PositionDaoImpl.class);
 
-    public JdbcPositionDao() {
+    public PositionDaoImpl() {
         DaoCommons.loadDriver();
     }
 
