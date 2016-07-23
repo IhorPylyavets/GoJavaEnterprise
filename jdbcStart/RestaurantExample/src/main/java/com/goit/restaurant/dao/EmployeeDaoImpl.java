@@ -110,10 +110,10 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     @Override
     public String readMetadata() {
-        StringBuilder sb = new StringBuilder();
-
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              Statement statement = connection.createStatement()){
+
+            StringBuilder sb = new StringBuilder();
 
             String sql = "SELECT * FROM EMPLOYEE";
             ResultSet resultSet = statement.executeQuery(sql);
@@ -125,12 +125,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
                 sb.append("====" + metaData.getColumnName(i) + "\n");
             }
 
+            return sb.toString();
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
         }
-
-        return sb.toString();
     }
 
     private Employee createEmployeeFromResultSet(ResultSet resultSet) throws SQLException {

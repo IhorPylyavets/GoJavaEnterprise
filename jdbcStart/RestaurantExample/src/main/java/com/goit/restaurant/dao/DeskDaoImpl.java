@@ -1,6 +1,6 @@
 package com.goit.restaurant.dao;
 
-import com.goit.restaurant.model.Position;
+import com.goit.restaurant.model.Desk;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,49 +8,51 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PositionDaoImpl implements PositionDao {
+public class DeskDaoImpl implements DeskDao{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PositionDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DeskDaoImpl.class);
 
-    public PositionDaoImpl() {
+    public DeskDaoImpl() {
         DaoCommons.loadDriver();
     }
 
-    public Position createPosition(String positionTitle) {
+    @Override
+    public Desk createDesk(String deskNumber) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement =
-                     connection.prepareStatement("INSERT INTO POSITION (TITLE) VALUES (?) RETURNING ID, TITLE")){
+                     connection.prepareStatement("INSERT INTO DESK (NUMBER ) VALUES (?) RETURNING ID, NUMBER ")){
 
-            Position resultPosition = new Position();
+            Desk resultDesk = new Desk();
 
-            statement.setString(1, positionTitle);
+            statement.setString(1, deskNumber);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                resultPosition.setId(resultSet.getInt(1));
-                resultPosition.setTitle(resultSet.getString(2));
+                resultDesk.setId(resultSet.getInt(1));
+                resultDesk.setNumber(resultSet.getString(2));
             }
-            LOGGER.info(String.format("Position with TITLE %s is creating in DB", positionTitle));
+            LOGGER.info(String.format("Desk with NUMBER %s is creating in DB", deskNumber));
 
-            return resultPosition;
+            return resultDesk;
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
         }
     }
 
-    public Position loadPosition(int id) {
+    @Override
+    public Desk loadDesk(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement =
-                     connection.prepareStatement("SELECT * FROM POSITION WHERE ID = ?")){
+                     connection.prepareStatement("SELECT * FROM DESK WHERE ID = ?")){
 
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return new Position(resultSet.getInt("ID"), resultSet.getString("TITLE"));
+                return new Desk(resultSet.getInt("ID"), resultSet.getString("NUMBER"));
             } else {
-                throw new RuntimeException("Cannot find Position with ID " + id);
+                throw new RuntimeException("Cannot find Desk with ID " + id);
             }
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
@@ -58,17 +60,18 @@ public class PositionDaoImpl implements PositionDao {
         }
     }
 
-    public List<Position> getAllPosition() {
+    @Override
+    public List<Desk> getAllDesk() {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              Statement statement = connection.createStatement()){
 
-            List<Position> resultList = new ArrayList<>();
+            List<Desk> resultList = new ArrayList<>();
 
-            String sql = "SELECT * FROM POSITION";
+            String sql = "SELECT * FROM DESK";
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                resultList.add(new Position(resultSet.getInt("ID"), resultSet.getString("TITLE")));
+                resultList.add(new Desk(resultSet.getInt("ID"), resultSet.getString("NUMBER")));
             }
 
             return resultList;
@@ -78,29 +81,31 @@ public class PositionDaoImpl implements PositionDao {
         }
     }
 
-    public void deletePosition(int id) {
+    @Override
+    public void deleteDesk(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM POSITION WHERE ID = ?")){
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM DESK WHERE ID = ?")){
 
             statement.setInt(1, id);
             statement.execute();
 
-            LOGGER.info(String.format("Position with ID %d is deleting from DB", id));
+            LOGGER.info(String.format("Desk with ID %d is deleting from DB", id));
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
         }
     }
 
-    public void updatePosition(int id, String newPositionTitle) {
+    @Override
+    public void updateDesk(int id, String newDeskNumber) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("UPDATE POSITION SET TITLE=? WHERE ID = ?")){
+             PreparedStatement statement = connection.prepareStatement("UPDATE DESK SET NUMBER=? WHERE ID = ?")){
 
-            statement.setString(1, newPositionTitle);
+            statement.setString(1, newDeskNumber);
             statement.setInt(2, id);
             statement.execute();
 
-            LOGGER.info(String.format("Position with ID %d is updating from DB", id));
+            LOGGER.info(String.format("Desk with ID %d is updating from DB", id));
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
@@ -114,7 +119,7 @@ public class PositionDaoImpl implements PositionDao {
 
             StringBuilder sb = new StringBuilder();
 
-            String sql = "SELECT * FROM POSITION";
+            String sql = "SELECT * FROM DESK";
             ResultSet resultSet = statement.executeQuery(sql);
             ResultSetMetaData metaData = resultSet.getMetaData();
 
@@ -129,6 +134,7 @@ public class PositionDaoImpl implements PositionDao {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
         }
-    }
 
+
+    }
 }

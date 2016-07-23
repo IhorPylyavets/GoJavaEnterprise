@@ -8,10 +8,6 @@ public class Position {
     public Position() {
     }
 
-    public Position(String title) {
-        this.title = title;
-    }
-
     public Position(int id, String title) {
         this.id = id;
         this.title = title;
