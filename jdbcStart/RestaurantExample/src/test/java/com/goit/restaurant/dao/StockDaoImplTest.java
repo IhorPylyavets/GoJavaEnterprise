@@ -1,17 +1,17 @@
 package com.goit.restaurant.dao;
 
-import com.goit.restaurant.model.Stock;
+import com.goit.restaurant.model.Warehouse;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
 public class StockDaoImplTest {
-    private StockDao stockDao;
+    private WarehouseDao stockDao;
 
     @Before
     public void init() {
-        stockDao = new StockDaoImpl();
+        stockDao = new WarehouseDaoImpl();
     }
 
     @Test
@@ -19,8 +19,8 @@ public class StockDaoImplTest {
         int ingredientId = 1;
         int amount = 243;
 
-        Stock createStock = stockDao.create(ingredientId, amount);
-        Stock stock = stockDao.load(createStock.getId());
+        Warehouse createStock = stockDao.create(ingredientId, amount);
+        Warehouse stock = stockDao.load(createStock.getId());
         assertTrue(createStock.equals(stock));
 
         stockDao.delete(createStock.getId());
@@ -31,9 +31,9 @@ public class StockDaoImplTest {
         int ingredientId = 1;
         int amount = 243;
 
-        Stock createStock = stockDao.create(ingredientId, amount);
+        Warehouse createStock = stockDao.create(ingredientId, amount);
         stockDao.delete(createStock.getId());
-        Stock stock = stockDao.load(createStock.getId());
+        Warehouse stock = stockDao.load(createStock.getId());
     }
 
     @Test

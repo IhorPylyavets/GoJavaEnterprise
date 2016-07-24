@@ -1,6 +1,6 @@
 package com.goit.restaurant.dao;
 
-import com.goit.restaurant.model.Stock;
+import com.goit.restaurant.model.Warehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,33 +8,33 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StockDaoImpl implements StockDao{
+public class WarehouseDaoImpl implements WarehouseDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StockDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WarehouseDaoImpl.class);
 
-    public StockDaoImpl() {
+    public WarehouseDaoImpl() {
         DaoCommons.loadDriver();
     }
 
     @Override
-    public Stock create(int ingredientId, int amount) {
+    public Warehouse create(int ingredientId, int amount) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement =
-                     connection.prepareStatement("INSERT INTO STOCK (INGREDIENT_ID, AMOUNT) " +
+                     connection.prepareStatement("INSERT INTO WAREHOUSE (INGREDIENT_ID, AMOUNT) " +
                              "VALUES (?,?) RETURNING ID, INGREDIENT_ID, AMOUNT")){
 
             statement.setInt(1, ingredientId);
             statement.setInt(2, amount);
             ResultSet resultSet = statement.executeQuery();
 
-            Stock resultStock = null;
+            Warehouse resultWarehouse = null;
 
             if (resultSet.next()) {
-                resultStock = createStockFromResultSet(resultSet);
+                resultWarehouse = createWarehouseFromResultSet(resultSet);
             }
-            LOGGER.info(String.format("Stock is creating in DB"));
+            LOGGER.info(String.format("Warehouse is creating in DB"));
 
-            return resultStock;
+            return resultWarehouse;
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
@@ -42,17 +42,17 @@ public class StockDaoImpl implements StockDao{
     }
 
     @Override
-    public Stock load(int id) {
+    public Warehouse load(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM STOCK WHERE ID = ?")){
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM WAREHOUSE WHERE ID = ?")){
 
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return createStockFromResultSet(resultSet);
+                return createWarehouseFromResultSet(resultSet);
             } else {
-                throw new RuntimeException("Cannot find Stock with id " + id);
+                throw new RuntimeException("Cannot find Warehouse with id " + id);
             }
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
@@ -61,17 +61,17 @@ public class StockDaoImpl implements StockDao{
     }
 
     @Override
-    public List<Stock> getAll() {
+    public List<Warehouse> getAll() {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              Statement statement = connection.createStatement()){
 
-            String sql = "SELECT * FROM STOCK";
+            String sql = "SELECT * FROM WAREHOUSE";
             ResultSet resultSet = statement.executeQuery(sql);
-            List<Stock> resultList = new ArrayList<>();
+            List<Warehouse> resultList = new ArrayList<>();
 
             while (resultSet.next()) {
-                Stock stock = createStockFromResultSet(resultSet);
-                resultList.add(stock);
+                Warehouse warehouse = createWarehouseFromResultSet(resultSet);
+                resultList.add(warehouse);
             }
 
             return resultList;
@@ -84,12 +84,12 @@ public class StockDaoImpl implements StockDao{
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM STOCK WHERE ID = ?")){
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM WAREHOUSE WHERE ID = ?")){
 
             statement.setInt(1, id);
             statement.execute();
 
-            LOGGER.info(String.format("Stock with ID %d is deleting from DB", id));
+            LOGGER.info(String.format("Warehouse with ID %d is deleting from DB", id));
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
@@ -103,7 +103,7 @@ public class StockDaoImpl implements StockDao{
 
             StringBuilder sb = new StringBuilder();
 
-            String sql = "SELECT * FROM STOCK";
+            String sql = "SELECT * FROM WAREHOUSE";
             ResultSet resultSet = statement.executeQuery(sql);
             ResultSetMetaData metaData = resultSet.getMetaData();
 
@@ -120,11 +120,11 @@ public class StockDaoImpl implements StockDao{
         }
     }
 
-    private Stock createStockFromResultSet(ResultSet resultSet) throws SQLException {
-        Stock stock = new Stock();
-        stock.setId(resultSet.getInt("ID"));
-        stock.setIngredientId(resultSet.getInt("INGREDIENT_ID"));
-        stock.setAmount(resultSet.getInt("AMOUNT"));
-        return stock;
+    private Warehouse createWarehouseFromResultSet(ResultSet resultSet) throws SQLException {
+        Warehouse warehouse = new Warehouse();
+        warehouse.setId(resultSet.getInt("ID"));
+        warehouse.setIngredientId(resultSet.getInt("INGREDIENT_ID"));
+        warehouse.setAmount(resultSet.getInt("AMOUNT"));
+        return warehouse;
     }
 }

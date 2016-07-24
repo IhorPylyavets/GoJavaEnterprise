@@ -1,6 +1,6 @@
 package com.goit.restaurant.model;
 
-public class Stock {
+public class Warehouse {
 
     private int id;
     private int ingredientId;
@@ -41,7 +41,7 @@ public class Stock {
 
     @Override
     public boolean equals(Object obj) {
-        Stock o = (Stock) obj;
+        Warehouse o = (Warehouse) obj;
 
         return ((o.getIngredientId() == getIngredientId()) &&
                 (o.getAmount() == getAmount()));
