@@ -1,6 +1,6 @@
 package com.goit.restaurant.dao;
 
-import com.goit.restaurant.model.Desk;
+import com.goit.restaurant.model.Ingredient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,30 +8,30 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeskDaoImpl implements SimpleDao<Desk> {
+public class IngredientDaoImpl implements SimpleDao<Ingredient>{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DeskDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IngredientDaoImpl.class);
 
-    public DeskDaoImpl() {
+    public IngredientDaoImpl() {
         DaoCommons.loadDriver();
     }
 
     @Override
-    public Desk create(String title) {
+    public Ingredient create(String title) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement =
-                     connection.prepareStatement("INSERT INTO DESK (NUMBER) VALUES (?) RETURNING ID, NUMBER ")){
+                     connection.prepareStatement("INSERT INTO INGREDIENT (TITLE) VALUES (?) RETURNING ID, TITLE ")){
 
-            Desk resultDesk = new Desk();
+            Ingredient resultDesk = new Ingredient();
 
             statement.setString(1, title);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 resultDesk.setId(resultSet.getInt(1));
-                resultDesk.setNumber(resultSet.getString(2));
+                resultDesk.setTitle(resultSet.getString(2));
             }
-            LOGGER.info(String.format("Desk with NUMBER %s is creating in DB", title));
+            LOGGER.info(String.format("Ingredient with TITLE %s is creating in DB", title));
 
             return resultDesk;
         } catch (SQLException e) {
@@ -41,18 +41,18 @@ public class DeskDaoImpl implements SimpleDao<Desk> {
     }
 
     @Override
-    public Desk load(int id) {
+    public Ingredient load(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement =
-                     connection.prepareStatement("SELECT * FROM DESK WHERE ID = ?")){
+                     connection.prepareStatement("SELECT * FROM INGREDIENT WHERE ID = ?")){
 
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return new Desk(resultSet.getInt("ID"), resultSet.getString("NUMBER"));
+                return new Ingredient(resultSet.getInt("ID"), resultSet.getString("TITLE"));
             } else {
-                throw new RuntimeException("Cannot find Desk with ID " + id);
+                throw new RuntimeException("Cannot find Ingredient with ID " + id);
             }
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
@@ -61,17 +61,17 @@ public class DeskDaoImpl implements SimpleDao<Desk> {
     }
 
     @Override
-    public List<Desk> getAll() {
+    public List<Ingredient> getAll() {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              Statement statement = connection.createStatement()){
 
-            List<Desk> resultList = new ArrayList<>();
+            List<Ingredient> resultList = new ArrayList<>();
 
-            String sql = "SELECT * FROM DESK";
+            String sql = "SELECT * FROM INGREDIENT";
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                resultList.add(new Desk(resultSet.getInt("ID"), resultSet.getString("NUMBER")));
+                resultList.add(new Ingredient(resultSet.getInt("ID"), resultSet.getString("TITLE")));
             }
 
             return resultList;
@@ -84,12 +84,12 @@ public class DeskDaoImpl implements SimpleDao<Desk> {
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM DESK WHERE ID = ?")){
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM INGREDIENT WHERE ID = ?")){
 
             statement.setInt(1, id);
             statement.execute();
 
-            LOGGER.info(String.format("Desk with ID %d is deleting from DB", id));
+            LOGGER.info(String.format("Ingredient with ID %d is deleting from DB", id));
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
@@ -99,13 +99,13 @@ public class DeskDaoImpl implements SimpleDao<Desk> {
     @Override
     public void update(int id, String newTitle) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("UPDATE DESK SET NUMBER=? WHERE ID = ?")){
+             PreparedStatement statement = connection.prepareStatement("UPDATE INGREDIENT SET TITLE=? WHERE ID = ?")){
 
             statement.setString(1, newTitle);
             statement.setInt(2, id);
             statement.execute();
 
-            LOGGER.info(String.format("Desk with ID %d is updating from DB", id));
+            LOGGER.info(String.format("Ingredient with ID %d is updating from DB", id));
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
@@ -119,7 +119,7 @@ public class DeskDaoImpl implements SimpleDao<Desk> {
 
             StringBuilder sb = new StringBuilder();
 
-            String sql = "SELECT * FROM DESK";
+            String sql = "SELECT * FROM INGREDIENT";
             ResultSet resultSet = statement.executeQuery(sql);
             ResultSetMetaData metaData = resultSet.getMetaData();
 

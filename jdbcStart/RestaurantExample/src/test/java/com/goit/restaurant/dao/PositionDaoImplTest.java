@@ -4,11 +4,11 @@ import com.goit.restaurant.model.Position;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PositionDaoImplTest {
 
-    private PositionDao positionDao;
+    private PositionDaoImpl positionDao;
 
     @Before
     public void init() {
@@ -18,32 +18,32 @@ public class PositionDaoImplTest {
     @Test
     public void testCreatePosition() throws Exception {
         String positionTitle = "Test position60905";
-        Position createPosition = positionDao.createPosition(positionTitle);
-        Position position = positionDao.loadPosition(createPosition.getId());
+        Position createPosition = positionDao.create(positionTitle);
+        Position position = positionDao.load(createPosition.getId());
         assertEquals(position.getTitle(), positionTitle);
 
-        positionDao.deletePosition(createPosition.getId());
+        positionDao.delete(createPosition.getId());
     }
 
     @Test
     public void testUpdatePosition() throws Exception {
         String title = "qwerty";
-        Position createPosition = positionDao.createPosition(title);
+        Position createPosition = positionDao.create(title);
 
         String newTitle = "newPositionTitle";
-        positionDao.updatePosition(createPosition.getId(), newTitle);
-        Position loadPosition = positionDao.loadPosition(createPosition.getId());
+        positionDao.update(createPosition.getId(), newTitle);
+        Position loadPosition = positionDao.load(createPosition.getId());
         assertEquals(loadPosition.getTitle(), newTitle);
 
-        positionDao.deletePosition(loadPosition.getId());
+        positionDao.delete(loadPosition.getId());
     }
 
     @Test(expected = RuntimeException.class)
     public void testDeletePosition() throws Exception {
         String title = "qwerty";
-        Position createPosition = positionDao.createPosition(title);
-        positionDao.deletePosition(createPosition.getId());
-        Position pos = positionDao.loadPosition(createPosition.getId());
+        Position createPosition = positionDao.create(title);
+        positionDao.delete(createPosition.getId());
+        Position pos = positionDao.load(createPosition.getId());
     }
 
     @Test

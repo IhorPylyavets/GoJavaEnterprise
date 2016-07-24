@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class DeskDaoImplTest {
 
-    private DeskDao deskDao;
+    private DeskDaoImpl deskDao;
 
     @Before
     public void init() {
@@ -18,32 +18,32 @@ public class DeskDaoImplTest {
     @Test
     public void testCreateDesk() throws Exception {
         String deskNumber = "Test desk number";
-        Desk createDesk = deskDao.createDesk(deskNumber);
-        Desk desk = deskDao.loadDesk(createDesk.getId());
+        Desk createDesk = deskDao.create(deskNumber);
+        Desk desk = deskDao.load(createDesk.getId());
         assertEquals(desk.getNumber(), deskNumber);
 
-        deskDao.deleteDesk(createDesk.getId());
+        deskDao.delete(createDesk.getId());
     }
 
     @Test
     public void testUpdateDesk() throws Exception {
         String number = "qwerty desk";
-        Desk createDesk = deskDao.createDesk(number);
+        Desk createDesk = deskDao.create(number);
 
         String newNumber = "newDeskNumber";
-        deskDao.updateDesk(createDesk.getId(), newNumber);
-        Desk loadDesk = deskDao.loadDesk(createDesk.getId());
+        deskDao.update(createDesk.getId(), newNumber);
+        Desk loadDesk = deskDao.load(createDesk.getId());
         assertEquals(loadDesk.getNumber(), newNumber);
 
-        deskDao.deleteDesk(loadDesk.getId());
+        deskDao.delete(loadDesk.getId());
     }
 
     @Test(expected = RuntimeException.class)
     public void testDeleteDesk() throws Exception {
         String number = "qwerty desk";
-        Desk createDesk = deskDao.createDesk(number);
-        deskDao.deleteDesk(createDesk.getId());
-        Desk desk = deskDao.loadDesk(createDesk.getId());
+        Desk createDesk = deskDao.create(number);
+        deskDao.delete(createDesk.getId());
+        Desk desk = deskDao.load(createDesk.getId());
     }
 
     @Test
@@ -51,6 +51,5 @@ public class DeskDaoImplTest {
         String metaData = deskDao.readMetadata();
         System.out.println(metaData);
     }
-
 
 }

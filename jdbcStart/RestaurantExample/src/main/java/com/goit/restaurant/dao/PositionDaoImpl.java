@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PositionDaoImpl implements PositionDao {
+public class PositionDaoImpl implements SimpleDao<Position> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PositionDaoImpl.class);
 
@@ -16,21 +16,22 @@ public class PositionDaoImpl implements PositionDao {
         DaoCommons.loadDriver();
     }
 
-    public Position createPosition(String positionTitle) {
+    @Override
+    public Position create(String title) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement =
                      connection.prepareStatement("INSERT INTO POSITION (TITLE) VALUES (?) RETURNING ID, TITLE")){
 
             Position resultPosition = new Position();
 
-            statement.setString(1, positionTitle);
+            statement.setString(1, title);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 resultPosition.setId(resultSet.getInt(1));
                 resultPosition.setTitle(resultSet.getString(2));
             }
-            LOGGER.info(String.format("Position with TITLE %s is creating in DB", positionTitle));
+            LOGGER.info(String.format("Position with TITLE %s is creating in DB", title));
 
             return resultPosition;
         } catch (SQLException e) {
@@ -39,7 +40,8 @@ public class PositionDaoImpl implements PositionDao {
         }
     }
 
-    public Position loadPosition(int id) {
+    @Override
+    public Position load(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement =
                      connection.prepareStatement("SELECT * FROM POSITION WHERE ID = ?")){
@@ -58,7 +60,8 @@ public class PositionDaoImpl implements PositionDao {
         }
     }
 
-    public List<Position> getAllPosition() {
+    @Override
+    public List<Position> getAll() {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              Statement statement = connection.createStatement()){
 
@@ -78,7 +81,8 @@ public class PositionDaoImpl implements PositionDao {
         }
     }
 
-    public void deletePosition(int id) {
+    @Override
+    public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement = connection.prepareStatement("DELETE FROM POSITION WHERE ID = ?")){
 
@@ -92,11 +96,12 @@ public class PositionDaoImpl implements PositionDao {
         }
     }
 
-    public void updatePosition(int id, String newPositionTitle) {
+    @Override
+    public void update(int id, String newTitle) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement = connection.prepareStatement("UPDATE POSITION SET TITLE=? WHERE ID = ?")){
 
-            statement.setString(1, newPositionTitle);
+            statement.setString(1, newTitle);
             statement.setInt(2, id);
             statement.execute();
 
