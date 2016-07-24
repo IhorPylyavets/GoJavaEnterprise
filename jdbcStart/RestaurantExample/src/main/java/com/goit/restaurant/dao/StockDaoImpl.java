@@ -1,46 +1,40 @@
 package com.goit.restaurant.dao;
 
-import com.goit.restaurant.model.Employee;
+import com.goit.restaurant.model.Stock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDaoImpl implements EmployeeDao{
+public class StockDaoImpl implements StockDao{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockDaoImpl.class);
 
-    public EmployeeDaoImpl() {
+    public StockDaoImpl() {
         DaoCommons.loadDriver();
     }
 
     @Override
-    public Employee create(String lastName, String firstName, String birthday, String phone, int positionId, float salary) {
+    public Stock create(int ingredientId, int amount) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              PreparedStatement statement =
-                     connection.prepareStatement("INSERT INTO EMPLOYEE (LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY) " +
-                             "VALUES (?,?,?,?,?,?) RETURNING ID, LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY")){
+                     connection.prepareStatement("INSERT INTO STOCK (INGREDIENT_ID, AMOUNT) " +
+                             "VALUES (?,?) RETURNING ID, INGREDIENT_ID, AMOUNT")){
 
-            statement.setString(1, lastName);
-            statement.setString(2, firstName);
-            statement.setDate(3, stringToDate(birthday));
-            statement.setString(4, phone);
-            statement.setInt(5, positionId);
-            statement.setFloat(6, salary);
-
+            statement.setInt(1, ingredientId);
+            statement.setInt(2, amount);
             ResultSet resultSet = statement.executeQuery();
-            Employee resultEmployee = null;
+
+            Stock resultStock = null;
 
             if (resultSet.next()) {
-                resultEmployee = createEmployeeFromResultSet(resultSet);
+                resultStock = createStockFromResultSet(resultSet);
             }
-            LOGGER.info(String.format("Employee is creating in DB"));
+            LOGGER.info(String.format("Stock is creating in DB"));
 
-            return resultEmployee;
+            return resultStock;
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
@@ -48,17 +42,17 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public Employee load(int id) {
+    public Stock load(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM EMPLOYEE WHERE ID = ?")){
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM STOCK WHERE ID = ?")){
 
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return createEmployeeFromResultSet(resultSet);
+                return createStockFromResultSet(resultSet);
             } else {
-                throw new RuntimeException("Cannot find Employee with id " + id);
+                throw new RuntimeException("Cannot find Stock with id " + id);
             }
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
@@ -67,17 +61,17 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public List<Employee> getAll() {
+    public List<Stock> getAll() {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
              Statement statement = connection.createStatement()){
 
-            String sql = "SELECT * FROM EMPLOYEE";
+            String sql = "SELECT * FROM STOCK";
             ResultSet resultSet = statement.executeQuery(sql);
-            List<Employee> resultList = new ArrayList<>();
+            List<Stock> resultList = new ArrayList<>();
 
             while (resultSet.next()) {
-                Employee employee = createEmployeeFromResultSet(resultSet);
-                resultList.add(employee);
+                Stock stock = createStockFromResultSet(resultSet);
+                resultList.add(stock);
             }
 
             return resultList;
@@ -90,12 +84,12 @@ public class EmployeeDaoImpl implements EmployeeDao{
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM EMPLOYEE WHERE ID = ?")){
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM STOCK WHERE ID = ?")){
 
             statement.setInt(1, id);
             statement.execute();
 
-            LOGGER.info(String.format("Employee with ID %d is deleting from DB", id));
+            LOGGER.info(String.format("Stock with ID %d is deleting from DB", id));
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
             throw new RuntimeException(e);
@@ -109,7 +103,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
             StringBuilder sb = new StringBuilder();
 
-            String sql = "SELECT * FROM EMPLOYEE";
+            String sql = "SELECT * FROM STOCK";
             ResultSet resultSet = statement.executeQuery(sql);
             ResultSetMetaData metaData = resultSet.getMetaData();
 
@@ -126,26 +120,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
         }
     }
 
-    private Employee createEmployeeFromResultSet(ResultSet resultSet) throws SQLException {
-        Employee employee = new Employee();
-        employee.setId(resultSet.getInt("ID"));
-        employee.setLastName(resultSet.getString("LAST_NAME"));
-        employee.setFirstName(resultSet.getString("FIRST_NAME"));
-        employee.setBirthday(resultSet.getString("BIRTHDAY"));
-        employee.setPhone(resultSet.getString("PHONE"));
-        employee.setPositionId(resultSet.getInt("POSITION_ID"));
-        employee.setSalary(resultSet.getFloat("SALARY"));
-        return employee;
-    }
-
-    private Date stringToDate(String birthday) {
-        SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
-        java.util.Date date = null;
-        try {
-            date = sdf1.parse(birthday);
-        } catch (ParseException e) {
-            throw new IllegalArgumentException("Wrong birthday format");
-        }
-        return new Date(date.getTime());
+    private Stock createStockFromResultSet(ResultSet resultSet) throws SQLException {
+        Stock stock = new Stock();
+        stock.setId(resultSet.getInt("ID"));
+        stock.setIngredientId(resultSet.getInt("INGREDIENT_ID"));
+        stock.setAmount(resultSet.getInt("AMOUNT"));
+        return stock;
     }
 }

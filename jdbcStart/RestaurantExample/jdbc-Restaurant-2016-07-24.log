@@ -1,0 +1,139 @@
+>10:32:11.895 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:11.930 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.143 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with NUMBER qwerty desk is creating in DB
+>10:32:12.158 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with ID 16 is updating from DB
+>10:32:12.189 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with ID 16 is deleting from DB
+>10:32:12.192 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.192 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.211 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.212 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.231 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with NUMBER Test desk number is creating in DB
+>10:32:12.262 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with ID 17 is deleting from DB
+>10:32:12.263 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.264 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.284 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with NUMBER qwerty desk is creating in DB
+>10:32:12.296 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with ID 18 is deleting from DB
+>10:32:12.307 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.308 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.325 INFO  [main] c.g.restaurant.dao.EmployeeDaoImpl - Employee is creating in DB
+>10:32:12.343 INFO  [main] c.g.restaurant.dao.EmployeeDaoImpl - Employee with ID 13 is deleting from DB
+>10:32:12.354 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.354 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.370 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.371 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.389 INFO  [main] c.g.restaurant.dao.EmployeeDaoImpl - Employee is creating in DB
+>10:32:12.423 INFO  [main] c.g.restaurant.dao.EmployeeDaoImpl - Employee with ID 14 is deleting from DB
+>10:32:12.429 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.431 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.451 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.452 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.472 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with TITLE Test ingredient title is creating in DB
+>10:32:12.506 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with ID 12 is deleting from DB
+>10:32:12.508 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.511 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.523 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with TITLE qwerty Ingredient is creating in DB
+>10:32:12.543 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with ID 13 is deleting from DB
+>10:32:12.561 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.562 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.589 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with TITLE qwerty Ingredient is creating in DB
+>10:32:12.604 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with ID 14 is updating from DB
+>10:32:12.624 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with ID 14 is deleting from DB
+>10:32:12.626 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.626 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.643 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.644 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.660 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with TITLE qwerty is creating in DB
+>10:32:12.677 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with ID 20 is updating from DB
+>10:32:12.701 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with ID 20 is deleting from DB
+>10:32:12.702 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.702 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.714 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with TITLE Test position60905 is creating in DB
+>10:32:12.752 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with ID 21 is deleting from DB
+>10:32:12.755 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:32:12.755 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:32:12.772 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with TITLE qwerty is creating in DB
+>10:32:12.787 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with ID 22 is deleting from DB
+>10:45:21.104 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:45:21.128 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:45:21.251 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock is creating in DB
+>10:45:21.259 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock with ID 9 is deleting from DB
+>10:45:21.267 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:45:21.267 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:45:21.281 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:45:21.282 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:45:21.297 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock is creating in DB
+>10:47:32.992 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:33.019 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:33.122 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock is creating in DB
+>10:47:33.131 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock with ID 11 is deleting from DB
+>10:47:33.143 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:33.143 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:33.155 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:33.157 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:33.188 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock is creating in DB
+>10:47:33.229 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock with ID 12 is deleting from DB
+>10:47:43.946 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:43.978 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.085 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with NUMBER qwerty desk is creating in DB
+>10:47:44.094 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with ID 19 is updating from DB
+>10:47:44.109 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with ID 19 is deleting from DB
+>10:47:44.111 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.112 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.130 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.131 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.148 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with NUMBER Test desk number is creating in DB
+>10:47:44.192 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with ID 20 is deleting from DB
+>10:47:44.197 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.197 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.222 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with NUMBER qwerty desk is creating in DB
+>10:47:44.238 INFO  [main] com.goit.restaurant.dao.DeskDaoImpl - Desk with ID 21 is deleting from DB
+>10:47:44.254 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.254 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.274 INFO  [main] c.g.restaurant.dao.EmployeeDaoImpl - Employee is creating in DB
+>10:47:44.310 INFO  [main] c.g.restaurant.dao.EmployeeDaoImpl - Employee with ID 15 is deleting from DB
+>10:47:44.317 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.318 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.331 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.331 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.359 INFO  [main] c.g.restaurant.dao.EmployeeDaoImpl - Employee is creating in DB
+>10:47:44.403 INFO  [main] c.g.restaurant.dao.EmployeeDaoImpl - Employee with ID 16 is deleting from DB
+>10:47:44.409 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.410 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.428 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.428 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.447 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with TITLE Test ingredient title is creating in DB
+>10:47:44.480 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with ID 15 is deleting from DB
+>10:47:44.482 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.484 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.500 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with TITLE qwerty Ingredient is creating in DB
+>10:47:44.517 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with ID 16 is deleting from DB
+>10:47:44.529 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.530 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.543 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with TITLE qwerty Ingredient is creating in DB
+>10:47:44.560 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with ID 17 is updating from DB
+>10:47:44.578 INFO  [main] c.g.restaurant.dao.IngredientDaoImpl - Ingredient with ID 17 is deleting from DB
+>10:47:44.581 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.581 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.595 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.597 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.614 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with TITLE qwerty is creating in DB
+>10:47:44.631 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with ID 23 is updating from DB
+>10:47:44.663 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with ID 23 is deleting from DB
+>10:47:44.664 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.665 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.681 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with TITLE Test position60905 is creating in DB
+>10:47:44.709 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with ID 24 is deleting from DB
+>10:47:44.710 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.711 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.723 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with TITLE qwerty is creating in DB
+>10:47:44.737 INFO  [main] c.g.restaurant.dao.PositionDaoImpl - Position with ID 25 is deleting from DB
+>10:47:44.750 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.751 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.769 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock is creating in DB
+>10:47:44.785 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock with ID 13 is deleting from DB
+>10:47:44.803 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.803 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.817 INFO  [main] com.goit.restaurant.dao.DaoCommons - Loading JDBC driver: org.postgresql.Driver
+>10:47:44.818 INFO  [main] com.goit.restaurant.dao.DaoCommons - Driver successfully loaded
+>10:47:44.833 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock is creating in DB
+>10:47:44.860 INFO  [main] com.goit.restaurant.dao.StockDaoImpl - Stock with ID 14 is deleting from DB

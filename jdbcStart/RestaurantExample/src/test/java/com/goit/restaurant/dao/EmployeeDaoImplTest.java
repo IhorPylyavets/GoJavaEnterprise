@@ -24,11 +24,11 @@ public class EmployeeDaoImplTest {
         int positionId = 1;
         float salary = 20000;
 
-        Employee createEmployee = employeeDao.createEmployee(lastName, firstName, birthday, phone, positionId, salary);
-        Employee employee = employeeDao.loadEmployee(createEmployee.getId());
+        Employee createEmployee = employeeDao.create(lastName, firstName, birthday, phone, positionId, salary);
+        Employee employee = employeeDao.load(createEmployee.getId());
         assertTrue(createEmployee.equals(employee));
 
-        employeeDao.deleteEmployee(createEmployee.getId());
+        employeeDao.delete(createEmployee.getId());
     }
 
     @Test(expected = RuntimeException.class)
@@ -40,9 +40,9 @@ public class EmployeeDaoImplTest {
         int positionId = 1;
         float salary = 20000;
 
-        Employee createEmployee = employeeDao.createEmployee(lastName, firstName, birthday, phone, positionId, salary);
-        employeeDao.deleteEmployee(createEmployee.getId());
-        Employee pos = employeeDao.loadEmployee(createEmployee.getId());
+        Employee createEmployee = employeeDao.create(lastName, firstName, birthday, phone, positionId, salary);
+        employeeDao.delete(createEmployee.getId());
+        Employee pos = employeeDao.load(createEmployee.getId());
     }
 
     @Test
