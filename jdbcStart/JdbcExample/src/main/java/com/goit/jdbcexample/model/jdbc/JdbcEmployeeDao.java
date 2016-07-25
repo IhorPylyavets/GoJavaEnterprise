@@ -4,24 +4,19 @@ import com.goit.jdbcexample.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcEmployeeDao implements EmployeeDao {
 
+    private DataSource dataSource;
     private static final Logger LOGGER = LoggerFactory.getLogger(JdbcEmployeeDao.class);
-    private static final String URL = "jdbc:postgresql://localhost:5432/company";
-    private static final String USER = "user";
-    private static final String PASSWORD = "12345";
-
-    public JdbcEmployeeDao() {
-        loadDriver();
-    }
 
     @Override
     public Employee load(int id) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement =
                      connection.prepareStatement("SELECT * FROM EMPLOYEE WHERE ID = ?")){
 
@@ -34,7 +29,7 @@ public class JdbcEmployeeDao implements EmployeeDao {
                 throw new RuntimeException("Cannot find Employee with id " + id);
             }
         } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: " + URL, e);
+            LOGGER.error("Exception occurred while connection to DB: ", e);
             throw new RuntimeException(e);
         }
     }
@@ -43,7 +38,7 @@ public class JdbcEmployeeDao implements EmployeeDao {
     public List<Employee> getAllEmployee() {
         List<Employee> resultList = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()){
 
             String sql = "SELECT * FROM EMPLOYEE";
@@ -54,22 +49,11 @@ public class JdbcEmployeeDao implements EmployeeDao {
                 resultList.add(employee);
             }
         } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: " + URL, e);
+            LOGGER.error("Exception occurred while connection to DB: ", e);
             throw new RuntimeException(e);
         }
 
         return resultList;
-    }
-
-    private void loadDriver() {
-        try {
-            LOGGER.info("Loading JDBC driver: org.postgresql.Driver");
-            Class.forName("org.postgresql.Driver");
-            LOGGER.info("Driver successfully loaded");
-        } catch (ClassNotFoundException e) {
-            LOGGER.error("Cannot find driver: org.postgresql.Driver");
-            throw new RuntimeException(e);
-        }
     }
 
     private Employee createEmployee(ResultSet resultSet) throws SQLException {
@@ -83,4 +67,7 @@ public class JdbcEmployeeDao implements EmployeeDao {
         return employee;
     }
 
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 }
