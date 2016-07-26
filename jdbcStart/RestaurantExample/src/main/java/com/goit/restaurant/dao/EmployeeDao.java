@@ -5,10 +5,10 @@ import com.goit.restaurant.model.Employee;
 import java.util.List;
 
 public interface EmployeeDao {
-    Employee create(String lastName, String firstName, String birthday, String phone, int positionId, float salary);
-    Employee load(int id);
-    List<Employee> getAll();
-    void delete(int id);
+    Employee createEmployee(String lastName, String firstName, String birthday, String phone, int positionId, float salary);
+    Employee loadEmployeeById(int id);
+    List<Employee> getAllEmployees();
+    void deleteEmployee(int id);
     //void updateEmployee(int id, String newPositionTitle);
-    String readMetadata();
+    String readEmployeeMetadata();
 }

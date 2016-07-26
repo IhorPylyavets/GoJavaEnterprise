@@ -13,6 +13,16 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(int id, String lastName, String firstName, String birthday, String phone, int positionId, float salary) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.birthday = birthday;
+        this.phone = phone;
+        this.positionId = positionId;
+        this.salary = salary;
+    }
+
     public int getId() {
         return id;
     }
@@ -75,22 +85,10 @@ public class Employee {
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", birthday=" + birthday +
+                ", birthday='" + birthday + '\'' +
                 ", phone='" + phone + '\'' +
                 ", positionId=" + positionId +
                 ", salary=" + salary +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        Employee o = (Employee) obj;
-
-        return (o.getLastName().equals(getLastName()) &&
-                o.getFirstName().equals(getFirstName()) &&
-                o.getBirthday().equals(getBirthday()) &&
-                o.getPhone().equals(getPhone()) &&
-                (o.getPositionId() == getPositionId()) &&
-                (o.getSalary() ==getSalary()));
     }
 }

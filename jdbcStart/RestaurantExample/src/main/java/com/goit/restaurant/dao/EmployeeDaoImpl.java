@@ -3,7 +3,10 @@ package com.goit.restaurant.dao;
 import com.goit.restaurant.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,16 +16,14 @@ import java.util.List;
 public class EmployeeDaoImpl implements EmployeeDao{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
-
-    public EmployeeDaoImpl() {
-        DaoCommons.loadDriver();
-    }
+    private DataSource dataSource;
 
     @Override
-    public Employee create(String lastName, String firstName, String birthday, String phone, int positionId, float salary) {
-        try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
+    @Transactional(propagation = Propagation.MANDATORY)
+    public Employee createEmployee(String lastName, String firstName, String birthday, String phone, int positionId, float salary) {
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement("INSERT INTO EMPLOYEE (LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY) " +
+                     connection.prepareStatement("INSERT INTO EMPLOYEES (LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY) " +
                              "VALUES (?,?,?,?,?,?) RETURNING ID, LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY")){
 
             statement.setString(1, lastName);
@@ -42,15 +43,16 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
             return resultEmployee;
         } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
+            LOGGER.error("Exception occurred while connection to DB: ", e);
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public Employee load(int id) {
-        try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM EMPLOYEE WHERE ID = ?")){
+    @Transactional(propagation = Propagation.MANDATORY)
+    public Employee loadEmployeeById(int id) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE ID = ?")){
 
             statement.setInt(1, id);
 
@@ -61,17 +63,18 @@ public class EmployeeDaoImpl implements EmployeeDao{
                 throw new RuntimeException("Cannot find Employee with id " + id);
             }
         } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
+            LOGGER.error("Exception occurred while connection to DB: ", e);
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public List<Employee> getAll() {
-        try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
+    @Transactional(propagation = Propagation.MANDATORY)
+    public List<Employee> getAllEmployees() {
+        try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()){
 
-            String sql = "SELECT * FROM EMPLOYEE";
+            String sql = "SELECT * FROM EMPLOYEES";
             ResultSet resultSet = statement.executeQuery(sql);
             List<Employee> resultList = new ArrayList<>();
 
@@ -82,34 +85,36 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
             return resultList;
         } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
+            LOGGER.error("Exception occurred while connection to DB: ", e);
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public void delete(int id) {
-        try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM EMPLOYEE WHERE ID = ?")){
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void deleteEmployee(int id) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM EMPLOYEES WHERE ID = ?")){
 
             statement.setInt(1, id);
             statement.execute();
 
             LOGGER.info(String.format("Employee with ID %d is deleting from DB", id));
         } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
+            LOGGER.error("Exception occurred while connection to DB: ", e);
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public String readMetadata() {
-        try (Connection connection = DriverManager.getConnection(DaoCommons.URL, DaoCommons.USER, DaoCommons.PASSWORD);
+    @Transactional(propagation = Propagation.MANDATORY)
+    public String readEmployeeMetadata() {
+        try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()){
 
             StringBuilder sb = new StringBuilder();
 
-            String sql = "SELECT * FROM EMPLOYEE";
+            String sql = "SELECT * FROM EMPLOYEES";
             ResultSet resultSet = statement.executeQuery(sql);
             ResultSetMetaData metaData = resultSet.getMetaData();
 
@@ -121,9 +126,13 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
             return sb.toString();
         } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: " + DaoCommons.URL, e);
+            LOGGER.error("Exception occurred while connection to DB: ", e);
             throw new RuntimeException(e);
         }
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     private Employee createEmployeeFromResultSet(ResultSet resultSet) throws SQLException {

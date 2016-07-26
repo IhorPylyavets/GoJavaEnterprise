@@ -3,14 +3,14 @@ package com.goit.restaurant.model;
 public class Position {
 
     private int id;
-    private String title;
+    private String positionTitle;
 
     public Position() {
     }
 
-    public Position(int id, String title) {
+    public Position(int id, String positionTitle) {
         this.id = id;
-        this.title = title;
+        this.positionTitle = positionTitle;
     }
 
     public int getId() {
@@ -21,19 +21,19 @@ public class Position {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getPositionTitle() {
+        return positionTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPositionTitle(String positionTitle) {
+        this.positionTitle = positionTitle;
     }
 
     @Override
     public String toString() {
         return "Position{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", positionTitle='" + positionTitle + '\'' +
                 '}';
     }
 }
