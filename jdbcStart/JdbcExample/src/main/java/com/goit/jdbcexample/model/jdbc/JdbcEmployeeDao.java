@@ -3,6 +3,8 @@ package com.goit.jdbcexample.model.jdbc;
 import com.goit.jdbcexample.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -15,13 +17,13 @@ public class JdbcEmployeeDao implements EmployeeDao {
     private static final Logger LOGGER = LoggerFactory.getLogger(JdbcEmployeeDao.class);
 
     @Override
+    @Transactional(propagation = Propagation.MANDATORY)
     public Employee load(int id) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement =
                      connection.prepareStatement("SELECT * FROM EMPLOYEE WHERE ID = ?")){
 
             statement.setInt(1, id);
-
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return createEmployee(resultSet);
@@ -35,6 +37,7 @@ public class JdbcEmployeeDao implements EmployeeDao {
     }
 
     @Override
+    @Transactional(propagation = Propagation.MANDATORY)
     public List<Employee> getAllEmployee() {
         List<Employee> resultList = new ArrayList<>();
 
