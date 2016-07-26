@@ -9,6 +9,7 @@
         <property name="positionController" ref="positionController"/>
         <property name="employeeController" ref="employeeController"/>
         <property name="deskController" ref="deskController"/>
+        <property name="menuController" ref="menuController"/>
     </bean>
 
     <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
@@ -52,6 +53,14 @@
         <property name="deskDao" ref="deskDao"/>
     </bean>
     <bean class="com.goit.restaurant.dao.DeskDaoImpl" id="deskDao">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="com.goit.restaurant.controllers.MenuController" id="menuController">
+        <property name="txManager" ref="txManager"/>
+        <property name="menuDao" ref="menuDao"/>
+    </bean>
+    <bean class="com.goit.restaurant.dao.MenuDaoImpl" id="menuDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 

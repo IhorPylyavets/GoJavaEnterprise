@@ -39,7 +39,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
             if (resultSet.next()) {
                 resultEmployee = createEmployeeFromResultSet(resultSet);
             }
-            LOGGER.info(String.format("Employee is creating in DB"));
+            LOGGER.info(String.format("Employee with parameters {%s, %s, %s, %s, %d, %d} is creating in DB",
+                    lastName, firstName, birthday, phone, positionId, salary));
 
             return resultEmployee;
         } catch (SQLException e) {

@@ -32,7 +32,7 @@ public class PositionDaoImpl implements PositionDao{
                 resultPositions.setId(resultSet.getInt(1));
                 resultPositions.setPositionTitle(resultSet.getString(2));
             }
-            LOGGER.info(String.format("Position with TITLE %s is creating in DB", positionTitle));
+            LOGGER.info(String.format("Position with POSITION_TITLE %s is creating in DB", positionTitle));
 
             return resultPositions;
         } catch (SQLException e) {
@@ -53,7 +53,7 @@ public class PositionDaoImpl implements PositionDao{
             if (resultSet.next()) {
                 return new Position(resultSet.getInt("ID"), resultSet.getString("POSITION_TITLE"));
             } else {
-                throw new RuntimeException("Cannot find Employee with id " + id);
+                throw new RuntimeException("Cannot find Position with id " + id);
             }
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connection to DB: ", e);
@@ -87,7 +87,7 @@ public class PositionDaoImpl implements PositionDao{
     @Transactional(propagation = Propagation.MANDATORY)
     public void deletePosition(int id) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM POSITIONS WHERE ID = ?")){
+              PreparedStatement statement = connection.prepareStatement("DELETE FROM POSITIONS WHERE ID = ?")){
 
             statement.setInt(1, id);
             statement.execute();
