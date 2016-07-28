@@ -1,4 +1,4 @@
-package com.goit.restaurant.dao;
+package com.goit.restaurant.dao.mappers;
 
 import com.goit.restaurant.model.Desk;
 import org.springframework.jdbc.core.RowMapper;

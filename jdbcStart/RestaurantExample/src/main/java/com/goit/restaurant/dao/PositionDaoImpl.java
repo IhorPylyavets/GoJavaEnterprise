@@ -1,5 +1,7 @@
 package com.goit.restaurant.dao;
 
+import com.goit.restaurant.dao.mappers.PositionMapper;
+import com.goit.restaurant.dao.restaurantintefraces.PositionDao;
 import com.goit.restaurant.model.Position;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,5 +1,7 @@
 package com.goit.restaurant.dao;
 
+import com.goit.restaurant.dao.mappers.EmployeeMapper;
+import com.goit.restaurant.dao.restaurantintefraces.EmployeeDao;
 import com.goit.restaurant.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,20 +12,11 @@ import javax.sql.DataSource;
 
 import java.util.List;
 
-import com.goit.restaurant.model.Employee;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.sql.DataSource;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
-public class EmployeeDaoImpl implements EmployeeDao{
+public class EmployeeDaoImpl implements EmployeeDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
 

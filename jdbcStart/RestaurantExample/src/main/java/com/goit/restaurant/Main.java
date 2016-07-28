@@ -12,6 +12,9 @@ public class Main {
     private EmployeeController employeeController;
     private DeskController deskController;
     private MenuController menuController;
+    private IngredientController ingredientController;
+    private WarehouseController warehouseController;
+    private CategoryController categoryController;
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
@@ -20,6 +23,7 @@ public class Main {
     }
 
     private void start() {
+
     }
 
     public void setPositionController(PositionController positionController) {
@@ -33,5 +37,14 @@ public class Main {
     }
     public void setMenuController(MenuController menuController) {
         this.menuController = menuController;
+    }
+    public void setIngredientController(IngredientController ingredientController) {
+        this.ingredientController = ingredientController;
+    }
+    public void setWarehouseController(WarehouseController warehouseController) {
+        this.warehouseController = warehouseController;
+    }
+    public void setCategoryController(CategoryController categoryController) {
+        this.categoryController = categoryController;
     }
 }

@@ -1,4 +1,4 @@
-package com.goit.restaurant.dao;
+package com.goit.restaurant.dao.restaurantintefraces;
 
 import com.goit.restaurant.model.Desk;
 

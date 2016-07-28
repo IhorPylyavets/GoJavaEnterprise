@@ -1,5 +1,7 @@
 package com.goit.restaurant.dao;
 
+import com.goit.restaurant.dao.mappers.MenuMapper;
+import com.goit.restaurant.dao.restaurantintefraces.MenuDao;
 import com.goit.restaurant.model.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class MenuDaoImpl implements MenuDao{
+public class MenuDaoImpl implements MenuDao {
     private static final Logger LOGGER = LoggerFactory.getLogger(MenuDaoImpl.class);
 
     private DataSource dataSource;

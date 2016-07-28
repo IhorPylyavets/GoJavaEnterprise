@@ -1,5 +1,7 @@
 package com.goit.restaurant.dao;
 
+import com.goit.restaurant.dao.mappers.DeskMapper;
+import com.goit.restaurant.dao.restaurantintefraces.DeskDao;
 import com.goit.restaurant.model.Desk;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class DeskDaoImpl implements DeskDao{
+public class DeskDaoImpl implements DeskDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DeskDaoImpl.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+    }
 
     @Override
     @Transactional
@@ -51,7 +58,7 @@ public class DeskDaoImpl implements DeskDao{
     public void updateDeskTitle(int id, String newDeskTitle) {
         String SQL = "UPDATE DESKS SET DESK_TITLE = ? WHERE ID = ?";
         jdbcTemplateObject.update(SQL, newDeskTitle, id);
-        LOGGER.info(String.format("Desk with %d is updating in DB", id));
+        LOGGER.info(String.format("Desk with id %d is updating in DB", id));
     }
 
     /*@Override
@@ -62,8 +69,4 @@ public class DeskDaoImpl implements DeskDao{
         LOGGER.info(String.format("Desk with %d is updating in DB", id));
     }*/
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-    }
 }
