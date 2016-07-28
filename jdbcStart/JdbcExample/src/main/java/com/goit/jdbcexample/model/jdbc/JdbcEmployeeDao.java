@@ -3,6 +3,7 @@ package com.goit.jdbcexample.model.jdbc;
 import com.goit.jdbcexample.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,11 @@ public class JdbcEmployeeDao implements EmployeeDao {
 
     private DataSource dataSource;
     private static final Logger LOGGER = LoggerFactory.getLogger(JdbcEmployeeDao.class);
+
+    @Override
+    public void createEmployee(Employee employee) {
+
+    }
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
@@ -66,7 +72,7 @@ public class JdbcEmployeeDao implements EmployeeDao {
         employee.setAge(resultSet.getInt("AGE"));
         employee.setAddress(resultSet.getString("ADDRESS"));
         employee.setSalary(resultSet.getFloat("SALARY"));
-        employee.setJoinDate(resultSet.getString("JOIN_DATE"));
+        employee.setJoinDate(resultSet.getDate("JOIN_DATE"));
         return employee;
     }
 

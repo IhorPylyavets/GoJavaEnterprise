@@ -14,7 +14,7 @@ import java.util.List;
 public class MenuDaoImpl implements MenuDao{
 
     private DataSource dataSource;
-    private static final Logger LOGGER = LoggerFactory.getLogger(PositionDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MenuDaoImpl.class);
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)

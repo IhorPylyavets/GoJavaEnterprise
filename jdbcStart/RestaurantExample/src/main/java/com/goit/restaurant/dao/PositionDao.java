@@ -5,10 +5,10 @@ import com.goit.restaurant.model.Position;
 import java.util.List;
 
 public interface PositionDao {
-    Position createPosition(String positionTitle);
+    void createPosition(String positionTitle);
     Position loadPositionById(int id);
     List<Position> getAllPosition();
     void deletePosition(int id);
-    void updatePosition(int id, String newTitle);
-    String readPositionMetadata();
+    void updatePositionTitle(int id, String newTitle);
+    //String readPositionMetadata();
 }

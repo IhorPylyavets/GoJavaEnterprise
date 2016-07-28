@@ -1,10 +1,6 @@
 package com.goit.restaurant;
 
-import com.goit.restaurant.controllers.DeskController;
-import com.goit.restaurant.controllers.EmployeeController;
-import com.goit.restaurant.controllers.MenuController;
-import com.goit.restaurant.controllers.PositionController;
-import com.goit.restaurant.model.Desk;
+import com.goit.restaurant.controllers.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -24,7 +20,7 @@ public class Main {
     }
 
     private void start() {
-        
+
     }
 
     public void setPositionController(PositionController positionController) {

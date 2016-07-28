@@ -1,6 +1,7 @@
 package com.goit.jdbcexample.model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Employee {
 
@@ -9,12 +10,12 @@ public class Employee {
     private int age;
     private String address;
     private float salary;
-    private String joinDate;
+    private Date joinDate;
 
     public Employee() {
     }
 
-    public Employee(int id, String name, int age, String address, float salary, String joinDate) {
+    public Employee(int id, String name, int age, String address, float salary, Date joinDate) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -63,11 +64,11 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String getJoinDate() {
+    public Date getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(String joinDate) {
+    public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
 
