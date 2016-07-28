@@ -7,7 +7,7 @@ public class Desk {
 
         private final String status;
 
-        DeskStatus(final String status) {
+        private DeskStatus(final String status) {
             this.status = status;
         }
 
@@ -15,7 +15,6 @@ public class Desk {
         public String toString() {
             return status;
         }
-        //DeskStatus.ORDERED.toString();
     }
 
     private int id;

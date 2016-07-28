@@ -20,27 +20,27 @@ public class DeskController {
         this.deskDao = deskDao;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public Desk createDesk(String deskTitle) {
-        return deskDao.createDesk(deskTitle);
+    @Transactional
+    public void createDesk(String deskTitle) {
+        deskDao.createDesk(deskTitle);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public List<Desk> getAllPosition() {
+    @Transactional
+    public List<Desk> getAllDesks() {
         return deskDao.getAllDesks();
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public Desk loadDeskById(int id) {
         return deskDao.loadDeskById(id);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public void deleteDesk(int id) {
         deskDao.deleteDesk(id);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public void updateDeskTitle(int id, String newDeskTitle) {
         deskDao.updateDeskTitle(id, newDeskTitle);
     }
@@ -50,8 +50,8 @@ public class DeskController {
         deskDao.updateDeskStatus(id, deskStatus);
     }*/
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    /*@Transactional(propagation = Propagation.REQUIRED)
     public String readDeskMetadata() {
         return deskDao.readDeskMetadata();
-    }
+    }*/
 }

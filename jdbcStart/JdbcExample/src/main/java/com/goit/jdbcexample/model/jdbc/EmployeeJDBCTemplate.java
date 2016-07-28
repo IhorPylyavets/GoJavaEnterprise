@@ -26,6 +26,7 @@ public class EmployeeJDBCTemplate implements EmployeeDao {
     }
 
     @Override
+    @Transactional
     public Employee load(int id) {
         String SQL = "SELECT * FROM EMPLOYEE where ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new EmployeeMapper());

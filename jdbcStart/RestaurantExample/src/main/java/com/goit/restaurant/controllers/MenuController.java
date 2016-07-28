@@ -20,33 +20,29 @@ public class MenuController {
         this.menuDao = menuDao;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public Menu createMenu(String menuTitle) {
-        return menuDao.createMenu(menuTitle);
+    @Transactional
+    public void createMenu(String menuTitle) {
+        menuDao.createMenu(menuTitle);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public List<Menu> getAllMenu() {
         return menuDao.getAllMenu();
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public Menu loadMenuById(int id) {
         return menuDao.loadMenuById(id);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public void deleteMenu(int id) {
         menuDao.deleteMenu(id);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void updateMenu(int id, String newMenuTitle) {
-        menuDao.updateMenu(id, newMenuTitle);
+    @Transactional
+    public void updateMenuTitle(int id, String newMenuTitle) {
+        menuDao.updateMenuTitle(id, newMenuTitle);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public String readMenuMetadata() {
-        return menuDao.readMenuMetadata();
-    }
 }

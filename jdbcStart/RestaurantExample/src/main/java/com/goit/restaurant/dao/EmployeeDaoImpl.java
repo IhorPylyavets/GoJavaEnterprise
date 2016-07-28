@@ -3,6 +3,16 @@ package com.goit.restaurant.dao;
 import com.goit.restaurant.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.sql.DataSource;
+
+import java.util.List;
+
+import com.goit.restaurant.model.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,136 +26,96 @@ import java.util.List;
 public class EmployeeDaoImpl implements EmployeeDao{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
+
     private DataSource dataSource;
+    private JdbcTemplate jdbcTemplateObject;
 
     @Override
-    @Transactional(propagation = Propagation.MANDATORY)
-    public Employee createEmployee(String lastName, String firstName, String birthday, String phone, int positionId, float salary) {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement =
-                     connection.prepareStatement("INSERT INTO EMPLOYEES (LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY) " +
-                             "VALUES (?,?,?,?,?,?) RETURNING ID, LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY")){
+    @Transactional
+    public void createEmployee(String lastName, String firstName, String birthday,
+                               String phone, int positionId, float salary) {
 
-            statement.setString(1, lastName);
-            statement.setString(2, firstName);
-            statement.setDate(3, stringToDate(birthday));
-            statement.setString(4, phone);
-            statement.setInt(5, positionId);
-            statement.setFloat(6, salary);
-
-            ResultSet resultSet = statement.executeQuery();
-            Employee resultEmployee = null;
-
-            if (resultSet.next()) {
-                resultEmployee = createEmployeeFromResultSet(resultSet);
-            }
-            LOGGER.info(String.format("Employee with parameters {%s, %s, %s, %s, %d, %d} is creating in DB",
-                    lastName, firstName, birthday, phone, positionId, salary));
-
-            return resultEmployee;
-        } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: ", e);
-            throw new RuntimeException(e);
-        }
+        String sql = "INSERT INTO EMPLOYEES (LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY)" +
+                " VALUES (?,?,?,?,?,?)";
+        jdbcTemplateObject.update(sql, lastName, firstName, stringToDate(birthday), phone, positionId, salary);
+        LOGGER.info(String.format("Employee with parameters {%s, %s, %s, %s, %s, %s,} creating in DB"
+                , lastName, firstName, birthday, phone, positionId, salary));
     }
+    // employeeController.createEmployee("lastName", "firstName", "01-03-1972", "phone", 5, 29000.0F);
 
     @Override
-    @Transactional(propagation = Propagation.MANDATORY)
+    @Transactional
     public Employee loadEmployeeById(int id) {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE ID = ?")){
-
-            statement.setInt(1, id);
-
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return createEmployeeFromResultSet(resultSet);
-            } else {
-                throw new RuntimeException("Cannot find Employee with id " + id);
-            }
-        } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: ", e);
-            throw new RuntimeException(e);
-        }
+        String SQL = "SELECT * FROM EMPLOYEES WHERE ID = ?";
+        return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new EmployeeMapper());
     }
 
     @Override
-    @Transactional(propagation = Propagation.MANDATORY)
+    @Transactional
     public List<Employee> getAllEmployees() {
-        try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()){
-
-            String sql = "SELECT * FROM EMPLOYEES";
-            ResultSet resultSet = statement.executeQuery(sql);
-            List<Employee> resultList = new ArrayList<>();
-
-            while (resultSet.next()) {
-                Employee employee = createEmployeeFromResultSet(resultSet);
-                resultList.add(employee);
-            }
-
-            return resultList;
-        } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: ", e);
-            throw new RuntimeException(e);
-        }
+        String SQL = "SELECT * FROM EMPLOYEES";
+        return jdbcTemplateObject.query(SQL, new EmployeeMapper());
     }
 
     @Override
-    @Transactional(propagation = Propagation.MANDATORY)
+    @Transactional
     public void deleteEmployee(int id) {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM EMPLOYEES WHERE ID = ?")){
-
-            statement.setInt(1, id);
-            statement.execute();
-
-            LOGGER.info(String.format("Employee with ID %d is deleting from DB", id));
-        } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: ", e);
-            throw new RuntimeException(e);
-        }
+        String SQL = "DELETE FROM EMPLOYEES WHERE ID = ?";
+        jdbcTemplateObject.update(SQL, id);
+        LOGGER.info(String.format("Employee with %d is deleting from DB", id));
     }
 
     @Override
-    @Transactional(propagation = Propagation.MANDATORY)
-    public String readEmployeeMetadata() {
-        try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()){
+    @Transactional
+    public void updateEmployeeLastName(int id, String newEmployeeLastName) {
+        String SQL = "UPDATE EMPLOYEES SET LAST_NAME = ? WHERE ID = ?";
+        jdbcTemplateObject.update(SQL, newEmployeeLastName, id);
+        LOGGER.info(String.format("Employee with %d is updating LAST_NAME to '%s' in DB", id, newEmployeeLastName));
+    }
 
-            StringBuilder sb = new StringBuilder();
+    @Override
+    @Transactional
+    public void updateEmployeeFirstName(int id, String newEmployeeFirstName) {
+        String SQL = "UPDATE EMPLOYEES SET FIRST_NAME = ? WHERE ID = ?";
+        jdbcTemplateObject.update(SQL, newEmployeeFirstName, id);
+        LOGGER.info(String.format("Employee with %d is updating FIRST_NAME to '%s' in DB", id, newEmployeeFirstName));
+    }
 
-            String sql = "SELECT * FROM EMPLOYEES";
-            ResultSet resultSet = statement.executeQuery(sql);
-            ResultSetMetaData metaData = resultSet.getMetaData();
+    @Override
+    @Transactional
+    public void updateEmployeeBirthday(int id, String newEmployeeBirthday) {
+        String SQL = "UPDATE EMPLOYEES SET BIRTHDAY = ? WHERE ID = ?";
+        jdbcTemplateObject.update(SQL, stringToDate(newEmployeeBirthday), id);
+        LOGGER.info(String.format("Employee with %d is updating BIRTHDAY to '%s' in DB", id, newEmployeeBirthday));
+    }
 
-            int n = metaData.getColumnCount();
-            for (int i = 1; i<n+1; i++) {
-                sb.append(metaData.getColumnClassName(i));
-                sb.append("====" + metaData.getColumnName(i) + "\n");
-            }
+    @Override
+    @Transactional
+    public void updateEmployeePhone(int id, String newEmployeePhone) {
+        String SQL = "UPDATE EMPLOYEES SET PHONE = ? WHERE ID = ?";
+        jdbcTemplateObject.update(SQL, newEmployeePhone, id);
+        LOGGER.info(String.format("Employee with %d is updating PHONE to '%s' in DB", id, newEmployeePhone));
+    }
 
-            return sb.toString();
-        } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connection to DB: ", e);
-            throw new RuntimeException(e);
-        }
+    @Override
+    @Transactional
+    public void updateEmployeePositionId(int id, int newPositionId) {
+        String SQL = "UPDATE EMPLOYEES SET POSITION_ID = ? WHERE ID = ?";
+        jdbcTemplateObject.update(SQL, newPositionId, id);
+        LOGGER.info(String.format("Employee with %d is updating POSITION_ID to '%d' in DB", id, newPositionId));
+    }
+
+    @Override
+    @Transactional
+    public void updateEmployeeSalary(int id, float newEmployeeSalary) {
+        String SQL = "UPDATE EMPLOYEES SET SALARY = ? WHERE ID = ?";
+        jdbcTemplateObject.update(SQL, Float.valueOf(newEmployeeSalary), id);
+        LOGGER.info(String.format("Employee with %d is updating SALARY to '%f' in DB", id, newEmployeeSalary));
     }
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    private Employee createEmployeeFromResultSet(ResultSet resultSet) throws SQLException {
-        Employee employee = new Employee();
-        employee.setId(resultSet.getInt("ID"));
-        employee.setLastName(resultSet.getString("LAST_NAME"));
-        employee.setFirstName(resultSet.getString("FIRST_NAME"));
-        employee.setBirthday(resultSet.getString("BIRTHDAY"));
-        employee.setPhone(resultSet.getString("PHONE"));
-        employee.setPositionId(resultSet.getInt("POSITION_ID"));
-        employee.setSalary(resultSet.getFloat("SALARY"));
-        return employee;
+        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
 
     private Date stringToDate(String birthday) {

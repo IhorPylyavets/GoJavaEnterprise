@@ -20,28 +20,59 @@ public class EmployeeController {
         this.employeeDao = employeeDao;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public Employee createEmployee(String lastName, String firstName, String birthday, String phone, int positionId, float salary) {
-        return employeeDao.createEmployee(lastName, firstName, birthday, phone, positionId, salary);
+    @Transactional
+    public void createEmployee(String lastName, String firstName, String birthday,
+                               String phone, int positionId, float salary) {
+        employeeDao.createEmployee(lastName, firstName, birthday, phone, positionId, salary);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public Employee loadEmployeeById(int id) {
         return employeeDao.loadEmployeeById(id);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public List<Employee> getAllEmployee() {
         return employeeDao.getAllEmployees();
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public void deleteEmployee(int id) {
         employeeDao.deleteEmployee(id);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
+    public void updateEmployeeLastName(int id, String newEmployeeLastName) {
+        employeeDao.updateEmployeeLastName(id, newEmployeeLastName);
+    }
+
+    @Transactional
+    public void updateEmployeeFirstName(int id, String newEmployeeFirstName) {
+        employeeDao.updateEmployeeFirstName(id, newEmployeeFirstName);
+    }
+
+    @Transactional
+    public void updateEmployeeBirthday(int id, String newEmployeeBirthday) {
+        employeeDao.updateEmployeeBirthday(id, newEmployeeBirthday);
+    }
+
+    @Transactional
+    public void updateEmployeePhone(int id, String newEmployeePhone) {
+        employeeDao.updateEmployeePhone(id, newEmployeePhone);
+    }
+
+    @Transactional
+    public void updateEmployeePositionId(int id, int newPositionId) {
+        employeeDao.updateEmployeePositionId(id, newPositionId);
+    }
+
+    @Transactional
+    public void updateEmployeeSalary(int id, float newEmployeeSalary) {
+        employeeDao.updateEmployeeSalary(id, newEmployeeSalary);
+    }
+
+    /*@Transactional
     public String readEmployeeMetadata() {
         return employeeDao.readEmployeeMetadata();
-    }
+    }*/
 }
