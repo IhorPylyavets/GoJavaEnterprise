@@ -15,6 +15,8 @@ public class Main {
     private IngredientController ingredientController;
     private WarehouseController warehouseController;
     private CategoryController categoryController;
+    private OrderController orderController;
+    private DishesPreparationController dishesPreparationController;
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
@@ -46,5 +48,11 @@ public class Main {
     }
     public void setCategoryController(CategoryController categoryController) {
         this.categoryController = categoryController;
+    }
+    public void setOrderController(OrderController orderController) {
+        this.orderController = orderController;
+    }
+    public void setDishesPreparationController(DishesPreparationController dishesPreparationController) {
+        this.dishesPreparationController = dishesPreparationController;
     }
 }

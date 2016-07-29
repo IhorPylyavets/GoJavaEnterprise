@@ -30,11 +30,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
         String sql = "INSERT INTO EMPLOYEES (LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY)" +
                 " VALUES (?,?,?,?,?,?)";
-        jdbcTemplateObject.update(sql, lastName, firstName, stringToDate(birthday), phone, positionId, salary);
+        jdbcTemplateObject.update(sql, lastName, firstName, birthday, phone, positionId, salary);
         LOGGER.info(String.format("Employee with parameters {%s, %s, %s, %s, %s, %s,} creating in DB"
                 , lastName, firstName, birthday, phone, positionId, salary));
     }
-    // employeeController.createEmployee("lastName", "firstName", "01-03-1972", "phone", 5, 29000.0F);
+    // employeeController.createEmployee("lastName", "firstName", "1972-07-23", "phone", 5, 29000.0F);
 
     @Override
     @Transactional
@@ -78,7 +78,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Transactional
     public void updateEmployeeBirthday(int id, String newEmployeeBirthday) {
         String SQL = "UPDATE EMPLOYEES SET BIRTHDAY = ? WHERE ID = ?";
-        jdbcTemplateObject.update(SQL, stringToDate(newEmployeeBirthday), id);
+        jdbcTemplateObject.update(SQL, /*stringToDate(newEmployeeBirthday)*/newEmployeeBirthday, id);
         LOGGER.info(String.format("Employee with %d is updating BIRTHDAY to '%s' in DB", id, newEmployeeBirthday));
     }
 
