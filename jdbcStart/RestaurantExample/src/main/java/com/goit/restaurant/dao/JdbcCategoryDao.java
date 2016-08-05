@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class CategoryDaoImpl implements CategoryDao {
+public class JdbcCategoryDao implements CategoryDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CategoryDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcCategoryDao.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
@@ -33,7 +33,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     @Transactional
-    public Category loadCategoryById(int id) {
+    public Category findCategoryById(int id) {
         String SQL = "SELECT * FROM CATEGORIES WHERE ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new CategoryMapper());
     }

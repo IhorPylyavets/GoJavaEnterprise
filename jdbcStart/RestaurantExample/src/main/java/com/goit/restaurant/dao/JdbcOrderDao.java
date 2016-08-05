@@ -9,12 +9,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class OrderDaoImpl implements OrderDao{
+public class JdbcOrderDao implements OrderDao{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(OrderDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcOrderDao.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;

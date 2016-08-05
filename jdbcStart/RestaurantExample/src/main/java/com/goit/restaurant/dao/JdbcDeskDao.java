@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class DeskDaoImpl implements DeskDao {
+public class JdbcDeskDao implements DeskDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DeskDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcDeskDao.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
@@ -33,7 +33,7 @@ public class DeskDaoImpl implements DeskDao {
 
     @Override
     @Transactional
-    public Desk loadDeskById(int id) {
+    public Desk findDeskById(int id) {
         String SQL = "SELECT * FROM DESKS WHERE ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new DeskMapper());
     }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PositionDao {
     void createPosition(String positionTitle);
-    Position loadPositionById(int id);
+    Position findPositionById(int id);
     List<Position> getAllPosition();
     void deletePosition(int id);
     void updatePositionTitle(int id, String newTitle);

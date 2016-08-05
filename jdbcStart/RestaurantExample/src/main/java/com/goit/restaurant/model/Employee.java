@@ -1,11 +1,13 @@
 package com.goit.restaurant.model;
 
+import java.sql.Date;
+
 public class Employee {
 
     private int id;
     private String lastName;
     private String firstName;
-    private String birthday;
+    private Date birthday;
     private String phone;
     private int positionId;
     private float salary;
@@ -13,7 +15,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int id, String lastName, String firstName, String birthday, String phone, int positionId, float salary) {
+    public Employee(int id, String lastName, String firstName, Date birthday, String phone, int positionId, float salary) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -47,11 +49,11 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -90,5 +92,32 @@ public class Employee {
                 ", positionId=" + positionId +
                 ", salary=" + salary +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        if (positionId != employee.positionId) return false;
+        if (Float.compare(employee.salary, salary) != 0) return false;
+        if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
+        if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
+        if (birthday != null ? !birthday.equals(employee.birthday) : employee.birthday != null) return false;
+        return phone != null ? phone.equals(employee.phone) : employee.phone == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = lastName != null ? lastName.hashCode() : 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + positionId;
+        result = 31 * result + (salary != +0.0f ? Float.floatToIntBits(salary) : 0);
+        return result;
     }
 }

@@ -25,7 +25,6 @@ public class Main {
     }
 
     private void start() {
-
     }
 
     public void setPositionController(PositionController positionController) {

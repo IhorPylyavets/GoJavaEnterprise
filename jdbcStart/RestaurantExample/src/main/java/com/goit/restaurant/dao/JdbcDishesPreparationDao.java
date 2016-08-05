@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class DishesPreparationDaoImpl implements DishesPreparationDao {
+public class JdbcDishesPreparationDao implements DishesPreparationDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DishesPreparationDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcDishesPreparationDao.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;

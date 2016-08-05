@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class WarehouseDaoImpl implements WarehouseDao {
-    private static final Logger LOGGER = LoggerFactory.getLogger(WarehouseDaoImpl.class);
+public class JdbcWarehouseDao implements WarehouseDao {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcWarehouseDao.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;

@@ -30,8 +30,8 @@ public class DeskController {
     }
 
     @Transactional
-    public Desk loadDeskById(int id) {
-        return deskDao.loadDeskById(id);
+    public Desk findDeskById(int id) {
+        return deskDao.findDeskById(id);
     }
 
     @Transactional

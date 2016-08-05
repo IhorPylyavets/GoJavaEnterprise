@@ -16,16 +16,16 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class EmployeeDaoImpl implements EmployeeDao {
+public class JdbcEmployeeDao implements EmployeeDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcEmployeeDao.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
 
     @Override
     @Transactional
-    public void createEmployee(String lastName, String firstName, String birthday,
+    public void createEmployee(String lastName, String firstName, Date birthday,
                                String phone, int positionId, float salary) {
 
         String sql = "INSERT INTO EMPLOYEES (LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY)" +
@@ -38,7 +38,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     @Transactional
-    public Employee loadEmployeeById(int id) {
+    public Employee findEmployeeById(int id) {
         String SQL = "SELECT * FROM EMPLOYEES WHERE ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new EmployeeMapper());
     }
@@ -76,7 +76,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     @Transactional
-    public void updateEmployeeBirthday(int id, String newEmployeeBirthday) {
+    public void updateEmployeeBirthday(int id, Date newEmployeeBirthday) {
         String SQL = "UPDATE EMPLOYEES SET BIRTHDAY = ? WHERE ID = ?";
         jdbcTemplateObject.update(SQL, /*stringToDate(newEmployeeBirthday)*/newEmployeeBirthday, id);
         LOGGER.info(String.format("Employee with %d is updating BIRTHDAY to '%s' in DB", id, newEmployeeBirthday));

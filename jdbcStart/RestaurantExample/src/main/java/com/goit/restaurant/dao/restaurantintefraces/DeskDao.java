@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DeskDao {
     void createDesk(String deskTitle);
-    Desk loadDeskById(int id);
+    Desk findDeskById(int id);
     List<Desk> getAllDesks();
     void deleteDesk(int id);
     void updateDeskTitle(int id, String newDeskTitle);

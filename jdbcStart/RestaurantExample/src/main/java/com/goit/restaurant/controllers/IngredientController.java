@@ -31,8 +31,8 @@ public class IngredientController {
     }
 
     @Transactional
-    public Ingredient loadIngredientById(int id) {
-        return ingredientDao.loadIngredientById(id);
+    public Ingredient findIngredientById(int id) {
+        return ingredientDao.findIngredientById(id);
     }
 
     @Transactional

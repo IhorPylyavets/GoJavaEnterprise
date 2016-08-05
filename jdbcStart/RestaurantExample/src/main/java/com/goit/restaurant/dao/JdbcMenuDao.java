@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class MenuDaoImpl implements MenuDao {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MenuDaoImpl.class);
+public class JdbcMenuDao implements MenuDao {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcMenuDao.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;

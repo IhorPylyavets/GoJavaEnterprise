@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class IngredientDaoImpl implements IngredientDao {
+public class JdbcIngredientDao implements IngredientDao {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(IngredientDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcIngredientDao.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
@@ -33,7 +33,7 @@ public class IngredientDaoImpl implements IngredientDao {
 
     @Override
     @Transactional
-    public Ingredient loadIngredientById(int id) {
+    public Ingredient findIngredientById(int id) {
         String SQL = "SELECT * FROM INGREDIENTS where ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new IngredientMapper());
     }

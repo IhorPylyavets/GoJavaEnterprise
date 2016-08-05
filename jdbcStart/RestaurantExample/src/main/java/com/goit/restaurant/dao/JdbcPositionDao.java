@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class PositionDaoImpl implements PositionDao {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PositionDaoImpl.class);
+public class JdbcPositionDao implements PositionDao {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JdbcPositionDao.class);
 
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplateObject;
@@ -32,7 +32,7 @@ public class PositionDaoImpl implements PositionDao {
 
     @Override
     @Transactional
-    public Position loadPositionById(int id) {
+    public Position findPositionById(int id) {
         String SQL = "SELECT * FROM POSITIONS where ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new PositionMapper());
     }

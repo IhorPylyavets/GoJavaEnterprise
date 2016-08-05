@@ -5,6 +5,7 @@ import com.goit.restaurant.model.Employee;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 
 public class EmployeeController {
@@ -20,14 +21,14 @@ public class EmployeeController {
     }
 
     @Transactional
-    public void createEmployee(String lastName, String firstName, String birthday,
+    public void createEmployee(String lastName, String firstName, Date birthday,
                                String phone, int positionId, float salary) {
         employeeDao.createEmployee(lastName, firstName, birthday, phone, positionId, salary);
     }
 
     @Transactional
-    public Employee loadEmployeeById(int id) {
-        return employeeDao.loadEmployeeById(id);
+    public Employee findEmployeeById(int id) {
+        return employeeDao.findEmployeeById(id);
     }
 
     @Transactional
@@ -51,7 +52,7 @@ public class EmployeeController {
     }
 
     @Transactional
-    public void updateEmployeeBirthday(int id, String newEmployeeBirthday) {
+    public void updateEmployeeBirthday(int id, Date newEmployeeBirthday) {
         employeeDao.updateEmployeeBirthday(id, newEmployeeBirthday);
     }
 

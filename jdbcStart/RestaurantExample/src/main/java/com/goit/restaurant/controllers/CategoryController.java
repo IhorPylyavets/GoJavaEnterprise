@@ -31,8 +31,8 @@ public class CategoryController {
     }
 
     @Transactional
-    public Category loadCategoryById(int id) {
-        return categoryDao.loadCategoryById(id);
+    public Category findCategoryById(int id) {
+        return categoryDao.findCategoryById(id);
     }
 
     @Transactional

@@ -18,8 +18,8 @@ public class PositionController {
     }
 
     @Transactional
-    public Position loadPositionById(int id) {
-        return positionDao.loadPositionById(id);
+    public Position findPositionById(int id) {
+        return positionDao.findPositionById(id);
     }
 
     @Transactional

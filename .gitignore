@@ -10,3 +10,5 @@ out/
 ## Enterprise Architect
 #################
 *.ldb
+
+*/[Ll]ogs/*
