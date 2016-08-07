@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+    <bean id="main" class="com.example.Main"/>
+
+    <bean class="com.example.controllers.EmployeeController" id="employeeController"/>
+    <bean class="com.example.dao.hibernate.HEmployeeDao" id="employeeDao"/>
+
+    <bean class="com.example.controllers.DishController" id="dishController"/>
+    <bean class="com.example.dao.hibernate.HDishDao" id="dishDao"/>
+
+    <bean class="com.example.controllers.OrderController" id="orderController"/>
+    <bean class="com.example.dao.hibernate.HOrderDao" id="orderDao"/>
+
+</beans>
