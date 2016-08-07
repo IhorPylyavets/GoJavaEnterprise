@@ -24,15 +24,15 @@ public class JdbcWarehouseDao implements WarehouseDao {
 
     @Override
     @Transactional
-    public void createWarehouse(int ingredientId, int amount) {
+    public void createWarehouse(int ingredientId, float amount) {
         String sql = "INSERT INTO WAREHOUSE (INGREDIENT_ID, AMOUNT) VALUES (?, ?)";
         jdbcTemplateObject.update(sql, ingredientId, amount);
-        LOGGER.info(String.format("Warehouse with parameters {%d, %d} is creating in DB", ingredientId, amount));
+        LOGGER.info(String.format("Warehouse with parameters {%d, %f} is creating in DB", ingredientId, amount));
     }
 
     @Override
     @Transactional
-    public Warehouse loadWarehouseById(int id) {
+    public Warehouse findWarehouseById(int id) {
         String SQL = "SELECT * FROM WAREHOUSE where ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new WarehouseMapper());
     }
@@ -62,7 +62,7 @@ public class JdbcWarehouseDao implements WarehouseDao {
 
     @Override
     @Transactional
-    public void updateWarehouseAmount(int id, int newWarehouseAmount) {
+    public void updateWarehouseAmount(int id, float newWarehouseAmount) {
         String SQL = "UPDATE WAREHOUSE SET AMOUNT = ? WHERE ID = ?";
         jdbcTemplateObject.update(SQL, newWarehouseAmount, id);
         LOGGER.info(String.format("Warehouse with %d is updating in DB", id));

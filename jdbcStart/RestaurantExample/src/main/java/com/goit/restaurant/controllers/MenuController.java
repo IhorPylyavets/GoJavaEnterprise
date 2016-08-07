@@ -30,8 +30,8 @@ public class MenuController {
     }
 
     @Transactional
-    public Menu loadMenuById(int id) {
-        return menuDao.loadMenuById(id);
+    public Menu findMenuById(int id) {
+        return menuDao.findMenuById(id);
     }
 
     @Transactional

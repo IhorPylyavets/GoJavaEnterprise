@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class JdbcOrderDao implements OrderDao{
@@ -25,7 +26,7 @@ public class JdbcOrderDao implements OrderDao{
 
     @Override
     @Transactional
-    public void createOrder(int employeeId, int deskId, String orderDate) {
+    public void createOrder(int employeeId, int deskId, Timestamp orderDate) {
         String sql = "INSERT INTO ORDERS (EMPLOYEE_ID, DESK_ID, ORDER_DATE) VALUES (?, ?, ?)";
         jdbcTemplateObject.update(sql, employeeId, deskId, orderDate);
         LOGGER.info(String.format("Menu with {MENU_TITLE, DESK_ID, ORDER_DATE} : {%d, %d, %s} is creating in DB"
@@ -34,7 +35,7 @@ public class JdbcOrderDao implements OrderDao{
 
     @Override
     @Transactional
-    public Order loadOrderById(int id) {
+    public Order findOrderById(int id) {
         String SQL = "SELECT * FROM ORDERS WHERE ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new OrderMapper());
     }
@@ -72,7 +73,7 @@ public class JdbcOrderDao implements OrderDao{
 
     @Override
     @Transactional
-    public void updateOrderDate(int id, String orderDate) {
+    public void updateOrderDate(int id, Timestamp orderDate) {
         String SQL = "UPDATE ORDERS SET ORDER_DATE = ? WHERE ID = ?";
         jdbcTemplateObject.update(SQL, orderDate, id);
         LOGGER.info(String.format("Order with %d is updating (ORDER_DATE) to '%s' in DB", id, orderDate));

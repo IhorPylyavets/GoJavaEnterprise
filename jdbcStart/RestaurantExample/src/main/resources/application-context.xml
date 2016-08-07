@@ -15,6 +15,7 @@
         <property name="categoryController" ref="categoryController"/>
         <property name="orderController" ref="orderController"/>
         <property name="dishesPreparationController" ref="dishesPreparationController"/>
+        <property name="dishController" ref="dishController"/>
     </bean>
 
     <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
@@ -106,6 +107,14 @@
         <property name="dishesPreparationDao" ref="dishesPreparationDao"/>
     </bean>
     <bean class="com.goit.restaurant.dao.JdbcDishesPreparationDao" id="dishesPreparationDao">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="com.goit.restaurant.controllers.DishController" id="dishController">
+        <property name="txManager" ref="txManager"/>
+        <property name="dishDao" ref="dishDao"/>
+    </bean>
+    <bean class="com.goit.restaurant.dao.JdbcDishDao" id="dishDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 

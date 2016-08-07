@@ -17,6 +17,7 @@ public class Main {
     private CategoryController categoryController;
     private OrderController orderController;
     private DishesPreparationController dishesPreparationController;
+    private DishController dishController;
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
@@ -53,5 +54,8 @@ public class Main {
     }
     public void setDishesPreparationController(DishesPreparationController dishesPreparationController) {
         this.dishesPreparationController = dishesPreparationController;
+    }
+    public void setDishController(DishController dishController) {
+        this.dishController = dishController;
     }
 }

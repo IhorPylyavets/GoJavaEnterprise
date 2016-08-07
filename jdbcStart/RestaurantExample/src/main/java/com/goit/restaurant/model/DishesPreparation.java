@@ -1,17 +1,19 @@
 package com.goit.restaurant.model;
 
+import java.sql.Timestamp;
+
 public class DishesPreparation {
 
     private int id;
     private int dishesId;
     private int employeeId;
     private int orderId;
-    private String date;
+    private Timestamp date;
 
     public DishesPreparation() {
     }
 
-    public DishesPreparation(int id, int dishesId, int employeeId, int orderId, String date) {
+    public DishesPreparation(int id, int dishesId, int employeeId, int orderId, Timestamp date) {
         this.id = id;
         this.dishesId = dishesId;
         this.employeeId = employeeId;
@@ -51,11 +53,11 @@ public class DishesPreparation {
         this.orderId = orderId;
     }
 
-    public String getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

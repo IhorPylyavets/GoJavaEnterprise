@@ -11,6 +11,6 @@ public class DishesPreparationMapper implements RowMapper<DishesPreparation>{
     public DishesPreparation mapRow(ResultSet resultSet, int i) throws SQLException {
         return new DishesPreparation(resultSet.getInt("ID"), resultSet.getInt("DISHES_ID"),
                 resultSet.getInt("EMPLOYEE_ID"), resultSet.getInt("ORDER_ID"),
-                resultSet.getString("DATE_PREPARATIONS"));
+                resultSet.getTimestamp("DATE_PREPARATIONS"));
     }
 }

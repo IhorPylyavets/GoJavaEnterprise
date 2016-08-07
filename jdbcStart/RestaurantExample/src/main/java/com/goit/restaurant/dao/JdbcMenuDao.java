@@ -27,7 +27,7 @@ public class JdbcMenuDao implements MenuDao {
 
     @Override
     @Transactional
-    public Menu loadMenuById(int id) {
+    public Menu findMenuById(int id) {
         String SQL = "SELECT * FROM MENUS WHERE ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new MenuMapper());
     }

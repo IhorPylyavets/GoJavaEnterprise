@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MenuDao {
     void createMenu(String menuTitle);
-    Menu loadMenuById(int id);
+    Menu findMenuById(int id);
     List<Menu> getAllMenu();
     void deleteMenu(int id);
     void updateMenuTitle(int id, String newMenuTitle);

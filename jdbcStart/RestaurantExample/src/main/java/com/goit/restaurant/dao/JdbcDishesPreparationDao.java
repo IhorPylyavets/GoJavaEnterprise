@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class JdbcDishesPreparationDao implements DishesPreparationDao {
@@ -26,7 +27,7 @@ public class JdbcDishesPreparationDao implements DishesPreparationDao {
 
     @Override
     @Transactional
-    public void createDishesPreparation(int dishesId, int employeeId, int orderId, String date) {
+    public void createDishesPreparation(int dishesId, int employeeId, int orderId, Timestamp date) {
         String sql = "INSERT INTO DISHES_PREPARATION (DISHES_ID, EMPLOYEE_ID, ORDER_ID, DATE_PREPARATIONS) " +
                 "VALUES (?, ?, ?, ?)";
         jdbcTemplateObject.update(sql, dishesId, employeeId, orderId, date);
@@ -36,7 +37,7 @@ public class JdbcDishesPreparationDao implements DishesPreparationDao {
 
     @Override
     @Transactional
-    public DishesPreparation loadDishesPreparationById(int id) {
+    public DishesPreparation findDishesPreparationById(int id) {
         String SQL = "SELECT * FROM DISHES_PREPARATION where ID = ?";
         return jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new DishesPreparationMapper());
     }
@@ -82,7 +83,7 @@ public class JdbcDishesPreparationDao implements DishesPreparationDao {
 
     @Override
     @Transactional
-    public void updateDishesPreparationDate(int id, String newDishesPreparationDate) {
+    public void updateDishesPreparationDate(int id, Timestamp newDishesPreparationDate) {
         String SQL = "UPDATE DISHES_PREPARATION SET DATE_PREPARATIONS = ? WHERE ID = ?";
         jdbcTemplateObject.update(SQL, newDishesPreparationDate, id);
         LOGGER.info(String.format("DishesPreparation with %d is updating in DB", id));

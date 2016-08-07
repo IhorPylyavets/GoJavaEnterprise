@@ -4,12 +4,12 @@ public class Warehouse {
 
     private int id;
     private int ingredientId;
-    private int amount;
+    private float amount;
 
     public Warehouse() {
     }
 
-    public Warehouse(int id, int ingredientId, int amount) {
+    public Warehouse(int id, int ingredientId, float amount) {
         this.id = id;
         this.ingredientId = ingredientId;
         this.amount = amount;
@@ -31,11 +31,11 @@ public class Warehouse {
         this.ingredientId = ingredientId;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

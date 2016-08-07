@@ -5,6 +5,7 @@ import com.goit.restaurant.model.Order;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class OrderController {
@@ -21,7 +22,7 @@ public class OrderController {
     }
 
     @Transactional
-    public void createOrder(int employeeId, int deskId, String orderDate) {
+    public void createOrder(int employeeId, int deskId, Timestamp orderDate) {
         orderDao.createOrder(employeeId, deskId, orderDate);
     }
 
@@ -31,8 +32,8 @@ public class OrderController {
     }
 
     @Transactional
-    public Order loadOrderById(int id) {
-        return orderDao.loadOrderById(id);
+    public Order findOrderById(int id) {
+        return orderDao.findOrderById(id);
     }
 
     @Transactional
@@ -51,7 +52,7 @@ public class OrderController {
     }
 
     @Transactional
-    public void updateOrderDate(int id, String newOrderDate) {
+    public void updateOrderDate(int id, Timestamp newOrderDate) {
         orderDao.updateOrderDate(id, newOrderDate);
     }
 }

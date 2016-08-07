@@ -5,6 +5,7 @@ import com.goit.restaurant.model.DishesPreparation;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class DishesPreparationController {
@@ -21,13 +22,13 @@ public class DishesPreparationController {
     }
 
     @Transactional
-    public void createDishesPreparation(int dishesId, int employeeId, int orderId, String date) {
+    public void createDishesPreparation(int dishesId, int employeeId, int orderId, Timestamp date) {
         dishesPreparationDao.createDishesPreparation(dishesId, employeeId, orderId, date);
     }
 
     @Transactional
-    public DishesPreparation loadDishesPreparationById(int id) {
-        return dishesPreparationDao.loadDishesPreparationById(id);
+    public DishesPreparation findDishesPreparationById(int id) {
+        return dishesPreparationDao.findDishesPreparationById(id);
     }
 
     @Transactional
@@ -56,7 +57,7 @@ public class DishesPreparationController {
     }
 
     @Transactional
-    public void updateDishesPreparationDate(int id, String newDishesPreparationDate) {
+    public void updateDishesPreparationDate(int id, Timestamp newDishesPreparationDate) {
         dishesPreparationDao.updateDishesPreparationDate(id, newDishesPreparationDate);
     }
 }

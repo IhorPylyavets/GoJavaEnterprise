@@ -9,6 +9,6 @@ import java.sql.SQLException;
 public class WarehouseMapper implements RowMapper<Warehouse>{
     @Override
     public Warehouse mapRow(ResultSet resultSet, int i) throws SQLException {
-        return new Warehouse(resultSet.getInt("ID"), resultSet.getInt("INGREDIENT_ID"), resultSet.getInt("AMOUNT"));
+        return new Warehouse(resultSet.getInt("ID"), resultSet.getInt("INGREDIENT_ID"), resultSet.getFloat("AMOUNT"));
     }
 }

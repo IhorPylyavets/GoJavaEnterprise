@@ -20,7 +20,7 @@ public class WarehouseController {
     }
 
     @Transactional
-    public void createWarehouse(int ingredientId, int amount) {
+    public void createWarehouse(int ingredientId, float amount) {
         warehouseDao.createWarehouse(ingredientId, amount);
     }
 
@@ -30,8 +30,8 @@ public class WarehouseController {
     }
 
     @Transactional
-    public Warehouse loadWarehouseById(int id) {
-        return warehouseDao.loadWarehouseById(id);
+    public Warehouse findWarehouseById(int id) {
+        return warehouseDao.findWarehouseById(id);
     }
 
     @Transactional
@@ -45,7 +45,7 @@ public class WarehouseController {
     }
 
     @Transactional
-    public void updateWarehouseAmount(int id, int newWarehouseAmount) {
+    public void updateWarehouseAmount(int id, float newWarehouseAmount) {
         warehouseDao.updateWarehouseAmount(id, newWarehouseAmount);
     }
 
