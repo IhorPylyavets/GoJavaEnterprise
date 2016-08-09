@@ -26,8 +26,12 @@ public class JdbcCategoryDaoTest {
     @Rollback(true)
     public void testCreateDeleteCategory() throws Exception {
         List<Category> categoryList = categoryController.getAllCategories();
+
         String testCategoryTitle = "Test Category";
-        categoryController.createCategory(testCategoryTitle);
+        Category category = new Category();
+        category.setCategoryTitle(testCategoryTitle);
+        categoryController.createCategory(category);
+
         List<Category> categoryListCurrent = categoryController.getAllCategories();
         assertEquals(categoryList.size(), categoryListCurrent.size()-1);
         assertEquals(categoryListCurrent.get(categoryListCurrent.size()-1).getCategoryTitle(), testCategoryTitle);
@@ -42,10 +46,13 @@ public class JdbcCategoryDaoTest {
     @Rollback(true)
     public void testFindCategoryById() throws Exception {
         String testCategoryTitle = "Test Category";
-        categoryController.createCategory(testCategoryTitle);
+        Category category = new Category();
+        category.setCategoryTitle(testCategoryTitle);
+        categoryController.createCategory(category);
+
         List<Category> categoryList = categoryController.getAllCategories();
-        Category category = categoryController.findCategoryById(categoryList.get(categoryList.size()-1).getId());
-        assertEquals(category.getCategoryTitle(), testCategoryTitle);
+        Category categoryCurrent = categoryController.findCategoryById(categoryList.get(categoryList.size()-1).getId());
+        assertEquals(categoryCurrent.getCategoryTitle(), testCategoryTitle);
     }
 
     @Test
@@ -53,11 +60,14 @@ public class JdbcCategoryDaoTest {
     @Rollback(true)
     public void testUpdateCategoryTitle() throws Exception {
         String testCategoryTitle = "Test Category";
-        categoryController.createCategory(testCategoryTitle);
+        Category category = new Category();
+        category.setCategoryTitle(testCategoryTitle);
+        categoryController.createCategory(category);
+
         String testUpdateCategoryTitle = "Update Test Category";
         List<Category> categoryList = categoryController.getAllCategories();
         categoryController.updateCategoryTitle(categoryList.get(categoryList.size()-1).getId(), testUpdateCategoryTitle);
-        Category category = categoryController.findCategoryById(categoryList.get(categoryList.size()-1).getId());
-        assertEquals(category.getCategoryTitle(), testUpdateCategoryTitle);
+        Category categoryCurrent = categoryController.findCategoryById(categoryList.get(categoryList.size()-1).getId());
+        assertEquals(categoryCurrent.getCategoryTitle(), testUpdateCategoryTitle);
     }
 }

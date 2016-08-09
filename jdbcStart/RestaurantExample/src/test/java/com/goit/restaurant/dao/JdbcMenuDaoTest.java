@@ -26,8 +26,12 @@ public class JdbcMenuDaoTest {
     @Rollback(true)
     public void testCreateDeleteMenu() throws Exception {
         List<Menu> menuList = menuController.getAllMenu();
+
         String testMenuTitle = "Test Menu Title";
-        menuController.createMenu(testMenuTitle);
+        Menu menu = new Menu();
+        menu.setMenuTitle(testMenuTitle);
+
+        menuController.createMenu(menu);
         List<Menu> menuListCurrent = menuController.getAllMenu();
         assertEquals(menuList.size(), menuListCurrent.size()-1);
         assertEquals(menuListCurrent.get(menuListCurrent.size()-1).getMenuTitle(), testMenuTitle);
@@ -42,10 +46,13 @@ public class JdbcMenuDaoTest {
     @Rollback(true)
     public void testFindMenuById() throws Exception {
         String testMenuTitle = "Test Menu Title";
-        menuController.createMenu(testMenuTitle);
+        Menu menu = new Menu();
+        menu.setMenuTitle(testMenuTitle);
+
+        menuController.createMenu(menu);
         List<Menu> menuList = menuController.getAllMenu();
-        Menu menu = menuController.findMenuById(menuList.get(menuList.size()-1).getId());
-        assertEquals(menu.getMenuTitle(), testMenuTitle);
+        Menu menuCurrent = menuController.findMenuById(menuList.get(menuList.size()-1).getId());
+        assertEquals(menuCurrent.getMenuTitle(), testMenuTitle);
     }
 
     @Test
@@ -53,12 +60,13 @@ public class JdbcMenuDaoTest {
     @Rollback(true)
     public void testUpdateMenuTitle() throws Exception {
         String testMenuTitle = "Test Menu Title";
-        menuController.createMenu(testMenuTitle);
+        Menu menu = new Menu();
+        menu.setMenuTitle(testMenuTitle);
         String testUpdateMenuTitle = "Update Test Menu";
         List<Menu> menuList = menuController.getAllMenu();
         menuController.updateMenuTitle(menuList.get(menuList.size()-1).getId(), testUpdateMenuTitle);
-        Menu menu = menuController.findMenuById(menuList.get(menuList.size()-1).getId());
-        assertEquals(menu.getMenuTitle(), testUpdateMenuTitle);
+        Menu menuCurrent = menuController.findMenuById(menuList.get(menuList.size()-1).getId());
+        assertEquals(menuCurrent.getMenuTitle(), testUpdateMenuTitle);
     }
 
 }

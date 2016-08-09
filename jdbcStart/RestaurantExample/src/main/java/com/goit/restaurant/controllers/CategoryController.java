@@ -1,6 +1,6 @@
 package com.goit.restaurant.controllers;
 
-import com.goit.restaurant.dao.restaurantintefraces.CategoryDao;
+import com.goit.restaurant.dao.CategoryDao;
 import com.goit.restaurant.model.Category;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +21,8 @@ public class CategoryController {
     }
 
     @Transactional
-    public void createCategory(String categoryTitle) {
-        categoryDao.createCategory(categoryTitle);
+    public void createCategory(Category category) {
+        categoryDao.createCategory(category);
     }
 
     @Transactional

@@ -1,17 +1,21 @@
 package com.goit.restaurant.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "INGREDIENTS")
 public class Ingredient {
 
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "ID")
     private int id;
+
+    @Column(name = "INGREDIENT_TITLE")
     private String ingredientTitle;
-
-    public Ingredient() {
-    }
-
-    public Ingredient(int id, String ingredientTitle) {
-        this.id = id;
-        this.ingredientTitle = ingredientTitle;
-    }
 
     public int getId() {
         return id;

@@ -1,6 +1,6 @@
 package com.goit.restaurant.controllers;
 
-import com.goit.restaurant.dao.restaurantintefraces.OrderDao;
+import com.goit.restaurant.dao.OrderDao;
 import com.goit.restaurant.model.Order;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
 package com.goit.restaurant.controllers;
 
-import com.goit.restaurant.dao.restaurantintefraces.WarehouseDao;
+import com.goit.restaurant.dao.WarehouseDao;
 import com.goit.restaurant.model.Warehouse;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +20,8 @@ public class WarehouseController {
     }
 
     @Transactional
-    public void createWarehouse(int ingredientId, float amount) {
-        warehouseDao.createWarehouse(ingredientId, amount);
+    public void createWarehouse(Warehouse warehouse) {
+        warehouseDao.createWarehouse(warehouse);
     }
 
     @Transactional

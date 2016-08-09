@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+       default-autowire="byName">
 
     <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
 
@@ -38,19 +39,21 @@
 
 
 
-    <bean class="com.goit.restaurant.controllers.PositionController" id="positionController">
+    <!--<bean class="com.goit.restaurant.controllers.PositionController" id="positionController">
         <property name="txManager" ref="txManager"/>
         <property name="positionDao" ref="positionDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcPositionDao" id="positionDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcPositionDao" id="positionDao">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
+    <bean class="com.goit.restaurant.controllers.PositionController" id="positionController"/>
+    <bean class="com.goit.restaurant.dao.hibernate.HPositionDao" id="positionDao"/>
 
     <bean class="com.goit.restaurant.controllers.EmployeeController" id="employeeController">
         <property name="txManager" ref="txManager"/>
         <property name="employeeDao" ref="employeeDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcEmployeeDao" id="employeeDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcEmployeeDao" id="employeeDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
@@ -58,47 +61,55 @@
         <property name="txManager" ref="txManager"/>
         <property name="deskDao" ref="deskDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcDeskDao" id="deskDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcDeskDao" id="deskDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean class="com.goit.restaurant.controllers.MenuController" id="menuController">
+    <!--<bean class="com.goit.restaurant.controllers.MenuController" id="menuController">
         <property name="txManager" ref="txManager"/>
         <property name="menuDao" ref="menuDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcMenuDao" id="menuDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcMenuDao" id="menuDao">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
+    <bean class="com.goit.restaurant.controllers.MenuController" id="menuController"/>
+    <bean class="com.goit.restaurant.dao.hibernate.HMenuDao" id="menuDao"/>
 
-    <bean class="com.goit.restaurant.controllers.IngredientController" id="ingredientController">
+    <!--<bean class="com.goit.restaurant.controllers.IngredientController" id="ingredientController">
         <property name="txManager" ref="txManager"/>
         <property name="ingredientDao" ref="ingredientDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcIngredientDao" id="ingredientDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcIngredientDao" id="ingredientDao">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
+    <bean class="com.goit.restaurant.controllers.IngredientController" id="ingredientController"/>
+    <bean class="com.goit.restaurant.dao.hibernate.HIngredientDao" id="ingredientDao"/>
 
-    <bean class="com.goit.restaurant.controllers.WarehouseController" id="warehouseController">
+    <!--<bean class="com.goit.restaurant.controllers.WarehouseController" id="warehouseController">
         <property name="txManager" ref="txManager"/>
         <property name="warehouseDao" ref="warehouseDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcWarehouseDao" id="warehouseDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcWarehouseDao" id="warehouseDao">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
+    <bean class="com.goit.restaurant.controllers.WarehouseController" id="warehouseController"/>
+    <bean class="com.goit.restaurant.dao.hibernate.HWarehouseDao" id="warehouseDao"/>
 
-    <bean class="com.goit.restaurant.controllers.CategoryController" id="categoryController">
+    <!--<bean class="com.goit.restaurant.controllers.CategoryController" id="categoryController">
         <property name="txManager" ref="txManager"/>
         <property name="categoryDao" ref="categoryDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcCategoryDao" id="categoryDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcCategoryDao" id="categoryDao">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
+    <bean class="com.goit.restaurant.controllers.CategoryController" id="categoryController"/>
+    <bean class="com.goit.restaurant.dao.hibernate.HCategoryDao" id="categoryDao"/>
 
     <bean class="com.goit.restaurant.controllers.OrderController" id="orderController">
         <property name="txManager" ref="txManager"/>
         <property name="orderDao" ref="orderDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcOrderDao" id="orderDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcOrderDao" id="orderDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
@@ -106,7 +117,7 @@
         <property name="txManager" ref="txManager"/>
         <property name="dishesPreparationDao" ref="dishesPreparationDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcDishesPreparationDao" id="dishesPreparationDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcDishesPreparationDao" id="dishesPreparationDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
@@ -114,7 +125,7 @@
         <property name="txManager" ref="txManager"/>
         <property name="dishDao" ref="dishDao"/>
     </bean>
-    <bean class="com.goit.restaurant.dao.JdbcDishDao" id="dishDao">
+    <bean class="com.goit.restaurant.dao.jdbc.JdbcDishDao" id="dishDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 

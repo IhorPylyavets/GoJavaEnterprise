@@ -27,7 +27,9 @@ public class JdbcIngredientDaoTest {
     public void testCreateDeleteIngredient() throws Exception {
         List<Ingredient> ingredientList = ingredientController.getAllIngredient();
         String testIngredientTitle = "Test ingredient";
-        ingredientController.createIngredient(testIngredientTitle);
+        Ingredient ingredient = new Ingredient();
+        ingredient.setIngredientTitle(testIngredientTitle);
+        ingredientController.createIngredient(ingredient);
         List<Ingredient> ingredientListCurrent = ingredientController.getAllIngredient();
         assertEquals(ingredientList.size(), ingredientListCurrent.size()-1);
         assertEquals(ingredientListCurrent.get(ingredientListCurrent.size()-1).getIngredientTitle(), testIngredientTitle);
@@ -42,10 +44,12 @@ public class JdbcIngredientDaoTest {
     @Rollback(true)
     public void testFindIngredientById() throws Exception {
         String testIngredientTitle = "Test ingredient";
-        ingredientController.createIngredient(testIngredientTitle);
+        Ingredient ingredient = new Ingredient();
+        ingredient.setIngredientTitle(testIngredientTitle);
+        ingredientController.createIngredient(ingredient);
         List<Ingredient> ingredientList = ingredientController.getAllIngredient();
-        Ingredient ingredient = ingredientController.findIngredientById(ingredientList.get(ingredientList.size()-1).getId());
-        assertEquals(ingredient.getIngredientTitle(), testIngredientTitle);
+        Ingredient ingredientCurrent = ingredientController.findIngredientById(ingredientList.get(ingredientList.size()-1).getId());
+        assertEquals(ingredientCurrent.getIngredientTitle(), testIngredientTitle);
     }
 
     @Test
@@ -53,12 +57,13 @@ public class JdbcIngredientDaoTest {
     @Rollback(true)
     public void testUpdateIngredientTitle() throws Exception {
         String testIngredientTitle = "Test ingredient";
-        ingredientController.createIngredient(testIngredientTitle);
+        Ingredient ingredient = new Ingredient();
+        ingredient.setIngredientTitle(testIngredientTitle);
         String testUpdateIngredientTitle = "Update Test ingredient";
         List<Ingredient> ingredientList = ingredientController.getAllIngredient();
         ingredientController.updateIngredientTitle(ingredientList.get(ingredientList.size()-1).getId(), testUpdateIngredientTitle);
-        Ingredient ingredient = ingredientController.findIngredientById(ingredientList.get(ingredientList.size()-1).getId());
-        assertEquals(ingredient.getIngredientTitle(), testUpdateIngredientTitle);
+        Ingredient ingredientCurrent = ingredientController.findIngredientById(ingredientList.get(ingredientList.size()-1).getId());
+        assertEquals(ingredientCurrent.getIngredientTitle(), testUpdateIngredientTitle);
     }
 
 }

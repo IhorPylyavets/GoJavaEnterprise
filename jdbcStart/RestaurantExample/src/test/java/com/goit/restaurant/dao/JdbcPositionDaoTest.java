@@ -26,8 +26,12 @@ public class JdbcPositionDaoTest {
     @Rollback(true)
     public void testCreateDeletePosition() throws Exception {
         List<Position> positionList = positionController.getAllPosition();
+
         String testPositionTitle = "Test position";
-        positionController.createPosition(testPositionTitle);
+        Position position = new Position();
+        position.setPositionTitle(testPositionTitle);
+
+        positionController.createPosition(position);
         List<Position> positionListCurrent = positionController.getAllPosition();
         assertEquals(positionList.size(), positionListCurrent.size()-1);
         assertEquals(positionListCurrent.get(positionListCurrent.size()-1).getPositionTitle(), testPositionTitle);
@@ -42,10 +46,13 @@ public class JdbcPositionDaoTest {
     @Rollback(true)
     public void testFindPositionById() throws Exception {
         String testPositionTitle = "Test position";
-        positionController.createPosition(testPositionTitle);
+        Position position = new Position();
+        position.setPositionTitle(testPositionTitle);
+
+        positionController.createPosition(position);
         List<Position> positionList = positionController.getAllPosition();
-        Position position = positionController.findPositionById(positionList.get(positionList.size()-1).getId());
-        assertEquals(position.getPositionTitle(), testPositionTitle);
+        Position positionCurrent = positionController.findPositionById(positionList.get(positionList.size()-1).getId());
+        assertEquals(positionCurrent.getPositionTitle(), testPositionTitle);
     }
 
     @Test
@@ -53,12 +60,15 @@ public class JdbcPositionDaoTest {
     @Rollback(true)
     public void testUpdatePositionTitle() throws Exception {
         String testPositionTitle = "Test position";
-        positionController.createPosition(testPositionTitle);
+        Position position = new Position();
+        position.setPositionTitle(testPositionTitle);
+
+        positionController.createPosition(position);
         String testUpdatePositionTitle = "Update Test position";
         List<Position> positionList = positionController.getAllPosition();
         positionController.updatePositionTitle(positionList.get(positionList.size()-1).getId(), testUpdatePositionTitle);
-        Position position = positionController.findPositionById(positionList.get(positionList.size()-1).getId());
-        assertEquals(position.getPositionTitle(), testUpdatePositionTitle);
+        Position positionCurrent = positionController.findPositionById(positionList.get(positionList.size()-1).getId());
+        assertEquals(positionCurrent.getPositionTitle(), testUpdatePositionTitle);
     }
 
 }

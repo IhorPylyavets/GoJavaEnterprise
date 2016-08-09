@@ -1,6 +1,6 @@
 package com.goit.restaurant.controllers;
 
-import com.goit.restaurant.dao.restaurantintefraces.IngredientDao;
+import com.goit.restaurant.dao.IngredientDao;
 import com.goit.restaurant.model.Ingredient;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +21,8 @@ public class IngredientController {
     }
 
     @Transactional
-    public void createIngredient(String ingredientTitle) {
-        ingredientDao.createIngredient(ingredientTitle);
+    public void createIngredient(Ingredient ingredient) {
+        ingredientDao.createIngredient(ingredient);
     }
 
     @Transactional

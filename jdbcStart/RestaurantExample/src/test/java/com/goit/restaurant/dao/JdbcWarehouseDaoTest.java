@@ -26,9 +26,14 @@ public class JdbcWarehouseDaoTest {
     @Rollback(true)
     public void testCreateDeleteWarehouse() throws Exception {
         List<Warehouse> warehouseList = warehouseController.getAllWarehouse();
+
+        Warehouse warehouse = new Warehouse();
         int testIngredientId = 1;
         float testAmount = 23.2F;
-        warehouseController.createWarehouse(testIngredientId, testAmount);
+        warehouse.setIngredientId(testIngredientId);
+        warehouse.setAmount(testAmount);
+        warehouseController.createWarehouse(warehouse);
+
         List<Warehouse> warehouseListCurrent = warehouseController.getAllWarehouse();
         assertEquals(warehouseList.size(), warehouseListCurrent.size()-1);
         assertEquals(warehouseListCurrent.get(warehouseListCurrent.size()-1).getIngredientId(), testIngredientId);
@@ -43,30 +48,38 @@ public class JdbcWarehouseDaoTest {
     @Transactional
     @Rollback(true)
     public void testFindWarehouseById() throws Exception {
+        Warehouse warehouse = new Warehouse();
         int testIngredientId = 1;
-        float testAmount = 23.6F;
-        warehouseController.createWarehouse(testIngredientId, testAmount);
+        float testAmount = 23.2F;
+        warehouse.setIngredientId(testIngredientId);
+        warehouse.setAmount(testAmount);
+        warehouseController.createWarehouse(warehouse);
+
         List<Warehouse> warehouseList = warehouseController.getAllWarehouse();
-        Warehouse warehouse = warehouseController.findWarehouseById(warehouseList.get(warehouseList.size()-1).getId());
-        assertEquals(warehouse.getIngredientId(), testIngredientId);
-        assertEquals(warehouse.getAmount(), testAmount, 0.01);
+        Warehouse warehouseCurrent = warehouseController.findWarehouseById(warehouseList.get(warehouseList.size()-1).getId());
+        assertEquals(warehouseCurrent.getIngredientId(), testIngredientId);
+        assertEquals(warehouseCurrent.getAmount(), testAmount, 0.01);
     }
 
     @Test
     @Transactional
     @Rollback(true)
     public void testUpdateWarehouseTitle() throws Exception {
+        Warehouse warehouse = new Warehouse();
         int testIngredientId = 1;
-        float testAmount = 23.0F;
-        warehouseController.createWarehouse(testIngredientId, testAmount);
+        float testAmount = 23.2F;
+        warehouse.setIngredientId(testIngredientId);
+        warehouse.setAmount(testAmount);
+        warehouseController.createWarehouse(warehouse);
+
         int testUpdateIngredientId = 2;
         float testUpdateAmount = 42.6F;
         List<Warehouse> warehouseList = warehouseController.getAllWarehouse();
         warehouseController.updateWarehouseIngredientId(warehouseList.get(warehouseList.size()-1).getId(), testUpdateIngredientId);
         warehouseController.updateWarehouseAmount(warehouseList.get(warehouseList.size()-1).getId(), testUpdateAmount);
-        Warehouse warehouse = warehouseController.findWarehouseById(warehouseList.get(warehouseList.size()-1).getId());
-        assertEquals(warehouse.getIngredientId(), testUpdateIngredientId);
-        assertEquals(warehouse.getAmount(), testUpdateAmount, 0.01);
+        Warehouse warehouseCurrent = warehouseController.findWarehouseById(warehouseList.get(warehouseList.size()-1).getId());
+        assertEquals(warehouseCurrent.getIngredientId(), testUpdateIngredientId);
+        assertEquals(warehouseCurrent.getAmount(), testUpdateAmount, 0.01);
     }
 
 }

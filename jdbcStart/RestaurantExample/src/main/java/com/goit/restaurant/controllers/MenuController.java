@@ -1,6 +1,6 @@
 package com.goit.restaurant.controllers;
 
-import com.goit.restaurant.dao.restaurantintefraces.MenuDao;
+import com.goit.restaurant.dao.MenuDao;
 import com.goit.restaurant.model.Menu;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +20,8 @@ public class MenuController {
     }
 
     @Transactional
-    public void createMenu(String menuTitle) {
-        menuDao.createMenu(menuTitle);
+    public void createMenu(Menu menu) {
+        menuDao.createMenu(menu);
     }
 
     @Transactional
