@@ -1,11 +1,21 @@
 package com.goit.restaurant;
 
 import com.goit.restaurant.controllers.*;
-import com.goit.restaurant.model.*;
+import com.goit.restaurant.model.Employee;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import spark.Request;
+import spark.Response;
+import spark.Route;
+
+import java.io.StringWriter;
+import java.util.*;
+
+import static spark.Spark.*;
 
 public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
@@ -25,6 +35,36 @@ public class Main {
                 new ClassPathXmlApplicationContext("application-context.xml", "hibernate-context.xml");
         Main main = context.getBean(Main.class);
         main.start();
+
+
+    }
+
+    private static void showAllEmployee(List<Employee> employees) {
+        final Configuration configuration = new Configuration();
+        configuration.setClassForTemplateLoading(Main.class, "/");
+
+        get("/", new Route() {
+            @Override
+            public Object handle(Request request, Response response) {
+                StringWriter stringWriter = new StringWriter();
+
+                try {
+                    Template employeeTemplate = configuration.getTemplate("templates/employee.ftl");
+                    Map<String, Object> map = new HashMap<>();
+                    List<String> list = new ArrayList<>();
+                    for (Employee em : employees) {
+                        list.add(em.toString());
+                    }
+                    map.put("employees", list);
+                    employeeTemplate.process(map, stringWriter);
+
+                } catch (Exception e) {
+                    halt(500);
+                    e.printStackTrace();
+                }
+                return stringWriter;
+            }
+        });
     }
 
     private void start() {
@@ -97,9 +137,10 @@ public class Main {
         employeeController.updateEmployeePositionId(6, 2);
         employeeController.updateEmployeeSalary(6, 111.0F);
         System.out.println(employeeController.findEmployeeById(6));
-        employeeController.deleteEmployee(6);
+        employeeController.deleteEmployee(6);*/
 
-        employeeController.getAllEmployee().forEach(System.out::println);*/
+        showAllEmployee(employeeController.getAllEmployee());
+        //.forEach(System.out::println);
 
     }
 
