@@ -49,13 +49,15 @@
     <bean class="com.goit.restaurant.controllers.PositionController" id="positionController"/>
     <bean class="com.goit.restaurant.dao.hibernate.HPositionDao" id="positionDao"/>
 
-    <bean class="com.goit.restaurant.controllers.EmployeeController" id="employeeController">
+    <!--<bean class="com.goit.restaurant.controllers.EmployeeController" id="employeeController">
         <property name="txManager" ref="txManager"/>
         <property name="employeeDao" ref="employeeDao"/>
     </bean>
     <bean class="com.goit.restaurant.dao.jdbc.JdbcEmployeeDao" id="employeeDao">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
+    <bean class="com.goit.restaurant.controllers.EmployeeController" id="employeeController"/>
+    <bean class="com.goit.restaurant.dao.hibernate.HEmployeeDao" id="employeeDao"/>
 
     <bean class="com.goit.restaurant.controllers.DeskController" id="deskController">
         <property name="txManager" ref="txManager"/>
@@ -85,15 +87,15 @@
     <bean class="com.goit.restaurant.controllers.IngredientController" id="ingredientController"/>
     <bean class="com.goit.restaurant.dao.hibernate.HIngredientDao" id="ingredientDao"/>
 
-    <!--<bean class="com.goit.restaurant.controllers.WarehouseController" id="warehouseController">
+    <bean class="com.goit.restaurant.controllers.WarehouseController" id="warehouseController">
         <property name="txManager" ref="txManager"/>
         <property name="warehouseDao" ref="warehouseDao"/>
     </bean>
     <bean class="com.goit.restaurant.dao.jdbc.JdbcWarehouseDao" id="warehouseDao">
         <property name="dataSource" ref="dataSource"/>
-    </bean>-->
-    <bean class="com.goit.restaurant.controllers.WarehouseController" id="warehouseController"/>
-    <bean class="com.goit.restaurant.dao.hibernate.HWarehouseDao" id="warehouseDao"/>
+    </bean>
+    <!--<bean class="com.goit.restaurant.controllers.WarehouseController" id="warehouseController"/>
+    <bean class="com.goit.restaurant.dao.hibernate.HWarehouseDao" id="warehouseDao"/>-->
 
     <!--<bean class="com.goit.restaurant.controllers.CategoryController" id="categoryController">
         <property name="txManager" ref="txManager"/>

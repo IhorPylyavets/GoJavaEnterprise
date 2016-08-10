@@ -21,9 +21,8 @@ public class EmployeeController {
     }
 
     @Transactional
-    public void createEmployee(String lastName, String firstName, Date birthday,
-                               String phone, int positionId, float salary) {
-        employeeDao.createEmployee(lastName, firstName, birthday, phone, positionId, salary);
+    public void createEmployee(Employee employee) {
+        employeeDao.createEmployee(employee);
     }
 
     @Transactional

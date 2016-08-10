@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.util.List;
 
 public interface EmployeeDao {
-    void createEmployee(String lastName, String firstName, Date birthday, String phone, int positionId, float salary);
+    void createEmployee(Employee employee);
     Employee findEmployeeById(int id);
     List<Employee> getAllEmployees();
     void deleteEmployee(int id);

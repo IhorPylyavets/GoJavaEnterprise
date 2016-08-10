@@ -25,16 +25,16 @@ public class JdbcEmployeeDao implements EmployeeDao {
 
     @Override
     @Transactional
-    public void createEmployee(String lastName, String firstName, Date birthday,
-                               String phone, int positionId, float salary) {
+    public void createEmployee(Employee employee) {
 
         String sql = "INSERT INTO EMPLOYEES (LAST_NAME, FIRST_NAME, BIRTHDAY, PHONE, POSITION_ID, SALARY)" +
                 " VALUES (?,?,?,?,?,?)";
-        jdbcTemplateObject.update(sql, lastName, firstName, birthday, phone, positionId, salary);
+        jdbcTemplateObject.update(sql, employee.getLastName(), employee.getFirstName(), employee.getBirthday(),
+                employee.getPhone(), employee.getPositionId(), employee.getSalary());
         LOGGER.info(String.format("Employee with parameters {%s, %s, %s, %s, %s, %s,} creating in DB"
-                , lastName, firstName, birthday, phone, positionId, salary));
+                , employee.getLastName(), employee.getFirstName(), employee.getBirthday(),
+                employee.getPhone(), employee.getPositionId(), employee.getSalary()));
     }
-    // employeeController.createEmployee("lastName", "firstName", "1972-07-23", "phone", 5, 29000.0F);
 
     @Override
     @Transactional

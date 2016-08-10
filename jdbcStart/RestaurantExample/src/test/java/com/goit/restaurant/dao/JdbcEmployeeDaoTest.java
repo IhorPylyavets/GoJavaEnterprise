@@ -34,7 +34,16 @@ public class JdbcEmployeeDaoTest {
         String testPhone = "111 222 345";
         int testPositionId = 1;
         Float testSalary = 23000.0F;
-        employeeController.createEmployee(testLastName, testFirstName, testBirthday, testPhone, testPositionId, testSalary);
+
+        Employee employee = new Employee();
+        employee.setFirstName(testFirstName);
+        employee.setLastName(testLastName);
+        employee.setBirthday(testBirthday);
+        employee.setPhone(testPhone);
+        employee.setPositionId(testPositionId);
+        employee.setSalary(testSalary);
+
+        employeeController.createEmployee(employee);
 
         List<Employee> employeeListCurrent = employeeController.getAllEmployee();
         assertEquals(employeeList.size(), employeeListCurrent.size()-1);
@@ -60,16 +69,25 @@ public class JdbcEmployeeDaoTest {
         String testPhone = "111 222 345";
         int testPositionId = 1;
         Float testSalary = 23000.0F;
-        employeeController.createEmployee(testLastName, testFirstName, testBirthday, testPhone, testPositionId, testSalary);
+
+        Employee employee = new Employee();
+        employee.setFirstName(testFirstName);
+        employee.setLastName(testLastName);
+        employee.setBirthday(testBirthday);
+        employee.setPhone(testPhone);
+        employee.setPositionId(testPositionId);
+        employee.setSalary(testSalary);
+
+        employeeController.createEmployee(employee);
 
         List<Employee> employeeList = employeeController.getAllEmployee();
-        Employee employee = employeeController.findEmployeeById(employeeList.get(employeeList.size()-1).getId());
-        assertEquals(employee.getLastName(), testLastName);
-        assertEquals(employee.getFirstName(), testFirstName);
-        assertEquals(employee.getBirthday(), testBirthday);
-        assertEquals(employee.getPhone(), testPhone);
-        assertEquals(employee.getPositionId(), testPositionId);
-        assertEquals(employee.getSalary(), testSalary, 0.01);
+        Employee employeeCurrent = employeeController.findEmployeeById(employeeList.get(employeeList.size()-1).getId());
+        assertEquals(employeeCurrent.getLastName(), testLastName);
+        assertEquals(employeeCurrent.getFirstName(), testFirstName);
+        assertEquals(employeeCurrent.getBirthday(), testBirthday);
+        assertEquals(employeeCurrent.getPhone(), testPhone);
+        assertEquals(employeeCurrent.getPositionId(), testPositionId);
+        assertEquals(employeeCurrent.getSalary(), testSalary, 0.01);
     }
 
     @Test
@@ -82,7 +100,16 @@ public class JdbcEmployeeDaoTest {
         String testPhone = "111 222 345";
         int testPositionId = 1;
         Float testSalary = 23000.0F;
-        employeeController.createEmployee(testLastName, testFirstName, testBirthday, testPhone, testPositionId, testSalary);
+
+        Employee employee = new Employee();
+        employee.setFirstName(testFirstName);
+        employee.setLastName(testLastName);
+        employee.setBirthday(testBirthday);
+        employee.setPhone(testPhone);
+        employee.setPositionId(testPositionId);
+        employee.setSalary(testSalary);
+
+        employeeController.createEmployee(employee);
 
         List<Employee> employeeList = employeeController.getAllEmployee();
         String testUpdateLastName = "Test Update last name";
@@ -99,13 +126,13 @@ public class JdbcEmployeeDaoTest {
         employeeController.updateEmployeePositionId(employeeList.get(employeeList.size()-1).getId(), testUpdatePositionId);
         employeeController.updateEmployeeSalary(employeeList.get(employeeList.size()-1).getId(), testUpdateSalary);
 
-        Employee employee = employeeController.findEmployeeById(employeeList.get(employeeList.size()-1).getId());
-        assertEquals(employee.getLastName(), testUpdateLastName);
-        assertEquals(employee.getFirstName(), testUpdateFirstName);
-        assertEquals(employee.getBirthday(), testUpdateBirthday);
-        assertEquals(employee.getPhone(), testUpdatePhone);
-        assertEquals(employee.getPositionId(), testUpdatePositionId);
-        assertEquals(employee.getSalary(), testUpdateSalary, 0.01);
+        Employee employeeCurrent = employeeController.findEmployeeById(employeeList.get(employeeList.size()-1).getId());
+        assertEquals(employeeCurrent.getLastName(), testUpdateLastName);
+        assertEquals(employeeCurrent.getFirstName(), testUpdateFirstName);
+        assertEquals(employeeCurrent.getBirthday(), testUpdateBirthday);
+        assertEquals(employeeCurrent.getPhone(), testUpdatePhone);
+        assertEquals(employeeCurrent.getPositionId(), testUpdatePositionId);
+        assertEquals(employeeCurrent.getSalary(), testUpdateSalary, 0.01);
     }
 
 }

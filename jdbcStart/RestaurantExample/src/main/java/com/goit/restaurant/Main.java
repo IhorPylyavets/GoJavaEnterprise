@@ -1,10 +1,7 @@
 package com.goit.restaurant;
 
 import com.goit.restaurant.controllers.*;
-import com.goit.restaurant.model.Category;
-import com.goit.restaurant.model.Ingredient;
-import com.goit.restaurant.model.Menu;
-import com.goit.restaurant.model.Position;
+import com.goit.restaurant.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -73,7 +70,36 @@ public class Main {
         categoryController.deleteCategory(6);
         categoryController.getAllCategories().forEach(System.out::println);*/
 
-        warehouseController.getAllWarehouse().forEach(System.out::println);
+        //warehouseController.getAllWarehouse().forEach(System.out::println);
+
+        /*employeeController.getAllEmployee().forEach(System.out::println);
+        String testLastName = "Test last name";
+        String testFirstName = "Test first name";
+        java.sql.Date testBirthday = Common.stringToSqlDate("2000-11-23");
+        String testPhone = "111 222 345";
+        int testPositionId = 1;
+        Float testSalary = 23000.0F;
+
+        Employee employee = new Employee();
+        employee.setFirstName(testFirstName);
+        employee.setLastName(testLastName);
+        employee.setBirthday(testBirthday);
+        employee.setPhone(testPhone);
+        employee.setPositionId(testPositionId);
+        employee.setSalary(testSalary);
+
+        employeeController.createEmployee(employee);
+        System.out.println(employeeController.findEmployeeById(6));
+        employeeController.updateEmployeeLastName(6, "q");
+        employeeController.updateEmployeeFirstName(6, "q");
+        employeeController.updateEmployeeBirthday(6, Common.stringToSqlDate("1997-10-03"));
+        employeeController.updateEmployeePhone(6, "111");
+        employeeController.updateEmployeePositionId(6, 2);
+        employeeController.updateEmployeeSalary(6, 111.0F);
+        System.out.println(employeeController.findEmployeeById(6));
+        employeeController.deleteEmployee(6);
+
+        employeeController.getAllEmployee().forEach(System.out::println);*/
 
     }
 
