@@ -37,11 +37,11 @@
 					<td>${position.id}</td>
 					<td>${position.positionTitle}</td>
 					<td>
-						<spring:url value="/positions/${position.id}" var="userUrl" />
+						<spring:url value="/positions/${position.id}" var="positionUrl" />
 						<spring:url value="/positions/${position.id}/delete" var="deleteUrl" />
 						<spring:url value="/positions/${position.id}/update" var="updateUrl" />
 
-						<button class="btn btn-info" onclick="location.href='${userUrl}'">Query</button>
+						<button class="btn btn-info" onclick="location.href='${positionUrl}'">Query</button>
 						<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
 						<button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
 				</tr>

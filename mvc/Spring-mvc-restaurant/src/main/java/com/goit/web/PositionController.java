@@ -18,7 +18,7 @@ import java.util.Map;
 @Controller
 public class PositionController {
 
-    private static PositionService positionService;
+    private PositionService positionService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String main(Map<String, Object> model) {

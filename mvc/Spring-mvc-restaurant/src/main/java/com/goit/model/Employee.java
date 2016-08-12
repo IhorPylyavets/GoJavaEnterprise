@@ -27,8 +27,9 @@ public class Employee {
     @Column(name = "PHONE")
     private String phone;
 
-    @Column(name = "POSITION_ID")
-    private int positionId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="POSITION_ID")
+    private Position position;
 
     @Column(name = "SALARY")
     private float salary;
@@ -73,12 +74,12 @@ public class Employee {
         this.phone = phone;
     }
 
-    public int getPositionId() {
-        return positionId;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPositionId(int positionId) {
-        this.positionId = positionId;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public float getSalary() {
@@ -97,7 +98,7 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", phone='" + phone + '\'' +
-                ", positionId=" + positionId +
+                ", positionId=" + position +
                 ", salary=" + salary +
                 '}';
     }
@@ -109,12 +110,12 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        if (positionId != employee.positionId) return false;
         if (Float.compare(employee.salary, salary) != 0) return false;
         if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
         if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
         if (birthday != null ? !birthday.equals(employee.birthday) : employee.birthday != null) return false;
-        return phone != null ? phone.equals(employee.phone) : employee.phone == null;
+        if (phone != null ? !phone.equals(employee.phone) : employee.phone != null) return false;
+        return position != null ? position.equals(employee.position) : employee.position == null;
 
     }
 
@@ -124,7 +125,7 @@ public class Employee {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + positionId;
+        result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (salary != +0.0f ? Float.floatToIntBits(salary) : 0);
         return result;
     }
