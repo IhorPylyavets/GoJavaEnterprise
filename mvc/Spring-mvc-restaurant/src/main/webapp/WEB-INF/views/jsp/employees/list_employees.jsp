@@ -21,7 +21,7 @@
         </div>
     </c:if>
 
-    <h1>All Position</h1>
+    <h1>All Employees</h1>
 
     <table class="table table-striped">
         <thead>
@@ -45,7 +45,7 @@
                     <spring:url value="/employees/${employee.id}/delete" var="deleteUrl" />
                     <spring:url value="/employees/${employee.id}/update" var="updateUrl" />
 
-                    <button class="btn btn-info" onclick="location.href='${employeeUrl}'">Query</button>
+                    <button class="btn btn-info" onclick="location.href='${employeeUrl}'">Select</button>
                     <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
                     <button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
             </tr>

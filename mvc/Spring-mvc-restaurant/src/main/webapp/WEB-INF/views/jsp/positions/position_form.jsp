@@ -21,7 +21,7 @@
     </c:choose>
     <br />--%>
 
-    <h1>Create/Update Position</h1>
+    <h1>Create / Update Position</h1>
     <br />
 
     <spring:url value="/positions" var="positionActionUrl" />
@@ -53,7 +53,7 @@
             </div>
         </div>--%>
 
-        <button type="submit" class="btn-lg btn-primary pull-right">Create/Update</button>
+        <button type="submit" class="btn-lg btn-primary pull-right">Create / Update</button>
     </form:form>
 
 </div>

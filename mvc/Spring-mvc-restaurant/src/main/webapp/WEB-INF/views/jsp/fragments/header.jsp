@@ -15,10 +15,10 @@
 <nav class="navbar navbar-inverse ">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="${urlHome}">Position</a>
+			<a class="navbar-brand" href="${urlHome}">Positions</a>
 		</div>
 		<div class="navbar-header">
-			<a class="navbar-brand" href="${urlEmployee}">Employee</a>
+			<a class="navbar-brand" href="${urlEmployee}">Employees</a>
 		</div>
 	</div>
 </nav>

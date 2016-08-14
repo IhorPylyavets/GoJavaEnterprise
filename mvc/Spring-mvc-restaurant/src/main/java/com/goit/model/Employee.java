@@ -27,8 +27,10 @@ public class Employee {
     @Column(name = "PHONE")
     private String phone;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="POSITION_ID")
+    /*@ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="POSITION_ID")*/
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "POSITION_ID")
     private Position position;
 
     @Column(name = "SALARY")

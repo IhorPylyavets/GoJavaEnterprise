@@ -63,26 +63,25 @@ public class PositionController {
     @RequestMapping(value = "/positions/create", method = RequestMethod.GET)
     public String showCreatePositionForm(Model model) {
         Position position = new Position();
-        position.setPositionTitle("position title");
         model.addAttribute("position_form", position);
 
         return "positions/position_form";
     }
 
     @RequestMapping(value = "/positions", method = RequestMethod.POST)
-    public String saveOrUpdateUser(@ModelAttribute("userForm") @Validated Position position,
+    public String saveOrUpdatePosition(@ModelAttribute("position_form") @Validated Position position,
                                    BindingResult result, final RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
-            return "users/userform";
+            return "positions/position_form";
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
             if(position.getId() == 0){
-                redirectAttributes.addFlashAttribute("msg", "User added successfully!");
+                redirectAttributes.addFlashAttribute("msg", "Position added successfully!");
                 positionService.createPosition(position);
             }else{
-                redirectAttributes.addFlashAttribute("msg", "User updated successfully!");
+                redirectAttributes.addFlashAttribute("msg", "Position updated successfully!");
                 positionService.updatePositionTitle(position.getId(), position.getPositionTitle());
             }
 
