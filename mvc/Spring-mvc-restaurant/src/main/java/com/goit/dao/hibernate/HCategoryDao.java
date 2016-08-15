@@ -19,7 +19,7 @@ public class HCategoryDao implements CategoryDao{
 
     @Transactional
     public void createCategory(Category category) {
-        sessionFactory.getCurrentSession().save(category);
+        sessionFactory.getCurrentSession().persist(category);
     }
 
     @Transactional
