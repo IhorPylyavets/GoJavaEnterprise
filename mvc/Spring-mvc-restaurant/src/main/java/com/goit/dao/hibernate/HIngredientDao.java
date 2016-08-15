@@ -19,7 +19,7 @@ public class HIngredientDao implements IngredientDao{
 
     @Transactional
     public void createIngredient(Ingredient ingredient) {
-        sessionFactory.getCurrentSession().save(ingredient);
+        sessionFactory.getCurrentSession().persist(ingredient);
     }
 
     @Transactional
