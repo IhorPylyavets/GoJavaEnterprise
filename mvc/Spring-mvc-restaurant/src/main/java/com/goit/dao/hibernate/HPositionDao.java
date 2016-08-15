@@ -15,7 +15,7 @@ public class HPositionDao implements PositionDao {
 
     @Transactional
     public void createPosition(Position position) {
-        sessionFactory.getCurrentSession().save(position);
+        sessionFactory.getCurrentSession().persist(position);
     }
 
     @Transactional

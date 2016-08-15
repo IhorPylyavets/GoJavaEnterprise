@@ -16,7 +16,7 @@ public class HEmployeeDao implements EmployeeDao {
 
     @Transactional
     public void createEmployee(Employee employee) {
-        sessionFactory.getCurrentSession().save(employee);
+        sessionFactory.getCurrentSession().persist(employee);
     }
 
     @Transactional

@@ -18,42 +18,38 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <strong>${msg}</strong>
-        </div>
+        </div>p
     </c:if>
 
-    <h1>All Employees</h1>
+    <h1>All Ingredients</h1>
 
     <table class="table table-striped">
         <thead>
         <tr>
             <th>#ID</th>
-            <th>LastName</th>
-            <th>FirstName</th>
-            <th>Position</th>
+            <th>Title</th>
             <th>Action</th>
         </tr>
         </thead>
 
-        <c:forEach var="employee" items="${employees}">
+        <c:forEach var="ingredient" items="${ingredients}">
             <tr>
-                <td>${employee.id}</td>
-                <td>${employee.lastName}</td>
-                <td>${employee.firstName}</td>
-                <td>${employee.position.positionTitle}</td>
+                <td>${ingredient.id}</td>
+                <td>${ingredient.ingredientTitle}</td>
                 <td>
-                    <spring:url value="/employees/${employee.id}" var="employeeUrl" />
-                    <spring:url value="/employees/${employee.id}/delete" var="deleteUrl" />
-                    <spring:url value="/employees/${employee.id}/update" var="updateUrl" />
+                    <spring:url value="/ingredients/${ingredient.id}" var="ingredientUrl" />
+                    <spring:url value="/ingredients/${ingredient.id}/delete" var="deleteUrl" />
+                    <spring:url value="/ingredients/${ingredient.id}/update" var="updateUrl" />
 
-                    <button class="btn btn-info" onclick="location.href='${employeeUrl}'">Select</button>
+                    <button class="btn btn-info" onclick="location.href='${ingredientUrl}'">Select</button>
                     <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
                     <button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
             </tr>
         </c:forEach>
     </table>
 
-    <spring:url value="/employees/create" var="urlCreateEmployee" />
-    <button class="btn btn-toolbar" onclick="location.href='${urlCreateEmployee}'">Create Employee</button>
+    <spring:url value="/ingredients/create" var="urlCreateIngredient" />
+    <button class="btn btn-toolbar" onclick="location.href='${urlCreateIngredient}'">Create Ingredient</button>
 
 </div>
 

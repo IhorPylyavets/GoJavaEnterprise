@@ -11,6 +11,7 @@
 
 <spring:url value="/" var="urlHome" />
 <spring:url value="/employees" var="urlEmployee" />
+<spring:url value="/ingredients" var="urlIngredient" />
 
 <nav class="navbar navbar-inverse ">
 	<div class="container">
@@ -19,6 +20,9 @@
 		</div>
 		<div class="navbar-header">
 			<a class="navbar-brand" href="${urlEmployee}">Employees</a>
+		</div>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="${urlIngredient}">Ingredients</a>
 		</div>
 	</div>
 </nav>

@@ -10,4 +10,7 @@
     <bean id="employeeService" class="com.goit.service.EmployeeService"/>
     <bean id="employeeDao" class="com.goit.dao.hibernate.HEmployeeDao"/>
 
+    <bean id="ingredientService" class="com.goit.service.IngredientService"/>
+    <bean id="ingredientDao" class="com.goit.dao.hibernate.HIngredientDao"/>
+
 </beans>

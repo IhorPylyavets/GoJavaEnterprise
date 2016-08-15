@@ -21,21 +21,21 @@
     </c:choose>
     <br />--%>
 
-    <h1>Create / Update Position</h1>
+    <h1>Create / Update Ingredient</h1>
     <br />
 
-    <spring:url value="/positions" var="positionActionUrl" />
+    <spring:url value="/ingredients" var="ingredientActionUrl" />
 
-    <form:form class="form-horizontal" method="post" modelAttribute="position_form" action="${positionActionUrl}">
+    <form:form class="form-horizontal" method="post" modelAttribute="ingredient_form" action="${ingredientActionUrl}">
 
         <form:hidden path="id" />
 
-        <spring:bind path="positionTitle">
+        <spring:bind path="ingredientTitle">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <label class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">
-                    <form:input path="positionTitle" type="text" class="form-control " id="positionTitle" placeholder="Title" />
-                    <form:errors path="positionTitle" class="control-label" />
+                    <form:input path="ingredientTitle" type="text" class="form-control " id="ingredientTitle" placeholder="Title" />
+                    <form:errors path="ingredientTitle" class="control-label" />
                 </div>
             </div>
         </spring:bind>
