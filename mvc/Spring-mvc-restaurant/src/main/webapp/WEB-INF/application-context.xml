@@ -16,4 +16,7 @@
     <bean id="menuService" class="com.goit.service.MenuService"/>
     <bean id="menuDao" class="com.goit.dao.hibernate.HMenuDao"/>
 
+    <bean id="categoryService" class="com.goit.service.CategoryService"/>
+    <bean id="categoryDao" class="com.goit.dao.hibernate.HCategoryDao"/>
+
 </beans>
