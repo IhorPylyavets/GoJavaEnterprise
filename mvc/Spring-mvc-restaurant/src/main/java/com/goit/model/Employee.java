@@ -27,8 +27,6 @@ public class Employee {
     @Column(name = "PHONE")
     private String phone;
 
-    /*@ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="POSITION_ID")*/
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "POSITION_ID")
     private Position position;

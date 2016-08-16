@@ -16,26 +16,31 @@ public class MenuService {
 
     @Transactional
     public void createMenu(Menu menu) {
-        menuDao.createMenu(menu);
+        menuDao.create(menu);
     }
 
     @Transactional
     public List<Menu> getAllMenu() {
-        return menuDao.getAllMenu();
+        return menuDao.getAll();
     }
 
     @Transactional
     public Menu findMenuById(int id) {
-        return menuDao.findMenuById(id);
+        return menuDao.findById(id);
+    }
+
+    @Transactional
+    public Menu findMenuByTitle(String menuTitle) {
+        return menuDao.findByTitle(menuTitle);
     }
 
     @Transactional
     public void deleteMenu(int id) {
-        menuDao.deleteMenu(id);
+        menuDao.delete(id);
     }
 
     @Transactional
     public void updateMenuTitle(int id, String newMenuTitle) {
-        menuDao.updateMenuTitle(id, newMenuTitle);
+        menuDao.updateTitle(id, newMenuTitle);
     }
 }

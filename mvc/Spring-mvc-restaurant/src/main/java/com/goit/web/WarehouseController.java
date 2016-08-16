@@ -89,7 +89,8 @@ public class WarehouseController {
                 warehouseService.createWarehouse(warehouse);
             } else {
                 redirectAttributes.addFlashAttribute("msg", "Warehouse updated successfully!");
-                warehouseService.updateWarehouseIngredientId(warehouse.getId(), warehouse.getIngredient().getId());
+                warehouseService.updateWarehouseIngredientId(warehouse.getId(),
+                        ingredientService.findIngredientByTitle(warehouse.getIngredient().getIngredientTitle()));
                 warehouseService.updateWarehouseAmount(warehouse.getId(), warehouse.getAmount());
             }
 

@@ -18,25 +18,32 @@ public class HCategoryDao implements CategoryDao{
     }
 
     @Transactional
-    public void createCategory(Category category) {
+    public void create(Category category) {
         sessionFactory.getCurrentSession().persist(category);
     }
 
     @Transactional
-    public Category findCategoryById(int id) {
+    public Category findById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Category C WHERE C.id = :id");
         query.setParameter("id", id);
         return (Category) query.uniqueResult();
     }
 
+    public Category findByTitle(String title) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Category C WHERE C.categoryTitle = :categoryTitle");
+        query.setParameter("categoryTitle", title);
+        return (Category) query.uniqueResult();
+    }
+
     @Transactional
-    public List<Category> getAllCategory() {
+    public List<Category> getAll() {
         return sessionFactory.getCurrentSession().createQuery("select c from Category c").list();
     }
 
     @Transactional
-    public void deleteCategory(int id) {
+    public void delete(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete Category WHERE id = :id");
         query.setParameter("id", id);
@@ -44,7 +51,7 @@ public class HCategoryDao implements CategoryDao{
     }
 
     @Transactional
-    public void updateCategoryTitle(int id, String newCategoryTitle) {
+    public void updateTitle(int id, String newCategoryTitle) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("update Category set categoryTitle = :categoryTitle where id = :id");
         query.setParameter("categoryTitle", newCategoryTitle);

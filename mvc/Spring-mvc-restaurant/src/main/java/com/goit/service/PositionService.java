@@ -12,27 +12,32 @@ public class PositionService {
 
     @Transactional
     public void createPosition(Position position) {
-        positionDao.createPosition(position);
+        positionDao.create(position);
     }
 
     @Transactional
     public Position findPositionById(int id) {
-        return positionDao.findPositionById(id);
+        return positionDao.findById(id);
+    }
+
+    @Transactional
+    public Position findPositionByTitle(String positionTitle) {
+        return positionDao.findByTitle(positionTitle);
     }
 
     @Transactional
     public List<Position> getAllPosition() {
-        return positionDao.getAllPosition();
+        return positionDao.getAll();
     }
 
     @Transactional
     public void deletePosition(int id) {
-        positionDao.deletePosition(id);
+        positionDao.delete(id);
     }
 
     @Transactional
     public void updatePositionTitle(int id, String newPositionTitle) {
-        positionDao.updatePositionTitle(id, newPositionTitle);
+        positionDao.updateTitle(id, newPositionTitle);
     }
 
     public void setPositionDao(PositionDao positionDao) {

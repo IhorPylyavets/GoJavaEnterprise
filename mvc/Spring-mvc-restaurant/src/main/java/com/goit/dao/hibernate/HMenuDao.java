@@ -18,25 +18,32 @@ public class HMenuDao implements MenuDao{
     }
 
     @Transactional
-    public void createMenu(Menu menu) {
+    public void create(Menu menu) {
         sessionFactory.getCurrentSession().persist(menu);
     }
 
     @Transactional
-    public Menu findMenuById(int id) {
+    public Menu findById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Menu P WHERE P.id = :id");
         query.setParameter("id", id);
         return (Menu) query.uniqueResult();
     }
 
+    public Menu findByTitle(String menuTitle) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Menu P WHERE P.menuTitle = :menuTitle");
+        query.setParameter("menuTitle", menuTitle);
+        return (Menu) query.uniqueResult();
+    }
+
     @Transactional
-    public List<Menu> getAllMenu() {
+    public List<Menu> getAll() {
         return sessionFactory.getCurrentSession().createQuery("select m from Menu m").list();
     }
 
     @Transactional
-    public void deleteMenu(int id) {
+    public void delete(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete Menu WHERE id = :id");
         query.setParameter("id", id);
@@ -44,7 +51,7 @@ public class HMenuDao implements MenuDao{
     }
 
     @Transactional
-    public void updateMenuTitle(int id, String newMenuTitle) {
+    public void updateTitle(int id, String newMenuTitle) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("update Menu set menuTitle = :menuTitle where id = :id");
         query.setParameter("menuTitle", newMenuTitle);

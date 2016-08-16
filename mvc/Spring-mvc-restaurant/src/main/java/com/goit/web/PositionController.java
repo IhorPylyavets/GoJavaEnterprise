@@ -34,6 +34,7 @@ public class PositionController {
     @RequestMapping(value = "/positions/{id}", method = RequestMethod.GET)
     public String showPosition(@PathVariable("id") int id, Model model) {
         Position position = positionService.findPositionById(id);
+
         if (position == null) {
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Position not found");
@@ -75,7 +76,6 @@ public class PositionController {
         if (result.hasErrors()) {
             return "positions/position_form";
         } else {
-
             redirectAttributes.addFlashAttribute("css", "success");
             if(position.getId() == 0){
                 redirectAttributes.addFlashAttribute("msg", "Position added successfully!");
@@ -87,7 +87,6 @@ public class PositionController {
 
             return "redirect:/positions/" + position.getId();
         }
-
     }
 
     @Autowired

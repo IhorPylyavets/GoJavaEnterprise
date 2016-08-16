@@ -1,6 +1,7 @@
 package com.goit.service;
 
 import com.goit.dao.WarehouseDao;
+import com.goit.model.Ingredient;
 import com.goit.model.Warehouse;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,8 +36,8 @@ public class WarehouseService {
     }
 
     @Transactional
-    public void updateWarehouseIngredientId(int id, int newWarehouseIngredientId) {
-        warehouseDao.updateWarehouseIngredientId(id, newWarehouseIngredientId);
+    public void updateWarehouseIngredientId(int id, Ingredient newWarehouseIngredient) {
+        warehouseDao.updateWarehouseIngredientId(id, newWarehouseIngredient);
     }
 
     @Transactional

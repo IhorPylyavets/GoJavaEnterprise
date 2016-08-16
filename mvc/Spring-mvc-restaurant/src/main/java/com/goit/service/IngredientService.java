@@ -16,26 +16,31 @@ public class IngredientService {
 
     @Transactional
     public void createIngredient(Ingredient ingredient) {
-        ingredientDao.createIngredient(ingredient);
+        ingredientDao.create(ingredient);
     }
 
     @Transactional
     public List<Ingredient> getAllIngredient() {
-        return ingredientDao.getAllIngredient();
+        return ingredientDao.getAll();
     }
 
     @Transactional
     public Ingredient findIngredientById(int id) {
-        return ingredientDao.findIngredientById(id);
+        return ingredientDao.findById(id);
+    }
+
+    @Transactional
+    public Ingredient findIngredientByTitle(String ingredientTitle) {
+        return ingredientDao.findByTitle(ingredientTitle);
     }
 
     @Transactional
     public void deleteIngredient(int id) {
-        ingredientDao.deleteIngredient(id);
+        ingredientDao.delete(id);
     }
 
     @Transactional
     public void updateIngredientTitle(int id, String newIngredientTitle) {
-        ingredientDao.updateIngredientTitle(id, newIngredientTitle);
+        ingredientDao.updateTitle(id, newIngredientTitle);
     }
 }

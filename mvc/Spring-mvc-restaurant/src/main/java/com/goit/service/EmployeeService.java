@@ -2,6 +2,7 @@ package com.goit.service;
 
 import com.goit.dao.EmployeeDao;
 import com.goit.model.Employee;
+import com.goit.model.Position;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
@@ -52,8 +53,8 @@ public class EmployeeService{
     }
 
     @Transactional
-    public void updateEmployeePositionId(int id, int newPositionId) {
-        employeeDao.updateEmployeePositionId(id, newPositionId);
+    public void updateEmployeePositionId(int id, Position newPosition) {
+        employeeDao.updateEmployeePositionId(id, newPosition);
     }
 
     @Transactional

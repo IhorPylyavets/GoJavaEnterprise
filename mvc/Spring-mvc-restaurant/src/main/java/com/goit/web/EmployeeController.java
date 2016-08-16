@@ -1,6 +1,7 @@
 package com.goit.web;
 
 import com.goit.model.Employee;
+import com.goit.model.Position;
 import com.goit.service.EmployeeService;
 import com.goit.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class EmployeeController {
@@ -29,6 +33,7 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
     public String showEmployee(@PathVariable("id") int id, Model model) {
         Employee employee = employeeService.findEmployeeById(id);
+
         if (employee == null) {
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Employee not found");
@@ -61,6 +66,7 @@ public class EmployeeController {
     public String showCreateEmployeeForm(Model model) {
         Employee employee = new Employee();
         model.addAttribute("employee_form", employee);
+
         model.addAttribute("positionList", positionService.getAllPosition());
 
         return "employees/employee_form";
@@ -84,7 +90,8 @@ public class EmployeeController {
                 employeeService.updateEmployeeFirstName(employee.getId(), employee.getFirstName());
                 employeeService.updateEmployeeBirthday(employee.getId(), employee.getBirthday());
                 employeeService.updateEmployeePhone(employee.getId(), employee.getPhone());
-                employeeService.updateEmployeePositionId(employee.getId(), employee.getPosition().getId());
+                employeeService.updateEmployeePositionId(employee.getId(),
+                        positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
                 employeeService.updateEmployeeSalary(employee.getId(), employee.getSalary());
             }
 
@@ -92,7 +99,6 @@ public class EmployeeController {
         }
 
     }
-
 
     @Autowired
     public void setEmployeeService(EmployeeService employeeService) {

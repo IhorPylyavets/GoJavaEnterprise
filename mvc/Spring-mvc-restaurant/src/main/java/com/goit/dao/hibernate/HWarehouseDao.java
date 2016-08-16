@@ -1,6 +1,7 @@
 package com.goit.dao.hibernate;
 
 import com.goit.dao.WarehouseDao;
+import com.goit.model.Ingredient;
 import com.goit.model.Warehouse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -44,10 +45,10 @@ public class HWarehouseDao implements WarehouseDao{
     }
 
     @Transactional
-    public void updateWarehouseIngredientId(int id, int newWarehouseIngredientId) {
+    public void updateWarehouseIngredientId(int id, Ingredient newWarehouseIngredient) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("update Warehouse set ingredientId = :ingredientId where id = :id");
-        query.setParameter("ingredientId", newWarehouseIngredientId);
+        Query query = session.createQuery("update Warehouse set ingredient = :ingredient where id = :id");
+        query.setParameter("ingredient", newWarehouseIngredient);
         query.setParameter("id", id);
         query.executeUpdate();
     }

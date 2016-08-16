@@ -75,7 +75,7 @@
                 <label class="col-sm-2 control-label">Position</label>
                 <div class="col-sm-10">
                     <form:select path="position.positionTitle" class="form-control selcls">
-                        <form:options items="${positionList}" itemValue="positionTitle"/>
+                        <form:options items="${positionList}" itemValue="positionTitle" itemLabel="positionTitle"/>
                     </form:select>
                 </div>
             </div>

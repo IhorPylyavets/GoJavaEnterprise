@@ -16,26 +16,26 @@ public class CategoryService {
 
     @Transactional
     public void createCategory(Category category) {
-        categoryDao.createCategory(category);
+        categoryDao.create(category);
     }
 
     @Transactional
     public List<Category> getAllCategories() {
-        return categoryDao.getAllCategory();
+        return categoryDao.getAll();
     }
 
     @Transactional
     public Category findCategoryById(int id) {
-        return categoryDao.findCategoryById(id);
+        return categoryDao.findById(id);
     }
 
     @Transactional
     public void deleteCategory(int id) {
-        categoryDao.deleteCategory(id);
+        categoryDao.delete(id);
     }
 
     @Transactional
     public void updateCategoryTitle(int id, String newCategoryTitle) {
-        categoryDao.updateCategoryTitle(id, newCategoryTitle);
+        categoryDao.updateTitle(id, newCategoryTitle);
     }
 }

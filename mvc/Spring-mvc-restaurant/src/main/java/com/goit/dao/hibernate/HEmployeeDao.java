@@ -2,6 +2,7 @@ package com.goit.dao.hibernate;
 
 import com.goit.dao.EmployeeDao;
 import com.goit.model.Employee;
+import com.goit.model.Position;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -77,10 +78,10 @@ public class HEmployeeDao implements EmployeeDao {
     }
 
     @Transactional
-    public void updateEmployeePositionId(int id, int newPositionId) {
+    public void updateEmployeePositionId(int id, Position newPosition) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("update Employee set positionId = :positionId where id = :id");
-        query.setParameter("positionId", newPositionId);
+        Query query = session.createQuery("update Employee set position = :position where id = :id");
+        query.setParameter("position", newPosition);
         query.setParameter("id", id);
         query.executeUpdate();
     }

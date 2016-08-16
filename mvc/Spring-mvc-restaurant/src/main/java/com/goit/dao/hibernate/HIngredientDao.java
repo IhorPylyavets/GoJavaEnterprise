@@ -18,25 +18,32 @@ public class HIngredientDao implements IngredientDao{
     }
 
     @Transactional
-    public void createIngredient(Ingredient ingredient) {
+    public void create(Ingredient ingredient) {
         sessionFactory.getCurrentSession().persist(ingredient);
     }
 
     @Transactional
-    public Ingredient findIngredientById(int id) {
+    public Ingredient findById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Ingredient I WHERE I.id = :id");
         query.setParameter("id", id);
         return (Ingredient) query.uniqueResult();
     }
 
+    public Ingredient findByTitle(String ingredientTitle) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Ingredient I WHERE I.ingredientTitle = :ingredientTitle");
+        query.setParameter("ingredientTitle", ingredientTitle);
+        return (Ingredient) query.uniqueResult();
+    }
+
     @Transactional
-    public List<Ingredient> getAllIngredient() {
+    public List<Ingredient> getAll() {
         return sessionFactory.getCurrentSession().createQuery("select i from Ingredient i").list();
     }
 
     @Transactional
-    public void deleteIngredient(int id) {
+    public void delete(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete Ingredient WHERE id = :id");
         query.setParameter("id", id);
@@ -44,7 +51,7 @@ public class HIngredientDao implements IngredientDao{
     }
 
     @Transactional
-    public void updateIngredientTitle(int id, String newIngredientTitle) {
+    public void updateTitle(int id, String newIngredientTitle) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("update Ingredient set ingredientTitle = :ingredientTitle where id = :id");
         query.setParameter("ingredientTitle", newIngredientTitle);
