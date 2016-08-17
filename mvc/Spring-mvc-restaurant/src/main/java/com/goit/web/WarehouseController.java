@@ -20,16 +20,6 @@ public class WarehouseController {
     private WarehouseService warehouseService;
     private IngredientService ingredientService;
 
-    @Autowired
-    public void setWarehouseService(WarehouseService warehouseService) {
-        this.warehouseService = warehouseService;
-    }
-
-    @Autowired
-    public void setIngredientService(IngredientService ingredientService) {
-        this.ingredientService = ingredientService;
-    }
-
     @RequestMapping(value = "/warehouses", method = RequestMethod.GET)
     public String showAllWarehouses(Model model) {
         model.addAttribute("warehouses", warehouseService.getAllWarehouse());
@@ -86,6 +76,7 @@ public class WarehouseController {
             redirectAttributes.addFlashAttribute("css", "success");
             if (warehouse.getId() == 0) {
                 redirectAttributes.addFlashAttribute("msg", "Warehouse added successfully!");
+                warehouse.setIngredient(ingredientService.findIngredientByTitle(warehouse.getIngredient().getIngredientTitle()));
                 warehouseService.createWarehouse(warehouse);
             } else {
                 redirectAttributes.addFlashAttribute("msg", "Warehouse updated successfully!");
@@ -96,5 +87,15 @@ public class WarehouseController {
 
             return "redirect:/warehouses/" + warehouse.getId();
         }
+    }
+
+    @Autowired
+    public void setWarehouseService(WarehouseService warehouseService) {
+        this.warehouseService = warehouseService;
+    }
+
+    @Autowired
+    public void setIngredientService(IngredientService ingredientService) {
+        this.ingredientService = ingredientService;
     }
 }

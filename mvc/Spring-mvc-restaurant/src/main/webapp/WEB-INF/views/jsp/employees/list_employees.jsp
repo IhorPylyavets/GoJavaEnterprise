@@ -34,9 +34,10 @@
         </tr>
         </thead>
 
+        <c:set var="idCounter" value="1"/>
         <c:forEach var="employee" items="${employees}">
             <tr>
-                <td>${employee.id}</td>
+                <td><c:out value="${idCounter}"/></td>
                 <td>${employee.lastName}</td>
                 <td>${employee.firstName}</td>
                 <td>${employee.position.positionTitle}</td>
@@ -49,6 +50,7 @@
                     <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
                     <button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
             </tr>
+            <c:set var="idCounter" value="${idCounter+1}"/>
         </c:forEach>
     </table>
 

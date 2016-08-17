@@ -20,7 +20,7 @@ public class HWarehouseDao implements WarehouseDao{
 
     @Transactional
     public void createWarehouse(Warehouse warehouse) {
-        sessionFactory.getCurrentSession().persist(warehouse);
+        sessionFactory.getCurrentSession().saveOrUpdate(warehouse);
     }
 
     @Transactional

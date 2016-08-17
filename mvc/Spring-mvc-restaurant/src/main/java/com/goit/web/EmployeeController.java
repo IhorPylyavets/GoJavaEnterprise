@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class EmployeeController {
@@ -33,7 +35,6 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
     public String showEmployee(@PathVariable("id") int id, Model model) {
         Employee employee = employeeService.findEmployeeById(id);
-
         if (employee == null) {
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Employee not found");
@@ -56,7 +57,6 @@ public class EmployeeController {
     public String showUpdateEmployeeForm(@PathVariable("id") int id, Model model) {
         Employee employee = employeeService.findEmployeeById(id);
         model.addAttribute("employee_form", employee);
-
         model.addAttribute("positionList", positionService.getAllPosition());
 
         return "employees/employee_form";
@@ -66,7 +66,6 @@ public class EmployeeController {
     public String showCreateEmployeeForm(Model model) {
         Employee employee = new Employee();
         model.addAttribute("employee_form", employee);
-
         model.addAttribute("positionList", positionService.getAllPosition());
 
         return "employees/employee_form";
@@ -83,7 +82,10 @@ public class EmployeeController {
             redirectAttributes.addFlashAttribute("css", "success");
             if(employee.getId() == 0){
                 redirectAttributes.addFlashAttribute("msg", "Employee added successfully!");
+
+                employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
                 employeeService.createEmployee(employee);
+
             }else{
                 redirectAttributes.addFlashAttribute("msg", "Employee updated successfully!");
                 employeeService.updateEmployeeLastName(employee.getId(), employee.getLastName());

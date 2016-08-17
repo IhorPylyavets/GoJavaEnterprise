@@ -32,9 +32,10 @@
         </tr>
         </thead>
 
+        <c:set var="idCounter" value="1"/>
         <c:forEach var="menu" items="${menus}">
             <tr>
-                <td>${menu.id}</td>
+                <td><c:out value="${idCounter}"/></td>
                 <td>${menu.menuTitle}</td>
                 <td>
                     <spring:url value="/menus/${menu.id}" var="menuUrl" />
@@ -45,6 +46,7 @@
                     <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
                     <button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
             </tr>
+            <c:set var="idCounter" value="${idCounter+1}"/>
         </c:forEach>
     </table>
 
