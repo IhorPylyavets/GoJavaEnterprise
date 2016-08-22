@@ -21,33 +21,33 @@
     </c:choose>
     <br />--%>
 
-    <h1>Create / Update Warehouse</h1>
+    <h1>Create / Update Desk</h1>
     <br />
 
-    <spring:url value="/warehouses" var="warehouseActionUrl" />
+    <spring:url value="/desks" var="deskActionUrl" />
 
-    <form:form class="form-horizontal" method="post" modelAttribute="warehouse_form" action="${warehouseActionUrl}">
+    <form:form class="form-horizontal" method="post" modelAttribute="desk_form" action="${deskActionUrl}">
 
         <form:hidden path="id" />
 
-        <spring:bind path="ingredient">
+        <spring:bind path="deskTitle">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <label class="col-sm-2 control-label">Ingredient</label>
+                <label class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">
-                    <form:select path="ingredient.ingredientTitle" class="form-control selcls">
-                        <form:option value="NONE" label="--- Select Ingredient ---" />
-                        <form:options items="${ingredientList}" itemValue="ingredientTitle" itemLabel="ingredientTitle"/>
-                    </form:select>
+                    <form:input path="deskTitle" type="text" class="form-control " id="deskTitle" placeholder="Title" />
+                    <form:errors path="deskTitle" class="control-label" />
                 </div>
             </div>
         </spring:bind>
 
-        <spring:bind path="amount">
+        <spring:bind path="deskStatus">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <label class="col-sm-2 control-label">Amount</label>
+                <label class="col-sm-2 control-label">Status</label>
                 <div class="col-sm-10">
-                    <form:input path="amount" type="number" min="0" class="form-control " id="amount" placeholder="Amount" />
-                    <form:errors path="amount" class="control-label" />
+                    <form:select path="deskStatus" class="form-control selcls">
+                        <form:option value="NONE" label="--- Select Status ---" />
+                        <form:options path="${statusList}"/>
+                    </form:select>
                 </div>
             </div>
         </spring:bind>

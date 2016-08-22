@@ -35,6 +35,7 @@
                 <label class="col-sm-2 control-label">Ingredient</label>
                 <div class="col-sm-10">
                     <form:select path="ingredient.ingredientTitle" class="form-control selcls">
+                        <form:option value="NONE" label="--- Select Ingredient ---" />
                         <form:options items="${ingredientList}" itemValue="ingredientTitle" itemLabel="ingredientTitle"/>
                     </form:select>
                 </div>

@@ -35,7 +35,7 @@
 
     <%--<div class="row">
         <label class="col-sm-2">INGREDIENTS</label>
-        <div class="col-sm-10">${dish.ingredients}</div>
+        <div class="col-sm-10">${dish.ingredients.size()}</div>
     </div>--%>
 
     <div class="row">

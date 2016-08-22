@@ -30,6 +30,11 @@ public class CategoryService {
     }
 
     @Transactional
+    public Category findCategoryByTitle(String categoryTitle) {
+        return categoryDao.findByTitle(categoryTitle);
+    }
+
+    @Transactional
     public void deleteCategory(int id) {
         categoryDao.delete(id);
     }

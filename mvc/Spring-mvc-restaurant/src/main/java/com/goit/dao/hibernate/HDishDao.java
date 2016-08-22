@@ -20,7 +20,7 @@ public class HDishDao implements DishDao{
 
     @Transactional
     public void createDish(Dish dish) {
-        sessionFactory.getCurrentSession().persist(dish);
+        sessionFactory.getCurrentSession().saveOrUpdate(dish);
     }
 
     @Transactional

@@ -20,37 +20,22 @@
         </div>
     </c:if>
 
-    <h1>Dish Detail</h1>
+    <h1>Desk Detail</h1>
     <br />
 
     <div class="row">
         <label class="col-sm-2">ID</label>
-        <div class="col-sm-10">${dish.id}</div>
+        <div class="col-sm-10">${desk.id}</div>
     </div>
 
     <div class="row">
         <label class="col-sm-2">TITLE</label>
-        <div class="col-sm-10">${dish.dishTitle}</div>
-    </div>
-
-    <%--<div class="row">
-        <label class="col-sm-2">INGREDIENTS</label>
-        <div class="col-sm-10">${dish.ingredients.size()}</div>
-    </div>--%>
-
-    <div class="row">
-        <label class="col-sm-2">CATEGORY</label>
-        <div class="col-sm-10">${dish.category.categoryTitle}</div>
+        <div class="col-sm-10">${desk.deskTitle}</div>
     </div>
 
     <div class="row">
-        <label class="col-sm-2">PRICE</label>
-        <div class="col-sm-10">${dish.price}</div>
-    </div>
-
-    <div class="row">
-        <label class="col-sm-2">WEIGHT</label>
-        <div class="col-sm-10">${dish.weight}</div>
+        <label class="col-sm-2">STATUS</label>
+        <div class="col-sm-10">${desk.deskStatus}</div>
     </div>
 
 </div>

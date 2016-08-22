@@ -16,6 +16,9 @@
 <spring:url value="/categories" var="urlCategory" />
 <spring:url value="/warehouses" var="urlWarehouse" />
 <spring:url value="/dishes" var="urlDish" />
+<spring:url value="/desks" var="urlDesk" />
+<spring:url value="/orders" var="urlOrder" />
+<spring:url value="/dishes_preparation" var="urlDishPreparation" />
 
 <nav class="navbar navbar-inverse ">
 	<div class="container">
@@ -39,6 +42,15 @@
 		</div>
 		<div class="navbar-header">
 			<a class="navbar-brand" href="${urlDish}">Dishes</a>
+		</div>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="${urlDesk}">Desks</a>
+		</div>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="${urlOrder}">Orders</a>
+		</div>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="${urlDishPreparation}">DishesPreparations</a>
 		</div>
 	</div>
 </nav>

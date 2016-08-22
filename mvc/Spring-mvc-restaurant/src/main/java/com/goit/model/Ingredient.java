@@ -17,6 +17,9 @@ public class Ingredient {
     @Column(name = "INGREDIENT_TITLE")
     private String ingredientTitle;
 
+    /*@ManyToMany(mappedBy="ingredients")
+    private List<Dish> dishes;*/
+
     public int getId() {
         return id;
     }
@@ -33,11 +36,24 @@ public class Ingredient {
         this.ingredientTitle = ingredientTitle;
     }
 
+   /* public List<Dish> getDishes() {
+        if (dishes == null) {
+            dishes = new ArrayList<Dish>();
+        }
+        return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
+    }*/
+
     @Override
     public String toString() {
         return "Ingredient{" +
                 "id=" + id +
                 ", ingredientTitle='" + ingredientTitle + '\'' +
+                //", dishes=" + dishes +
                 '}';
     }
+
 }

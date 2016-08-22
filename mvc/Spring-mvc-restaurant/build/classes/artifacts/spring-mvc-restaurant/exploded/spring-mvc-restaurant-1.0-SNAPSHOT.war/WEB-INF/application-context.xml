@@ -25,4 +25,7 @@
     <bean id="dishService" class="com.goit.service.DishService"/>
     <bean id="dishDao" class="com.goit.dao.hibernate.HDishDao"/>
 
+    <bean id="deskService" class="com.goit.service.DeskService"/>
+    <bean id="deskDao" class="com.goit.dao.hibernate.HDeskDao"/>
+
 </beans>
