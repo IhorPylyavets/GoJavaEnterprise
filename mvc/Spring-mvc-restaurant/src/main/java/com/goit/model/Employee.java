@@ -98,7 +98,7 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", phone='" + phone + '\'' +
-                ", positionId=" + position +
+                ", position=" + position +
                 ", salary=" + salary +
                 '}';
     }

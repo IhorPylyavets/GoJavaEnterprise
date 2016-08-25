@@ -28,6 +28,11 @@ public class EmployeeService{
     }
 
     @Transactional
+    public List<Employee> getAllEmployeesByPosition(Position position) {
+        return employeeDao.getAllEmployeesByPosition(position);
+    }
+
+    @Transactional
     public void deleteEmployee(int id) {
         employeeDao.deleteEmployee(id);
     }

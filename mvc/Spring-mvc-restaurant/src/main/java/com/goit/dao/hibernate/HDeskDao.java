@@ -3,6 +3,7 @@ package com.goit.dao.hibernate;
 import com.goit.dao.DeskDao;
 import com.goit.model.Desk;
 import com.goit.model.DeskStatus;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -59,6 +60,14 @@ public class HDeskDao implements DeskDao{
         query.setParameter("deskTitle", newTitle);
         query.setParameter("id", id);
         query.executeUpdate();
+    }
+
+    @Transactional
+    public List<Desk> getAllFreeDesk() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("select d from Desk d WHERE d.deskStatus = :deskStatus")
+                .setParameter("deskStatus", DeskStatus.FREE)
+                .list();
     }
 
     @Transactional

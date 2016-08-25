@@ -3,6 +3,7 @@ package com.goit.dao.hibernate;
 import com.goit.dao.EmployeeDao;
 import com.goit.model.Employee;
 import com.goit.model.Position;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -31,6 +32,14 @@ public class HEmployeeDao implements EmployeeDao {
     @Transactional
     public List<Employee> getAllEmployees() {
         return sessionFactory.getCurrentSession().createQuery("select e from Employee e").list();
+    }
+
+    @Transactional
+    public List<Employee> getAllEmployeesByPosition(Position position) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("select e from Employee e WHERE e.position.positionTitle = :positionTitle")
+                .setParameter("positionTitle", position.getPositionTitle())
+                .list();
     }
 
     @Transactional

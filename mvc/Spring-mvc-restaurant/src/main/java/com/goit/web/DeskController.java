@@ -87,8 +87,7 @@ public class DeskController {
                 System.out.println(desk.getDeskStatus().toString());
 
                 desk.setDeskStatus(DeskStatus.valueOf(desk.getDeskStatus().toString()));
-                //desk.setDeskStatus(Enum.valueOf(DeskStatus.class, desk.getDeskStatus().toString()));
-                //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
+
                 System.out.println(desk);
                 deskService.create(desk);
 
@@ -96,13 +95,6 @@ public class DeskController {
                 redirectAttributes.addFlashAttribute("msg", "Desk updated successfully!");
                 deskService.updateTitle(desk.getId(), desk.getDeskTitle());
                 deskService.updateStatus(desk.getId(), desk.getDeskStatus());
-                /*employeeService.updateEmployeeLastName(employee.getId(), employee.getLastName());
-                employeeService.updateEmployeeFirstName(employee.getId(), employee.getFirstName());
-                employeeService.updateEmployeeBirthday(employee.getId(), employee.getBirthday());
-                employeeService.updateEmployeePhone(employee.getId(), employee.getPhone());
-                employeeService.updateEmployeePositionId(employee.getId(),
-                        positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
-                employeeService.updateEmployeeSalary(employee.getId(), employee.getSalary());*/
             }
 
             return "redirect:/desks/" + desk.getId();

@@ -36,6 +36,11 @@ public class DeskService {
     }
 
     @Transactional
+    public List<Desk> getAllFreeDesk() {
+        return deskDao.getAllFreeDesk();
+    }
+
+    @Transactional
     public void delete(int id) {
         deskDao.delete(id);
     }

@@ -18,7 +18,7 @@
 <spring:url value="/dishes" var="urlDish" />
 <spring:url value="/desks" var="urlDesk" />
 <spring:url value="/orders" var="urlOrder" />
-<spring:url value="/dishes_preparation" var="urlDishPreparation" />
+<spring:url value="/dishes_preparations" var="urlDishPreparation" />
 
 <nav class="navbar navbar-inverse ">
 	<div class="container">
