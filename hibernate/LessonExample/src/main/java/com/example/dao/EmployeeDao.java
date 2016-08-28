@@ -5,9 +5,17 @@ import com.example.model.Employee;
 import java.util.List;
 
 public interface EmployeeDao {
+
     void save(Employee employee);
-    Employee getEmployeeById();
+
+    Employee getEmployeeById(Long id);
+
     List<Employee> findAllEmployee();
+
     Employee findByName(String name);
+
     void remove(Employee employee);
+
+    void removeAll();
+
 }

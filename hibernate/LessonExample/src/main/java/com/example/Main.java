@@ -6,14 +6,13 @@ import com.example.controllers.OrderController;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
 
     private EmployeeController employeeController;
     private DishController dishController;
     private OrderController orderController;
+
+    private boolean reInit;
 
     public static void main(String[] args) {
         ApplicationContext applicationContext =
@@ -21,21 +20,23 @@ public class Main {
         applicationContext.getBean(Main.class).start();
     }
 
+    public void init() {
+        if (reInit) {
+            orderController.removeAllOrders();
+            dishController.removeAllDishes();
+            employeeController.removeAllEmployee();
+
+            dishController.initDishes();
+            employeeController.initEmployee();
+            orderController.initOrders();
+
+
+        }
+    }
+
     private void start() {
-        employeeController.createEmployee();
-        dishController.createDish();
-
-        List<String> dishes1 = new ArrayList<>();
-        dishes1.add("Plov");
-        dishes1.add("Salad");
-        orderController.createOrder("Victor", dishes1, 1);
-
-        List<String> dishes2 = new ArrayList<>();
-        dishes2.add("Plov");
-        dishes2.add("Potato");
-        orderController.createOrder("Victor", dishes2, 2);
-
-        orderController.printAllOrders();
+        employeeController.printEmployeesToConsole(1L);
+        employeeController.printEmployeesToConsole(2L);
     }
 
     public void setEmployeeController(EmployeeController employeeController) {
@@ -46,5 +47,9 @@ public class Main {
     }
     public void setOrderController(OrderController orderController) {
         this.orderController = orderController;
+    }
+
+    public void setReInit(boolean reInit) {
+        this.reInit = reInit;
     }
 }

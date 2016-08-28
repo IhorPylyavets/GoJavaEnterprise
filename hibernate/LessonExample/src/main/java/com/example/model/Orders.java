@@ -20,7 +20,7 @@ public class Orders {
     @JoinColumn(name = "EMPLOYEE_ID")
     private Employee waiter;
 
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "DISH_TO_ORDER",
             joinColumns = @JoinColumn(name = "ORDER_ID"),
@@ -78,7 +78,6 @@ public class Orders {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", waiter=" + waiter +
                 ", dishes=" + dishes +
                 ", tableNumber=" + tableNumber +
                 ", orderDate=" + orderDate +

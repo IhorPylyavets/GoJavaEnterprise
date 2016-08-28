@@ -33,6 +33,11 @@ public class HDishDao implements DishDao {
         return (Dish) query.uniqueResult();
     }
 
+    @Override
+    public void removeAll() {
+        sessionFactory.getCurrentSession().createQuery("delete from Dish").executeUpdate();
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

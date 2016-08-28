@@ -20,8 +20,12 @@ public class HEmployeeDao implements EmployeeDao {
     }
 
     @Override
-    public Employee getEmployeeById() {
-        return null;
+    public Employee getEmployeeById(Long id) {
+        /*Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Employee  C WHERE C.id = :id");
+        query.setParameter("id", id);
+        return (Employee) query.uniqueResult();*/
+        return sessionFactory.getCurrentSession().load(Employee.class, id);
     }
 
     @Override
@@ -40,6 +44,11 @@ public class HEmployeeDao implements EmployeeDao {
     @Override
     public void remove(Employee employee) {
         sessionFactory.getCurrentSession().delete(employee );
+    }
+
+    @Override
+    public void removeAll() {
+        sessionFactory.getCurrentSession().createQuery("delete from Employee").executeUpdate();
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

@@ -14,7 +14,7 @@ public class DishController {
     private DishDao dishDao;
 
     @Transactional
-    public void createDish() {
+    public void initDishes() {
         Dish plov = new Dish();
         plov.setName("Plov");
         plov.setCategory(DishCategory.MAIN);
@@ -54,6 +54,11 @@ public class DishController {
     @Transactional
     public  Dish getDishByName(String name) {
         return dishDao.findByName(name);
+    }
+
+    @Transactional
+    public void removeAllDishes() {
+        dishDao.removeAll();
     }
 
     public void setDishDao(DishDao dishDao) {
