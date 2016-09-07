@@ -86,7 +86,7 @@ public class OrderController {
         Orders order = new Orders();
         model.addAttribute("order_form", order);
         model.addAttribute("waiterList", employeeService.getAllEmployeesByPosition(positionService.findPositionByTitle("waiter")));
-        model.addAttribute("deskList", deskService.getAll()); //getAllFreeDesk());
+        model.addAttribute("deskList", deskService./*getAll());*/ getAllFreeDesk());
 
         return "orders/order_form";
     }
@@ -95,6 +95,8 @@ public class OrderController {
     public String saveOrUpdateOrder(@ModelAttribute("order_form") @Validated Orders order,
                                        BindingResult result, final RedirectAttributes redirectAttributes) {
 
+        System.out.println(order);
+
         if (result.hasErrors()) {
             return "orders/order_form";
         } else {
@@ -102,6 +104,8 @@ public class OrderController {
             redirectAttributes.addFlashAttribute("css", "success");
             if(order.getId() == 0){
                 redirectAttributes.addFlashAttribute("msg", "Order added successfully!");
+
+
 
                 //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
                 //employeeService.createEmployee(employee);

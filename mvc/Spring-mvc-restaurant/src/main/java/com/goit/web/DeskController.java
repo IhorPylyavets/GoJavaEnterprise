@@ -56,7 +56,6 @@ public class DeskController {
     public String showUpdateDeskForm(@PathVariable("id") int id, Model model) {
         Desk desk = deskService.findById(id);
         model.addAttribute("desk_form", desk);
-        //model.addAttribute("positionList", positionService.getAllPosition());
         model.addAttribute("statusList", Arrays.asList(DeskStatus.values()));
 
         return "desks/desk_form";
@@ -66,7 +65,6 @@ public class DeskController {
     public String showCreateDeskForm(Model model) {
         Desk desk = new Desk();
         model.addAttribute("desk_form", desk);
-        //model.addAttribute("positionList", positionService.getAllPosition());
         model.addAttribute("statusList", Arrays.asList(DeskStatus.values()));
 
         return "desks/desk_form";
@@ -76,6 +74,8 @@ public class DeskController {
     public String saveOrUpdateDesk(@ModelAttribute("desk_form") @Validated Desk desk,
                                        BindingResult result, final RedirectAttributes redirectAttributes) {
 
+
+
         if (result.hasErrors()) {
             return "desks/desk_form";
         } else {
@@ -84,9 +84,8 @@ public class DeskController {
             if(desk.getId() == 0){
                 redirectAttributes.addFlashAttribute("msg", "Desk added successfully!");
                 System.out.println(desk);
-                System.out.println(desk.getDeskStatus().toString());
 
-                desk.setDeskStatus(DeskStatus.valueOf(desk.getDeskStatus().toString()));
+                desk.setDeskStatus(DeskStatus.FREE);
 
                 System.out.println(desk);
                 deskService.create(desk);

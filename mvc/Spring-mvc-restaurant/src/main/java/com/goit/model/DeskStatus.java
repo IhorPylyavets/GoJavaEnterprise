@@ -4,17 +4,17 @@ public enum DeskStatus {
     FREE("FREE"),
     ORDERED("ORDERED");
 
-    private final String name;
+    private String status;
 
-    private DeskStatus(String s) {
-        name = s;
+    DeskStatus(String status) {
+        this.status = status;
     }
 
-    public boolean equalsName(String otherName) {
-        return (otherName == null) ? false : name.equals(otherName);
+    public String getStatus() {
+        return status;
     }
 
-    public String toString() {
-        return this.name;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

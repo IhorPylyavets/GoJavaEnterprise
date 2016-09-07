@@ -46,7 +46,7 @@
                 <div class="col-sm-10">
                     <form:select path="deskStatus" class="form-control selcls">
                         <form:option value="NONE" label="--- Select Status ---" />
-                        <form:options path="${statusList}"/>
+                        <form:options path="${statusList}" itemValue="status" itemLabel="status"/>
                     </form:select>
                 </div>
             </div>

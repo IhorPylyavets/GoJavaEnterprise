@@ -38,7 +38,7 @@
         <c:forEach var="dishes_preparation" items="${dishes_preparations}">
             <tr>
                 <td><c:out value="${idCounter}"/></td>
-                <td>${dishes_preparation.dish.dishTitle}</td>
+                <%--<td>${dishes_preparation.dish.dishTitle}</td>
                 <td>${dishes_preparation.employee.firstName}</td>
                 <td>${dishes_preparation.datePreparation}</td>
                 <td>
@@ -48,7 +48,7 @@
 
                     <button class="btn btn-info" onclick="location.href='${dishes_preparationUrl}'">Select</button>
                     <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
-                    <button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
+                    <button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>--%>
             </tr>
             <c:set var="idCounter" value="${idCounter+1}"/>
         </c:forEach>

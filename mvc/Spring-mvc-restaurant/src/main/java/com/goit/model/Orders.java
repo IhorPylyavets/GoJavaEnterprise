@@ -17,7 +17,7 @@ public class Orders {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_ID")
-    private Employee employee;
+    private Waiter waiter;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "DESK_ID")
@@ -34,12 +34,12 @@ public class Orders {
         this.id = id;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Waiter getWaiter() {
+        return waiter;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setWaiter(Waiter waiter) {
+        this.waiter = waiter;
     }
 
     public Desk getDesk() {
@@ -62,7 +62,7 @@ public class Orders {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", employee=" + employee +
+                ", waiter=" + waiter +
                 ", desk=" + desk +
                 ", orderDate=" + orderDate +
                 '}';

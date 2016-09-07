@@ -38,7 +38,7 @@
             <tr>
                 <td><c:out value="${idCounter}"/></td>
                 <td>${desk.deskTitle}</td>
-                <td>${desk.deskStatus}</td>
+                <td>${desk.deskStatus.status}</td>
                 <td>
                     <spring:url value="/desks/${desk.id}" var="deskUrl" />
                     <spring:url value="/desks/${desk.id}/delete" var="deleteUrl" />

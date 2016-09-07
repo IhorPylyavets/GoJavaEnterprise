@@ -77,6 +77,8 @@ public class CategoryController {
             redirectAttributes.addFlashAttribute("css", "success");
             if(category.getId() == 0){
                 redirectAttributes.addFlashAttribute("msg", "Category added successfully!");
+
+                System.out.println(category);
                 categoryService.createCategory(category);
             }else{
                 redirectAttributes.addFlashAttribute("msg", "Category updated successfully!");
