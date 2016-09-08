@@ -4,6 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-autowire="byName">
 
+    <bean id="initService" class="com.goit.InitDB" init-method="init"/>
+
     <bean id="positionService" class="com.goit.service.PositionService"/>
     <bean id="positionDao" class="com.goit.dao.hibernate.HPositionDao"/>
 
@@ -31,7 +33,7 @@
     <bean id="orderService" class="com.goit.service.OrderService"/>
     <bean id="orderDao" class="com.goit.dao.hibernate.HOrderDao"/>
 
-    <bean id="dishesPreparationService" class="com.goit.service.DishesPreparationService"/>
-    <bean id="dishesPreparationDao" class="com.goit.dao.hibernate.HDishesPreparationDao"/>
+    <!--<bean id="dishesPreparationService" class="com.goit.service.DishesPreparationService"/>
+    <bean id="dishesPreparationDao" class="com.goit.dao.hibernate.HDishesPreparationDao"/>-->
 
 </beans>

@@ -2,6 +2,7 @@ package com.goit.dao;
 
 import com.goit.model.Category;
 import com.goit.model.Dish;
+import com.goit.model.Ingredient;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public interface DishDao {
     Dish findDishById(int id);
     Dish findDishByTitle(String dishTitle);
     List<Dish> getAllDish();
+    List<Ingredient> getAllIngredientByDishId(int id);
     void deleteDish(int id);
     void updateDishTitle(int id, String newDishTitle);
     void updateDishCategoryId(int id, Category newCategory);

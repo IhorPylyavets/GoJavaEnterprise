@@ -3,6 +3,8 @@ package com.goit.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "DISHES")
@@ -17,13 +19,13 @@ public class Dish {
     @Column(name = "DISH_TITLE")
     private String dishTitle;
 
-    /*@ManyToMany()
+    @ManyToMany()
     @JoinTable(
             name = "DISHES_TO_INGREDIENTS",
             joinColumns = @JoinColumn(name = "DISHES_ID"),
             inverseJoinColumns = @JoinColumn(name = "INGREDIENTS_ID")
     )
-    private List<Ingredient> ingredients;*/
+    private List<Ingredient> ingredients;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CATEGORY_ID")
@@ -51,7 +53,7 @@ public class Dish {
         this.dishTitle = dishTitle;
     }
 
-    /*public List<Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
         if (ingredients == null) {
             ingredients = new ArrayList<Ingredient>();
         }
@@ -60,7 +62,7 @@ public class Dish {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
-    }*/
+    }
 
     public Category getCategory() {
         return category;

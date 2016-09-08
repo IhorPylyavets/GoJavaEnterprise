@@ -1,3 +1,4 @@
+/*
 package com.goit.dao.hibernate;
 
 import com.goit.dao.DishesPreparationDao;
@@ -60,3 +61,4 @@ public class HDishesPreparationDao implements DishesPreparationDao{
     }
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.goit.model;
 
 import org.hibernate.annotations.Fetch;
@@ -44,3 +45,4 @@ public class Waiter extends Employee {
         return sb.toString();
     }
 }
+*/

@@ -23,6 +23,17 @@
 
     <h1>All Employees</h1>
 
+
+    <%--<div class="form-group ${status.error ? 'has-error' : ''}">
+        <label class="col-sm-2 control-label">Search by Position</label>
+        <div class="col-sm-10">
+            <form:select path="position.positionTitle" class="form-control selcls">
+                <form:option value="NONE" label="--- All ---" />
+                <form:options items="${positionList}" itemValue="positionTitle" itemLabel="positionTitle"/>
+            </form:select>
+        </div>
+    </div>--%>
+
     <table class="table table-striped">
         <thead>
         <tr>

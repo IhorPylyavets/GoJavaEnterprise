@@ -1,3 +1,4 @@
+/*
 package com.goit.model;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -82,3 +83,4 @@ public class DishesPreparation {
     }
 
 }
+*/

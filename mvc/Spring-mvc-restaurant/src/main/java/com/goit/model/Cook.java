@@ -1,3 +1,4 @@
+/*
 package com.goit.model;
 
 import org.hibernate.annotations.Fetch;
@@ -10,7 +11,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Cook extends Employee{
+public class Cook extends Employee {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMPLOYEE_ID")
@@ -46,3 +47,4 @@ public class Cook extends Employee{
     }
 
 }
+*/

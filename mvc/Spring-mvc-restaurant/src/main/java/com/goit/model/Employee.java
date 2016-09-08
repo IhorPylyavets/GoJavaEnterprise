@@ -3,12 +3,13 @@ package com.goit.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name = "EMPLOYEES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Employee {
+public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(generator = "increment")

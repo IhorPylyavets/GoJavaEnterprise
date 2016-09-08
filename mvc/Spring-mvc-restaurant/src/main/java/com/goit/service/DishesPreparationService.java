@@ -1,3 +1,4 @@
+/*
 package com.goit.service;
 
 import com.goit.dao.DishesPreparationDao;
@@ -58,3 +59,4 @@ public class DishesPreparationService {
         dishesPreparationDao.updateDishesPreparationDate(id, newDate);
     }
 }
+*/

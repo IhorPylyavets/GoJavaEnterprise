@@ -1,3 +1,4 @@
+/*
 package com.goit.web;
 
 import com.goit.service.DishesPreparationService;
@@ -23,3 +24,4 @@ public class DishesPreparationController {
         return "dishes_preparations/list_dishes_preparations";
     }
 }
+*/

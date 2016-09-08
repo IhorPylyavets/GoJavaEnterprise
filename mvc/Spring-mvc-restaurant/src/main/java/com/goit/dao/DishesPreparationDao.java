@@ -1,3 +1,4 @@
+/*
 package com.goit.dao;
 
 import com.goit.model.Dish;
@@ -18,3 +19,4 @@ public interface DishesPreparationDao {
     void updateDishesPreparationOrder(int id, Orders newOrder);
     void updateDishesPreparationDate(int id, Timestamp newDate);
 }
+*/

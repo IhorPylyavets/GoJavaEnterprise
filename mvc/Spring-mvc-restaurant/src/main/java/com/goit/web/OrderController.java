@@ -105,17 +105,17 @@ public class OrderController {
             if(order.getId() == 0){
                 redirectAttributes.addFlashAttribute("msg", "Order added successfully!");
 
-
-
                 //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
                 //employeeService.createEmployee(employee);
                 orderService.createOrder(order);
 
             }else{
                 redirectAttributes.addFlashAttribute("msg", "Order updated successfully!");
-                orderService.updateOrderWaiterId(order.getId(), order.getEmployee());
+                /*orderService.updateOrderWaiterId(order.getId(), order.getWaiter());
                 orderService.updateOrderDeskId(order.getId(), order.getDesk());
-                orderService.updateOrderDate(order.getId(), order.getOrderDate());
+                orderService.updateOrderDate(order.getId(), order.getOrderDate());*/
+
+
                 /*employeeService.updateEmployeeLastName(employee.getId(), employee.getLastName());
                 employeeService.updateEmployeeFirstName(employee.getId(), employee.getFirstName());
                 employeeService.updateEmployeeBirthday(employee.getId(), employee.getBirthday());

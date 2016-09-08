@@ -3,6 +3,7 @@ package com.goit.service;
 import com.goit.dao.DishDao;
 import com.goit.model.Category;
 import com.goit.model.Dish;
+import com.goit.model.Ingredient;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -33,6 +34,11 @@ public class DishService {
     @Transactional
     public List<Dish> getAllDish() {
         return dishDao.getAllDish();
+    }
+
+    @Transactional
+    public List<Ingredient> getAllIngredientsByDishId(int id) {
+        return dishDao.getAllIngredientByDishId(id);
     }
 
     @Transactional

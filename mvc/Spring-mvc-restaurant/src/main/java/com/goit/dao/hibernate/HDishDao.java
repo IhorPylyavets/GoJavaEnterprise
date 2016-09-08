@@ -3,11 +3,13 @@ package com.goit.dao.hibernate;
 import com.goit.dao.DishDao;
 import com.goit.model.Category;
 import com.goit.model.Dish;
+import com.goit.model.Ingredient;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class HDishDao implements DishDao{
@@ -42,6 +44,19 @@ public class HDishDao implements DishDao{
     @Transactional
     public List<Dish> getAllDish() {
         return sessionFactory.getCurrentSession().createQuery("select d from Dish d").list();
+    }
+
+    @Transactional
+    public List<Ingredient> getAllIngredientByDishId(int id) {
+        TypedQuery query = sessionFactory.getCurrentSession().createQuery(
+                "from Dish d JOIN d.ingredients i WHERE i.id=:DISHES_ID", Ingredient.class);
+                /* "from Menu m JOIN m.dishes d WHERE m.id=:idMenu", Dish.class);*/
+        /*joinColumns = @JoinColumn(name = "DISHES_ID"),
+        inverseJoinColumns = @JoinColumn(name = "INGREDIENTS_ID")*/
+        query.setParameter("DISHES_ID", id);
+        List<Ingredient> result = query.getResultList();
+
+        return result;
     }
 
     @Transactional

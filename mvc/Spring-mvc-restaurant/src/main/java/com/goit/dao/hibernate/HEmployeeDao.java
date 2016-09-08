@@ -23,10 +23,14 @@ public class HEmployeeDao implements EmployeeDao {
 
     @Transactional
     public Employee findEmployeeById(int id) {
-        Session session = sessionFactory.getCurrentSession();
+        /*Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Employee E WHERE E.id = :id");
         query.setParameter("id", id);
-        return (Employee) query.uniqueResult();
+        return (Employee) query.uniqueResult();*/
+        Employee employee = sessionFactory.getCurrentSession().get(Employee.class, id);
+        if (employee == null)
+            throw new RuntimeException("Can't find Employee by id = " + id);
+        return employee;
     }
 
     @Transactional

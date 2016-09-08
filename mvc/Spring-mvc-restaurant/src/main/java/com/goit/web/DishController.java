@@ -1,6 +1,7 @@
 package com.goit.web;
 
 import com.goit.model.Dish;
+import com.goit.model.Ingredient;
 import com.goit.service.CategoryService;
 import com.goit.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class DishController {
@@ -39,6 +43,9 @@ public class DishController {
     @RequestMapping(value = "/dishes/{id}", method = RequestMethod.GET)
     public String showDishes(@PathVariable("id") int id, Model model) {
         Dish dish = dishService.findDishById(id);
+
+        List<Ingredient> ingredients = dishService.getAllIngredientsByDishId(id);
+        System.out.println(Arrays.asList(ingredients));
 
         if (dish == null) {
             model.addAttribute("css", "danger");

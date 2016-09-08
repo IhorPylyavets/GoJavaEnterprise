@@ -3,6 +3,7 @@ package com.goit.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "INGREDIENTS")
@@ -19,6 +20,8 @@ public class Ingredient {
 
     /*@ManyToMany(mappedBy="ingredients")
     private List<Dish> dishes;*/
+    @ManyToMany(mappedBy = "ingredients", cascade = CascadeType.ALL)
+    private List<Dish> ingredients;
 
     public int getId() {
         return id;
