@@ -30,6 +30,7 @@ public class HIngredientDao implements IngredientDao{
         return (Ingredient) query.uniqueResult();
     }
 
+    @Transactional
     public Ingredient findByTitle(String ingredientTitle) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Ingredient I WHERE I.ingredientTitle = :ingredientTitle");

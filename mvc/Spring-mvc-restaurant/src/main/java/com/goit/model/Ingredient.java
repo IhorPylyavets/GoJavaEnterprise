@@ -1,17 +1,16 @@
 package com.goit.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "INGREDIENTS")
-public class Ingredient {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Ingredient implements Serializable{
 
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
@@ -22,6 +21,13 @@ public class Ingredient {
     private List<Dish> dishes;*/
     @ManyToMany(mappedBy = "ingredients", cascade = CascadeType.ALL)
     private List<Dish> ingredients;
+
+    public Ingredient() {
+    }
+
+    public Ingredient(String ingredientTitle) {
+        this.ingredientTitle = ingredientTitle;
+    }
 
     public int getId() {
         return id;

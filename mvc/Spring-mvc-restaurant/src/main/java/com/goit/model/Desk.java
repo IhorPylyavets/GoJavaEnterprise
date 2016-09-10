@@ -1,16 +1,15 @@
 package com.goit.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "DESKS")
-public class Desk {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Desk implements Serializable {
 
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
@@ -20,6 +19,14 @@ public class Desk {
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS_OF_DESK")
     private DeskStatus deskStatus;
+
+    public Desk() {
+    }
+
+    public Desk(String deskTitle) {
+        this.deskTitle = deskTitle;
+        this.deskStatus = DeskStatus.FREE;
+    }
 
     public int getId() {
         return id;

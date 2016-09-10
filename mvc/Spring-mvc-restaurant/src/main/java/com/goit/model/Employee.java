@@ -1,7 +1,5 @@
 package com.goit.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -11,9 +9,8 @@ import java.sql.Date;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Employee implements Serializable {
 
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
@@ -35,6 +32,18 @@ public class Employee implements Serializable {
 
     @Column(name = "SALARY")
     private float salary;
+
+    public Employee() {
+    }
+
+    public Employee(String lastName, String firstName, Date birthday, String phone, Position position, float salary) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.birthday = birthday;
+        this.phone = phone;
+        this.position = position;
+        this.salary = salary;
+    }
 
     public int getId() {
         return id;

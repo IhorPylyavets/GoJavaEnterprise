@@ -1,21 +1,27 @@
 package com.goit.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "MENUS")
-public class Menu {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Menu implements Serializable{
 
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
     @Column(name = "MENU_TITLE")
     private String menuTitle;
+
+    public Menu() {
+    }
+
+    public Menu(String menuTitle) {
+        this.menuTitle = menuTitle;
+    }
 
     public int getId() {
         return id;

@@ -1,16 +1,15 @@
 package com.goit.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "WAREHOUSE")
-public class Warehouse {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Warehouse implements Serializable{
 
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
@@ -20,6 +19,14 @@ public class Warehouse {
 
     @Column(name = "AMOUNT")
     private float amount;
+
+    public Warehouse() {
+    }
+
+    public Warehouse(Ingredient ingredient, float amount) {
+        this.ingredient = ingredient;
+        this.amount = amount;
+    }
 
     public int getId() {
         return id;

@@ -1,18 +1,17 @@
 package com.goit.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "DISHES")
-public class Dish {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Dish implements Serializable {
 
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
@@ -36,6 +35,16 @@ public class Dish {
 
     @Column(name = "WEIGHT")
     private float weight;
+
+    public Dish() {
+    }
+
+    public Dish(String dishTitle, Category category, float price, float weight) {
+        this.dishTitle = dishTitle;
+        this.category = category;
+        this.price = price;
+        this.weight = weight;
+    }
 
     public int getId() {
         return id;

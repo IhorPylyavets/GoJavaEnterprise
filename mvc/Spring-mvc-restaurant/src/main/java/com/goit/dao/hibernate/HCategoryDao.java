@@ -30,6 +30,7 @@ public class HCategoryDao implements CategoryDao{
         return (Category) query.uniqueResult();
     }
 
+    @Transactional
     public Category findByTitle(String title) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Category C WHERE C.categoryTitle = :categoryTitle");
