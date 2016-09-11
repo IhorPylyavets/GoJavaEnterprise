@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -45,7 +44,7 @@ public class DishController {
         Dish dish = dishService.findDishById(id);
 
         List<Ingredient> ingredients = dishService.getAllIngredientsByDishId(id);
-        System.out.println(Arrays.asList(ingredients));
+        //System.out.println(Arrays.asList(ingredients));
 
         if (dish == null) {
             model.addAttribute("css", "danger");

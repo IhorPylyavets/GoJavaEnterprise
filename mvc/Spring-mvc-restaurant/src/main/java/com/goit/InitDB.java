@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 @Service
 public class InitDB {
@@ -89,12 +90,25 @@ public class InitDB {
         warehouseDao.createWarehouse(new Warehouse(ingredientDao.findByTitle("duck"), 42.0F));
         warehouseDao.createWarehouse(new Warehouse(ingredientDao.findByTitle("apple"), 190.0F));
 
-        dishDao.createDish(new Dish("Chop", categoryDao.findByTitle("meat"), 54.0F, 220.0F));
-        dishDao.createDish(new Dish("Grapes", categoryDao.findByTitle("fruit"), 31.0F, 300.0F));
-        dishDao.createDish(new Dish("Olivie", categoryDao.findByTitle("salads"), 35.0F, 200.0F));
-        dishDao.createDish(new Dish("Apple juice", categoryDao.findByTitle("juices"), 20.0F, 250.0F));
-        dishDao.createDish(new Dish("Vodka", categoryDao.findByTitle("alcohol"), 50.0F, 500.0F));
-        dishDao.createDish(new Dish("Duck with apples", categoryDao.findByTitle("meat"), 70.0F, 430.0F));
+        //dishDao.createDish(new Dish("Chop", categoryDao.findByTitle("meat"), 54.0F, 220.0F));
+        //dishDao.createDish(new Dish("Grapes", categoryDao.findByTitle("fruit"), 31.0F, 300.0F));
+        ArrayList<Ingredient> olivieIngredient = new ArrayList<>();
+        olivieIngredient.add(ingredientDao.findByTitle("potato"));
+        olivieIngredient.add(ingredientDao.findByTitle("eggs"));
+        olivieIngredient.add(ingredientDao.findByTitle("union"));
+        dishDao.createDish(new Dish("Olivie", olivieIngredient, categoryDao.findByTitle("salads"), 35.0F, 200.0F));
+        //dishDao.createDish(new Dish("Apple juice", categoryDao.findByTitle("juices"), 20.0F, 250.0F));
+        //dishDao.createDish(new Dish("Vodka", categoryDao.findByTitle("alcohol"), 50.0F, 500.0F));
+
+        ArrayList<Ingredient> duckWithApplesIngredients = new ArrayList<>();
+        duckWithApplesIngredients.add(ingredientDao.findByTitle("duck"));
+        duckWithApplesIngredients.add(ingredientDao.findByTitle("apple"));
+        dishDao.createDish(new Dish("Duck with apples", duckWithApplesIngredients, categoryDao.findByTitle("meat"), 70.0F, 430.0F));
+
+        System.out.println(dishDao.findDishByTitle("Olivie").toString());
+        System.out.println(dishDao.findDishByTitle("Duck with apples").toString());
+
+
 
         deskDao.create(new Desk("First"));
         deskDao.create(new Desk("Second"));
