@@ -2,12 +2,21 @@ package com.example.servlets;
 
 public class Task {
 
+    private int id;
     private String name;
     private String category;
     private boolean complete;
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -33,10 +42,10 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
                 ", complete=" + complete +
                 '}';
     }
-
 }

@@ -25,35 +25,44 @@
 
     <!-- The ToDo List -->
     <div class = "todoList">
-        <table class="table table-bordered table-striped" id="list">
-            <%--<thead>--%>
-            <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Complete</th>
-            </tr>
-            <c:forEach items="${taskList}" var="task">
+        <form class="form-horizontal" role="form" method="POST" name="taskTable">
+            <table class="table table-bordered table-striped" id="list">
+                <%--<thead>--%>
                 <tr>
-                    <td><c:out value="${task.name}"/></td>
-                    <td><c:out value="${task.category}"/></td>
-                    <td><input type="checkbox" name="complete"
-                               <c:if test="${task.complete == true}">checked="checked"</c:if>
-                    /></td>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Complete</th>
                 </tr>
-            </c:forEach>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+                <c:forEach items="${taskList}" var="task">
+                    <tr>
+                        <td><c:out value="${task.name}"/></td>
+                        <td><c:out value="${task.category}"/></td>
+                        <td><input type="checkbox" name="complete" value="${task.id}"
+                                   <c:if test="${task.complete == true}">checked="checked"</c:if>
+                        /></td>
 
-        <!-- Update Button -->
-        <div class="todoUpdatePanel">
-            <form class="form-horizontal" role="form" method="POST" action="list">
-                <button href="list.jsp" role="button" class="btn btn-primary" name="updateTasks">Update Tasks</button>
-            </form>
-        </div>
+                    </tr>
+                </c:forEach>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="todoForm">
+                <form class="form-horizontal" role="form" method="POST" action="list">
+                    <button href="list.jsp" role="button" class="btn btn-primary" name="updateTasks">Update Tasks</button>
+                </form>
 
+            </div>
+        </form>
     </div>
+
+    <!-- Update Button -->
+    <%--<div class="todoForm">
+        <form class="form-horizontal" role="form" method="POST" action="list">
+            <button href="list.jsp" role="button" class="btn btn-primary" name="updateTasks">Update Tasks</button>
+        </form>
+
+    </div>--%>
 
     <hr/>
 

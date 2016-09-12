@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ToDoListServlet extends HttpServlet {
@@ -26,45 +27,52 @@ public class ToDoListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session =request.getSession();
+        HttpSession session = request.getSession();
 
         if (request.getParameter("addTask") != null) {
             Task task = new Task();
             task.setName(request.getParameter(TASK_NAME));
             task.setCategory(request.getParameter(TASK_CATEGORY));
-
+            task.setId(getCurrentTaskId());
             taskList.add(task);
-
+        }
+        else if (request.getParameter("updateTasks") != null) {
             session.setAttribute("taskList", taskList);
 
-            try {
-                getServletContext().getRequestDispatcher("/list.jsp").forward(request, response);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (request.getParameter("updateTasks") != null) {
-            session.setAttribute("taskList", taskList);
+            if (request.getParameterValues("complete").length != 0) {
+                String[] completed = request.getParameterValues("complete");
 
-            /*for (Task task : taskList) {
-                System.out.println(task);
-            }*/
-
-            String[] tasks = request.getParameterValues("complete");
-            for (String task : tasks) {
-                System.out.println(task);
+                for (Task task : taskList) {
+                    if (Arrays.asList(completed).contains(String.valueOf(task.getId()))) {
+                        task.setComplete(true);
+                    } else if (task.isComplete()&& !Arrays.asList(completed).contains(task.getId())) {
+                        task.setComplete(false);
+                    }
+                }
             }
+        }
 
-            try {
-                getServletContext().getRequestDispatcher("/list.jsp").forward(request, response);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        session.setAttribute("taskList", taskList);
+
+        try {
+            getServletContext().getRequestDispatcher("/list.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void init() throws ServletException {
         taskList = new ArrayList<>();
+    }
+
+    private int getCurrentTaskId() {
+        if (taskList.size() == 0) {
+            return 1;
+        } else {
+            int currentId = taskList.get(taskList.size()-1).getId();
+            return currentId+1;
+        }
     }
 
 }
