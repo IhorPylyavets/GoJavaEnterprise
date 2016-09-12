@@ -51,6 +51,11 @@ public class ToDoListServlet extends HttpServlet {
                 }
             }
         }
+        else if (request.getParameter("deleteTask") != null) {
+            session.setAttribute("taskList", taskList);
+
+            taskList.remove(getTaskById(taskList, Integer.parseInt(request.getParameter("deleteTask"))));
+        }
 
         session.setAttribute("taskList", taskList);
 
@@ -73,6 +78,15 @@ public class ToDoListServlet extends HttpServlet {
             int currentId = taskList.get(taskList.size()-1).getId();
             return currentId+1;
         }
+    }
+
+    private Task getTaskById(List<Task> list, int id) {
+        for (Task task : list) {
+            if (task.getId() == id) {
+                return task;
+            }
+        }
+        return null;
     }
 
 }

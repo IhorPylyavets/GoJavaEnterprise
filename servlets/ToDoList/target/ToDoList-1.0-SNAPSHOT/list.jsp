@@ -29,19 +29,25 @@
             <table class="table table-bordered table-striped" id="list">
                 <%--<thead>--%>
                 <tr>
+                    <th>#ID</th>
                     <th>Name</th>
                     <th>Category</th>
                     <th>Complete</th>
+                    <th>Action</th>
                 </tr>
+                <c:set var="idCounter" value="1"/>
                 <c:forEach items="${taskList}" var="task">
                     <tr>
+                        <td><c:out value="${idCounter}"/></td>
                         <td><c:out value="${task.name}"/></td>
                         <td><c:out value="${task.category}"/></td>
                         <td><input type="checkbox" name="complete" value="${task.id}"
-                                   <c:if test="${task.complete == true}">checked="checked"</c:if>
-                        /></td>
+                                   <c:if test="${task.complete == true}">checked="checked"</c:if>/></td>
+                        <td><button href="list.jsp" role="button" class="btn btn-danger" name="deleteTask"
+                                    value="${task.id}">Delete task</button></td>
 
                     </tr>
+                    <c:set var="idCounter" value="${idCounter+1}"/>
                 </c:forEach>
                 </thead>
                 <tbody>
@@ -55,14 +61,6 @@
             </div>
         </form>
     </div>
-
-    <!-- Update Button -->
-    <%--<div class="todoForm">
-        <form class="form-horizontal" role="form" method="POST" action="list">
-            <button href="list.jsp" role="button" class="btn btn-primary" name="updateTasks">Update Tasks</button>
-        </form>
-
-    </div>--%>
 
     <hr/>
 
