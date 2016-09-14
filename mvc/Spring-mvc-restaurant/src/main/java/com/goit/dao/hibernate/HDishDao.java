@@ -10,6 +10,7 @@ import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HDishDao implements DishDao{
@@ -48,14 +49,11 @@ public class HDishDao implements DishDao{
 
     @Transactional
     public List<Ingredient> getAllIngredientByDishId(int id) {
-        TypedQuery query = sessionFactory.getCurrentSession().createQuery(
-                "from Dish d JOIN d.ingredients i WHERE d.id=:DISHES_ID", Ingredient.class);
-             /* "from Menu m JOIN m.dishes d WHERE m.id=:idMenu", Dish.class);*/
-        /*joinColumns = @JoinColumn(name = "DISHES_ID"),
-        inverseJoinColumns = @JoinColumn(name = "INGREDIENTS_ID")*/
-        query.setParameter("DISHES_ID", id);
-        //List<Ingredient> result = query.getResultList();
-        return query.getResultList();
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "FROM Dish as d LEFT JOIN FETCH  d.ingredients WHERE d.id =" + id);
+        Dish dish = (Dish) query.uniqueResult();
+
+        return new ArrayList<Ingredient>(dish.getIngredients());
     }
 
     @Transactional

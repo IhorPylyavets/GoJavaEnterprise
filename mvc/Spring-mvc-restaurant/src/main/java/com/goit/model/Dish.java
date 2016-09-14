@@ -20,9 +20,9 @@ public class Dish implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "DISHES_TO_INGREDIENTS",
-            joinColumns = @JoinColumn(name = "DISHES_ID"),
-            inverseJoinColumns = @JoinColumn(name = "INGREDIENTS_ID")
+            name = "dishes_to_ingredients",
+            joinColumns = @JoinColumn(name = "dishId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredientId", referencedColumnName = "id")
     )
     private List<Ingredient> ingredients;
 

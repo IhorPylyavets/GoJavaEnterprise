@@ -2,6 +2,7 @@ package com.goit.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Ingredient implements Serializable{
     /*@ManyToMany(mappedBy="ingredients")
     private List<Dish> dishes;*/
     @ManyToMany(mappedBy = "ingredients", cascade = CascadeType.ALL)
-    private List<Dish> dishes;
+    private List<Dish> dishes = new ArrayList<>();
 
     public Ingredient() {
     }

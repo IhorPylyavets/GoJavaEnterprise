@@ -33,10 +33,17 @@
         <div class="col-sm-10">${dish.dishTitle}</div>
     </div>
 
-    <%--<div class="row">
+    <div class="row">
         <label class="col-sm-2">INGREDIENTS</label>
-        <div class="col-sm-10">${dish.ingredients.size()}</div>
-    </div>--%>
+        <div class="col-sm-10">
+            [
+            <c:forEach items="${dish.ingredients}" var="ingredient" varStatus="stat">
+                ${ingredient.ingredientTitle}
+                <c:if test="${!stat.last}">|</c:if>
+            </c:forEach>
+             ]
+        </div>
+    </div>
 
     <div class="row">
         <label class="col-sm-2">CATEGORY</label>

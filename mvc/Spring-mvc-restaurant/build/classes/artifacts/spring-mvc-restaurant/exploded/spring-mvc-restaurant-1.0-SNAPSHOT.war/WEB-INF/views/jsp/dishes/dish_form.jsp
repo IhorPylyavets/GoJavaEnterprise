@@ -40,6 +40,17 @@
             </div>
         </spring:bind>
 
+        <spring:bind path="ingredients">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <label class="col-sm-2 control-label">Ingredients</label>
+                <div class="col-sm-10">
+                    <form:select path="ingredients" items="${ingredientList}"
+                                 multiple="true" size="10" class="form-control" itemLabel="ingredientTitle"/>
+                    <form:errors path="ingredients" class="control-label" />
+                </div>
+            </div>
+        </spring:bind>
+
         <spring:bind path="category">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <label class="col-sm-2 control-label">Category</label>

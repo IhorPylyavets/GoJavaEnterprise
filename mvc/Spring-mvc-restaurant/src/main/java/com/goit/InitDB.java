@@ -105,11 +105,6 @@ public class InitDB {
         duckWithApplesIngredients.add(ingredientDao.findByTitle("apple"));
         dishDao.createDish(new Dish("Duck with apples", duckWithApplesIngredients, categoryDao.findByTitle("meat"), 70.0F, 430.0F));
 
-        System.out.println(dishDao.findDishByTitle("Olivie").toString());
-        System.out.println(dishDao.findDishByTitle("Duck with apples").toString());
-
-
-
         deskDao.create(new Desk("First"));
         deskDao.create(new Desk("Second"));
         deskDao.create(new Desk("Third"));
@@ -159,4 +154,5 @@ public class InitDB {
         }
 
     }
+
 }

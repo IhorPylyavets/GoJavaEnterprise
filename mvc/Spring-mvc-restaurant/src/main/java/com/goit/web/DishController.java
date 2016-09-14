@@ -1,5 +1,6 @@
 package com.goit.web;
 
+import com.goit.dao.IngredientDao;
 import com.goit.model.Dish;
 import com.goit.model.Ingredient;
 import com.goit.service.CategoryService;
@@ -21,11 +22,17 @@ import java.util.List;
 public class DishController {
 
     private DishService dishService;
+    private IngredientDao ingredientDao;
     private CategoryService categoryService;
 
     @Autowired
     public void setDishService(DishService dishService) {
         this.dishService = dishService;
+    }
+
+    @Autowired
+    public void setIngredientDao(IngredientDao ingredientDao) {
+        this.ingredientDao = ingredientDao;
     }
 
     @Autowired
@@ -42,9 +49,6 @@ public class DishController {
     @RequestMapping(value = "/dishes/{id}", method = RequestMethod.GET)
     public String showDishes(@PathVariable("id") int id, Model model) {
         Dish dish = dishService.findDishById(id);
-
-        List<Ingredient> ingredients = dishService.getAllIngredientsByDishId(id);
-        //System.out.println(Arrays.asList(ingredients));
 
         if (dish == null) {
             model.addAttribute("css", "danger");
@@ -69,6 +73,7 @@ public class DishController {
     public String showUpdateEmployeeForm(@PathVariable("id") int id, Model model) {
         Dish dish = dishService.findDishById(id);
         model.addAttribute("dish_form", dish);
+        model.addAttribute("ingredientList", ingredientDao.getAll());
         model.addAttribute("categoryList", categoryService.getAllCategories());
 
         return "dishes/dish_form";
@@ -78,6 +83,7 @@ public class DishController {
     public String showCreateEmployeeForm(Model model) {
         Dish dish = new Dish();
         model.addAttribute("dish_form", dish);
+        model.addAttribute("ingredients", ingredientDao.getAll());
         model.addAttribute("categoryList", categoryService.getAllCategories());
 
         return "dishes/dish_form";
