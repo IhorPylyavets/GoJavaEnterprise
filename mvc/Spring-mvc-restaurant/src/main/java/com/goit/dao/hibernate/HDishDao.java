@@ -13,7 +13,7 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HDishDao implements DishDao{
+public class HDishDao implements DishDao {
 
     private SessionFactory sessionFactory;
 
@@ -96,6 +96,15 @@ public class HDishDao implements DishDao{
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("update Dish set weight = :weight where id = :id");
         query.setParameter("weight", newDishWeight);
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
+
+    @Transactional
+    public void updateDistIngredients(int id, List<Ingredient> newIngredients) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("update Dish set ingredients = :ingredients where id = :id");
+        query.setParameter("ingredients", newIngredients);
         query.setParameter("id", id);
         query.executeUpdate();
     }

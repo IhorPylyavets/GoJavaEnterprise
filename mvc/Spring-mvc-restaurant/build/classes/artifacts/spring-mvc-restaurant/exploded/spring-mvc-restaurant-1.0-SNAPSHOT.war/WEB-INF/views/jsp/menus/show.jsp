@@ -33,6 +33,18 @@
         <div class="col-sm-10">${menu.menuTitle}</div>
     </div>
 
+    <%--<div class="row">
+        <label class="col-sm-2">DISHES</label>
+        <div class="col-sm-10">
+            [
+            <c:forEach items="${menu.dishes}" var="dish" varStatus="stat">
+                ${dish.dishTitle}
+                <c:if test="${!stat.last}">|</c:if>
+            </c:forEach>
+            ]
+        </div>
+    </div>--%>
+
 </div>
 
 <jsp:include page="../fragments/footer.jsp" />

@@ -7,10 +7,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "INGREDIENTS")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Ingredient implements Serializable{
 
-    //@javax.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -19,8 +17,6 @@ public class Ingredient implements Serializable{
     @Column(name = "INGREDIENT_TITLE")
     private String ingredientTitle;
 
-    /*@ManyToMany(mappedBy="ingredients")
-    private List<Dish> dishes;*/
     @ManyToMany(mappedBy = "ingredients", cascade = CascadeType.ALL)
     private List<Dish> dishes = new ArrayList<>();
 
@@ -80,7 +76,6 @@ public class Ingredient implements Serializable{
         return "Ingredient{" +
                 "id=" + id +
                 ", ingredientTitle='" + ingredientTitle + '\'' +
-                //", dishes=" + dishes +
                 '}';
     }
 }

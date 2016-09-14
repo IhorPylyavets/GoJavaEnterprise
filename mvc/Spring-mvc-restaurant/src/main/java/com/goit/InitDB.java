@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class InitDB {
@@ -67,6 +68,10 @@ public class InitDB {
         ingredientDao.create(new Ingredient("union"));
         ingredientDao.create(new Ingredient("duck"));
         ingredientDao.create(new Ingredient("apple"));
+        ingredientDao.create(new Ingredient("carrot"));
+        ingredientDao.create(new Ingredient("sausage"));
+        ingredientDao.create(new Ingredient("cucumbers"));
+        ingredientDao.create(new Ingredient("olive"));
 
         menuDao.create(new Menu("Menu Business Lunch"));
         menuDao.create(new Menu("Buffet"));
@@ -89,21 +94,48 @@ public class InitDB {
         warehouseDao.createWarehouse(new Warehouse(ingredientDao.findByTitle("union"), 15.0F));
         warehouseDao.createWarehouse(new Warehouse(ingredientDao.findByTitle("duck"), 42.0F));
         warehouseDao.createWarehouse(new Warehouse(ingredientDao.findByTitle("apple"), 190.0F));
+        warehouseDao.createWarehouse(new Warehouse(ingredientDao.findByTitle("carrot"), 200.0F));
+        warehouseDao.createWarehouse(new Warehouse(ingredientDao.findByTitle("sausage"), 50.0F));
+        warehouseDao.createWarehouse(new Warehouse(ingredientDao.findByTitle("cucumbers"), 45.0F));
+        warehouseDao.createWarehouse(new Warehouse(ingredientDao.findByTitle("olive"), 36.0F));
 
         //dishDao.createDish(new Dish("Chop", categoryDao.findByTitle("meat"), 54.0F, 220.0F));
         //dishDao.createDish(new Dish("Grapes", categoryDao.findByTitle("fruit"), 31.0F, 300.0F));
-        ArrayList<Ingredient> olivieIngredient = new ArrayList<>();
+        List<Ingredient> olivieIngredient = new ArrayList<>();
         olivieIngredient.add(ingredientDao.findByTitle("potato"));
         olivieIngredient.add(ingredientDao.findByTitle("eggs"));
         olivieIngredient.add(ingredientDao.findByTitle("union"));
+        olivieIngredient.add(ingredientDao.findByTitle("carrot"));
+        olivieIngredient.add(ingredientDao.findByTitle("sausage"));
         dishDao.createDish(new Dish("Olivie", olivieIngredient, categoryDao.findByTitle("salads"), 35.0F, 200.0F));
         //dishDao.createDish(new Dish("Apple juice", categoryDao.findByTitle("juices"), 20.0F, 250.0F));
         //dishDao.createDish(new Dish("Vodka", categoryDao.findByTitle("alcohol"), 50.0F, 500.0F));
 
-        ArrayList<Ingredient> duckWithApplesIngredients = new ArrayList<>();
+        List<Ingredient> duckWithApplesIngredients = new ArrayList<>();
         duckWithApplesIngredients.add(ingredientDao.findByTitle("duck"));
         duckWithApplesIngredients.add(ingredientDao.findByTitle("apple"));
         dishDao.createDish(new Dish("Duck with apples", duckWithApplesIngredients, categoryDao.findByTitle("meat"), 70.0F, 430.0F));
+
+        List<Ingredient> greekSaladIngredients = new ArrayList<>();
+        greekSaladIngredients.add(ingredientDao.findByTitle("tomatoes"));
+        greekSaladIngredients.add(ingredientDao.findByTitle("cucumbers"));
+        greekSaladIngredients.add(ingredientDao.findByTitle("olive"));
+        dishDao.createDish(new Dish("Greek salad", greekSaladIngredients, categoryDao.findByTitle("salads"), 30.0F, 180.0F));
+
+        /*List<Dish> businessDishes = new ArrayList<>();
+        businessDishes.add(dishDao.findDishByTitle("Olivie"));
+        businessDishes.add(dishDao.findDishByTitle("Duck with apples"));
+        menuDao.create(new Menu("Menu Business Lunch", businessDishes));
+        List<Dish> buffetDishes = new ArrayList<>();
+        buffetDishes.add(dishDao.findDishByTitle("Greek salad"));
+        buffetDishes.add(dishDao.findDishByTitle("Duck with apples"));
+        menuDao.create(new Menu("Buffet", buffetDishes));
+        List<Dish> tableDishes = new ArrayList<>();
+        tableDishes.add(dishDao.findDishByTitle("Greek salad"));
+        menuDao.create(new Menu("Table d*hote menu", tableDishes));
+        List<Dish> carteDishes = new ArrayList<>();
+        carteDishes.add(dishDao.findDishByTitle("Duck with apples"));
+        menuDao.create(new Menu("Menu a la carte", carteDishes));*/
 
         deskDao.create(new Desk("First"));
         deskDao.create(new Desk("Second"));

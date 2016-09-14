@@ -17,4 +17,5 @@ public interface DishDao {
     void updateDishCategoryId(int id, Category newCategory);
     void updateDishPrice(int id, float newDishPrice);
     void updateDishWeight(int id, float newDishWeight);
+    void updateDistIngredients(int id, List<Ingredient> newIngredients);
 }

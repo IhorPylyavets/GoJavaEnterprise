@@ -6,10 +6,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "DISHES")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Dish implements Serializable {
 
-    //@javax.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -35,6 +33,9 @@ public class Dish implements Serializable {
 
     @Column(name = "WEIGHT")
     private float weight;
+
+    /*@ManyToMany(mappedBy = "dishes", cascade = CascadeType.ALL)
+    private List<Dish> menus = new ArrayList<>();*/
 
     public Dish() {
     }
@@ -94,6 +95,14 @@ public class Dish implements Serializable {
     public void setWeight(float weight) {
         this.weight = weight;
     }
+
+    /*public List<Dish> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(List<Dish> menus) {
+        this.menus = menus;
+    }*/
 
     @Override
     public String toString() {

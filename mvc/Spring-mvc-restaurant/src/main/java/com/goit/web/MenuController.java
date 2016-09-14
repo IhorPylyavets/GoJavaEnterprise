@@ -1,7 +1,7 @@
 package com.goit.web;
 
 import com.goit.model.Menu;
-import com.goit.model.Position;
+import com.goit.service.DishService;
 import com.goit.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +18,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class MenuController {
 
     private MenuService menuService;
+    private DishService dishService;
 
     @Autowired
     public void setMenuService(MenuService menuService) {
         this.menuService = menuService;
+    }
+
+    @Autowired
+    public void setDishService(DishService dishService) {
+        this.dishService = dishService;
     }
 
     @RequestMapping(value = "/menus", method = RequestMethod.GET)
@@ -54,6 +60,7 @@ public class MenuController {
     @RequestMapping(value = "/menus/{id}/update", method = RequestMethod.GET)
     public String showUpdateMenuForm(@PathVariable("id") int id, Model model) {
         Menu menu = menuService.findMenuById(id);
+        model.addAttribute("dishList", dishService.getAllDish());
         model.addAttribute("menu_form", menu);
 
         return "menus/menu_form";
@@ -62,6 +69,7 @@ public class MenuController {
     @RequestMapping(value = "/menus/create", method = RequestMethod.GET)
     public String showCreatePositionForm(Model model) {
         Menu menu = new Menu();
+        model.addAttribute("dishList", dishService.getAllDish());
         model.addAttribute("menu_form", menu);
 
         return "menus/menu_form";

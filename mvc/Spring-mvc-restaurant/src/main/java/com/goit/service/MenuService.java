@@ -43,4 +43,14 @@ public class MenuService {
     public void updateMenuTitle(int id, String newMenuTitle) {
         menuDao.updateTitle(id, newMenuTitle);
     }
+
+    /*@Transactional
+    public void getAllDishByMenuId(int id) {
+        menuDao.getAllDishByMenuId(id);
+    }
+
+    @Transactional
+    public void updateMenuDishes(int id, List<Dish> newDishes) {
+        menuDao.updateMenuDishes(id, newDishes);
+    }*/
 }

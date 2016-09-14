@@ -66,4 +66,9 @@ public class DishService {
         dishDao.updateDishWeight(id, newDishWeight);
     }
 
+    @Transactional
+    public void updateDistIngredients(int id, List<Ingredient> newIngredients) {
+        dishDao.updateDistIngredients(id, newIngredients);
+    }
+
 }

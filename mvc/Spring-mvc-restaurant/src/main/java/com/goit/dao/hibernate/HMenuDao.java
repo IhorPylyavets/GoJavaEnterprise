@@ -1,15 +1,17 @@
 package com.goit.dao.hibernate;
 
 import com.goit.dao.MenuDao;
+import com.goit.model.Dish;
 import com.goit.model.Menu;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class HMenuDao implements MenuDao{
+public class HMenuDao implements MenuDao {
 
     private SessionFactory sessionFactory;
 
@@ -58,4 +60,19 @@ public class HMenuDao implements MenuDao{
         query.setParameter("id", id);
         query.executeUpdate();
     }
+
+    /*@Transactional
+    public List<Dish> getAllDishByMenuId(int id) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "FROM Menu as m LEFT JOIN FETCH m.dishes WHERE d.id =" + id);
+                //"FROM Dish as d LEFT JOIN FETCH  d.ingredients WHERE d.id =" + id);
+        Menu menu = (Menu) query.uniqueResult();
+
+        return new ArrayList<Dish>(menu.getDishes());
+    }
+
+    @Transactional
+    public void updateMenuDishes(int id, List<Dish> newDishes) {
+
+    }*/
 }

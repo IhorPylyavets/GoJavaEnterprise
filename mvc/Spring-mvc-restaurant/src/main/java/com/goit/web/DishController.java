@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -83,7 +84,7 @@ public class DishController {
     public String showCreateEmployeeForm(Model model) {
         Dish dish = new Dish();
         model.addAttribute("dish_form", dish);
-        model.addAttribute("ingredients", ingredientDao.getAll());
+        model.addAttribute("ingredientList", ingredientDao.getAll());
         model.addAttribute("categoryList", categoryService.getAllCategories());
 
         return "dishes/dish_form";
@@ -98,22 +99,33 @@ public class DishController {
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
-            if(dish.getId() == 0){
+            if (dish.getId() == 0){
                 redirectAttributes.addFlashAttribute("msg", "Dish added successfully!");
                 dish.setCategory(categoryService.findCategoryByTitle(dish.getCategory().getCategoryTitle()));
+                dish.setIngredients(fixedSelectedIngredients(dish.getIngredients()));
                 dishService.createDish(dish);
 
-            }else{
+            } else {
                 redirectAttributes.addFlashAttribute("msg", "Dish updated successfully!");
                 dishService.updateDishTitle(dish.getId(), dish.getDishTitle());
                 dishService.updateDishCategoryId(dish.getId(),
                         categoryService.findCategoryByTitle(dish.getCategory().getCategoryTitle()));
                 dishService.updateDishPrice(dish.getId(), dish.getPrice());
                 dishService.updateDishWeight(dish.getId(), dish.getWeight());
+
+                dishService.updateDistIngredients(dish.getId(), fixedSelectedIngredients(dish.getIngredients()));
             }
 
             return "redirect:/dishes/" + dish.getId();
         }
 
+    }
+
+    private List<Ingredient> fixedSelectedIngredients(List<Ingredient> ingredients) {
+        List<Ingredient> ingredientsList = new ArrayList<>();
+        for (Ingredient i : ingredients) {
+            ingredientsList.add(ingredientDao.findByTitle(i.getIngredientTitle()));
+        }
+        return ingredientsList;
     }
 }
