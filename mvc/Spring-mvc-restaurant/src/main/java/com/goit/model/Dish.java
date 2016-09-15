@@ -2,6 +2,7 @@ package com.goit.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,8 +35,8 @@ public class Dish implements Serializable {
     @Column(name = "WEIGHT")
     private float weight;
 
-    /*@ManyToMany(mappedBy = "dishes", cascade = CascadeType.ALL)
-    private List<Dish> menus = new ArrayList<>();*/
+    @ManyToMany(mappedBy = "dishes", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Dish> menus = new ArrayList<>();
 
     public Dish() {
     }
@@ -96,13 +97,13 @@ public class Dish implements Serializable {
         this.weight = weight;
     }
 
-    /*public List<Dish> getMenus() {
+    public List<Dish> getMenus() {
         return menus;
     }
 
     public void setMenus(List<Dish> menus) {
         this.menus = menus;
-    }*/
+    }
 
     @Override
     public String toString() {
@@ -127,7 +128,8 @@ public class Dish implements Serializable {
         if (Float.compare(dish.weight, weight) != 0) return false;
         if (dishTitle != null ? !dishTitle.equals(dish.dishTitle) : dish.dishTitle != null) return false;
         if (ingredients != null ? !ingredients.equals(dish.ingredients) : dish.ingredients != null) return false;
-        return category != null ? category.equals(dish.category) : dish.category == null;
+        if (category != null ? !category.equals(dish.category) : dish.category != null) return false;
+        return menus != null ? menus.equals(dish.menus) : dish.menus == null;
 
     }
 
@@ -138,6 +140,7 @@ public class Dish implements Serializable {
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (price != +0.0f ? Float.floatToIntBits(price) : 0);
         result = 31 * result + (weight != +0.0f ? Float.floatToIntBits(weight) : 0);
+        result = 31 * result + (menus != null ? menus.hashCode() : 0);
         return result;
     }
 }

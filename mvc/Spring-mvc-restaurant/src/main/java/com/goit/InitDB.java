@@ -16,6 +16,9 @@ import java.util.List;
 public class InitDB {
 
     @Autowired
+    private CategoryDao categoryDao;
+
+    @Autowired
     private PositionDao positionDao;
 
     @Autowired
@@ -27,8 +30,7 @@ public class InitDB {
     @Autowired
     private MenuDao menuDao;
 
-    @Autowired
-    private CategoryDao categoryDao;
+
 
     @Autowired
     private  WarehouseDao warehouseDao;
@@ -73,10 +75,10 @@ public class InitDB {
         ingredientDao.create(new Ingredient("cucumbers"));
         ingredientDao.create(new Ingredient("olive"));
 
-        menuDao.create(new Menu("Menu Business Lunch"));
+        /*menuDao.create(new Menu("Menu Business Lunch"));
         menuDao.create(new Menu("Buffet"));
         menuDao.create(new Menu("Table d*hote menu"));
-        menuDao.create(new Menu("Menu a la carte"));
+        menuDao.create(new Menu("Menu a la carte"));*/
 
         categoryDao.create(new Category("meat"));
         categoryDao.create(new Category("fruit"));
@@ -122,7 +124,7 @@ public class InitDB {
         greekSaladIngredients.add(ingredientDao.findByTitle("olive"));
         dishDao.createDish(new Dish("Greek salad", greekSaladIngredients, categoryDao.findByTitle("salads"), 30.0F, 180.0F));
 
-        /*List<Dish> businessDishes = new ArrayList<>();
+        List<Dish> businessDishes = new ArrayList<>();
         businessDishes.add(dishDao.findDishByTitle("Olivie"));
         businessDishes.add(dishDao.findDishByTitle("Duck with apples"));
         menuDao.create(new Menu("Menu Business Lunch", businessDishes));
@@ -135,7 +137,7 @@ public class InitDB {
         menuDao.create(new Menu("Table d*hote menu", tableDishes));
         List<Dish> carteDishes = new ArrayList<>();
         carteDishes.add(dishDao.findDishByTitle("Duck with apples"));
-        menuDao.create(new Menu("Menu a la carte", carteDishes));*/
+        menuDao.create(new Menu("Menu a la carte", carteDishes));
 
         deskDao.create(new Desk("First"));
         deskDao.create(new Desk("Second"));
