@@ -5,6 +5,7 @@ import com.goit.model.Dish;
 import com.goit.model.Ingredient;
 import com.goit.service.CategoryService;
 import com.goit.service.DishService;
+import com.goit.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ import java.util.List;
 public class DishController {
 
     private DishService dishService;
-    private IngredientDao ingredientDao;
+    private IngredientService ingredientService;
     private CategoryService categoryService;
 
     @Autowired
@@ -32,8 +33,8 @@ public class DishController {
     }
 
     @Autowired
-    public void setIngredientDao(IngredientDao ingredientDao) {
-        this.ingredientDao = ingredientDao;
+    public void setIngredientService(IngredientService ingredientService) {
+        this.ingredientService = ingredientService;
     }
 
     @Autowired
@@ -61,7 +62,7 @@ public class DishController {
 
 
     @RequestMapping(value = "/dishes/{id}/delete", method = RequestMethod.POST)
-    public String deletePosition(@PathVariable("id") int id, final RedirectAttributes redirectAttributes) {
+    public String deleteDish(@PathVariable("id") int id, final RedirectAttributes redirectAttributes) {
         dishService.deleteDish(id);
 
         redirectAttributes.addFlashAttribute("css", "success");
@@ -71,28 +72,30 @@ public class DishController {
     }
 
     @RequestMapping(value = "/dishes/{id}/update", method = RequestMethod.GET)
-    public String showUpdateEmployeeForm(@PathVariable("id") int id, Model model) {
+    public String showUpdateDishForm(@PathVariable("id") int id, Model model) {
         Dish dish = dishService.findDishById(id);
         model.addAttribute("dish_form", dish);
-        model.addAttribute("ingredientList", ingredientDao.getAll());
+        model.addAttribute("ingredientList", ingredientService.getAllIngredient());
         model.addAttribute("categoryList", categoryService.getAllCategories());
 
         return "dishes/dish_form";
     }
 
     @RequestMapping(value = "/dishes/create", method = RequestMethod.GET)
-    public String showCreateEmployeeForm(Model model) {
+    public String showCreateDishForm(Model model) {
         Dish dish = new Dish();
         model.addAttribute("dish_form", dish);
-        model.addAttribute("ingredientList", ingredientDao.getAll());
+        model.addAttribute("ingredientList", ingredientService.getAllIngredient());
         model.addAttribute("categoryList", categoryService.getAllCategories());
 
         return "dishes/dish_form";
     }
 
     @RequestMapping(value = "/dishes", method = RequestMethod.POST)
-    public String saveOrUpdateEmployee(@ModelAttribute("dish_form") @Validated Dish dish,
+    public String saveOrUpdateDish(@ModelAttribute("dish_form") @Validated Dish dish,
                                        BindingResult result, final RedirectAttributes redirectAttributes) {
+
+        System.out.println("dish//// " + dish);
 
         if (result.hasErrors()) {
             return "dishes/dish_form";
@@ -123,8 +126,8 @@ public class DishController {
 
     private List<Ingredient> fixedSelectedIngredients(List<Ingredient> ingredients) {
         List<Ingredient> ingredientsList = new ArrayList<>();
-        for (Ingredient i : ingredients) {
-            ingredientsList.add(ingredientDao.findByTitle(i.getIngredientTitle()));
+        for (Ingredient currentIngredient : ingredients) {
+            ingredientsList.add(ingredientService.findIngredientByTitle(currentIngredient.getIngredientTitle()));
         }
         return ingredientsList;
     }

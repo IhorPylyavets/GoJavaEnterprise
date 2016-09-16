@@ -1,6 +1,7 @@
 package com.goit.service;
 
 import com.goit.dao.MenuDao;
+import com.goit.model.Dish;
 import com.goit.model.Menu;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,41 +17,41 @@ public class MenuService {
 
     @Transactional
     public void createMenu(Menu menu) {
-        menuDao.create(menu);
-    }
-
-    @Transactional
-    public List<Menu> getAllMenu() {
-        return menuDao.getAll();
+        menuDao.createMenu(menu);
     }
 
     @Transactional
     public Menu findMenuById(int id) {
-        return menuDao.findById(id);
+        return menuDao.findMenuById(id);
     }
 
     @Transactional
     public Menu findMenuByTitle(String menuTitle) {
-        return menuDao.findByTitle(menuTitle);
+        return menuDao.findMenuByTitle(menuTitle);
+    }
+
+    @Transactional
+    public List<Menu> getAllMenu() {
+        return menuDao.getAllMenu();
     }
 
     @Transactional
     public void deleteMenu(int id) {
-        menuDao.delete(id);
+        menuDao.deleteMenu(id);
     }
 
     @Transactional
     public void updateMenuTitle(int id, String newMenuTitle) {
-        menuDao.updateTitle(id, newMenuTitle);
+        menuDao.updateMenuTitle(id, newMenuTitle);
     }
 
-    /*@Transactional
-    public void getAllDishByMenuId(int id) {
-        menuDao.getAllDishByMenuId(id);
+    @Transactional
+    public List<Dish> getAllDishByMenuId(int id) {
+        return menuDao.getAllDishByMenuId(id);
     }
 
     @Transactional
     public void updateMenuDishes(int id, List<Dish> newDishes) {
         menuDao.updateMenuDishes(id, newDishes);
-    }*/
+    }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "MENUS")
-public class Menu implements Serializable{
+public class Menu implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,24 +16,20 @@ public class Menu implements Serializable{
     @Column(name = "MENU_TITLE")
     private String menuTitle;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "menu_to_dishes",
+            name = "menus_to_dishes",
             joinColumns = @JoinColumn(name = "menuId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "dishId", referencedColumnName = "id")
     )
-    private List<Dish> dishes;
+    private List<Dish> dishesList;
 
     public Menu() {
     }
 
-    public Menu(String menuTitle, List<Dish> dishes) {
+    public Menu(String menuTitle, List<Dish> dishesList) {
         this.menuTitle = menuTitle;
-        this.dishes = dishes;
-    }
-
-    public Menu(String menuTitle) {
-        this.menuTitle = menuTitle;
+        this.dishesList = dishesList;
     }
 
     public int getId() {
@@ -52,15 +48,13 @@ public class Menu implements Serializable{
         this.menuTitle = menuTitle;
     }
 
-    @Override
-    public String toString() {
-        return "Menu{" +
-                "id=" + id +
-                ", menuTitle='" + menuTitle + '\'' +
-                ", dishes=" + dishes +
-                '}';
+    public List<Dish> getDishesList() {
+        return dishesList;
     }
 
+    public void setDishesList(List<Dish> dishesList) {
+        this.dishesList = dishesList;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -70,14 +64,23 @@ public class Menu implements Serializable{
         Menu menu = (Menu) o;
 
         if (menuTitle != null ? !menuTitle.equals(menu.menuTitle) : menu.menuTitle != null) return false;
-        return dishes != null ? dishes.equals(menu.dishes) : menu.dishes == null;
+        return dishesList != null ? dishesList.equals(menu.dishesList) : menu.dishesList == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = menuTitle != null ? menuTitle.hashCode() : 0;
-        result = 31 * result + (dishes != null ? dishes.hashCode() : 0);
+        result = 31 * result + (dishesList != null ? dishesList.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", menuTitle='" + menuTitle + '\'' +
+                ", dishesList=" + dishesList +
+                '}';
     }
 }

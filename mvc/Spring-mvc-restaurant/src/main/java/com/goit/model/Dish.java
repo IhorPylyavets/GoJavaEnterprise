@@ -1,6 +1,9 @@
 package com.goit.model;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,7 @@ public class Dish implements Serializable {
     @Column(name = "DISH_TITLE")
     private String dishTitle;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "dishes_to_ingredients",
             joinColumns = @JoinColumn(name = "dishId", referencedColumnName = "id"),
@@ -35,8 +38,8 @@ public class Dish implements Serializable {
     @Column(name = "WEIGHT")
     private float weight;
 
-    @ManyToMany(mappedBy = "dishes", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Dish> menus = new ArrayList<>();
+    @ManyToMany(mappedBy = "dishesList", cascade = CascadeType.ALL)
+    private List<Menu> menus = new ArrayList<>();
 
     public Dish() {
     }
@@ -97,11 +100,11 @@ public class Dish implements Serializable {
         this.weight = weight;
     }
 
-    public List<Dish> getMenus() {
+    public List<Menu> getMenus() {
         return menus;
     }
 
-    public void setMenus(List<Dish> menus) {
+    public void setMenus(List<Menu> menus) {
         this.menus = menus;
     }
 

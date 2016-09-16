@@ -19,41 +19,48 @@ public class HMenuDao implements MenuDao {
         this.sessionFactory = sessionFactory;
     }
 
+    @Override
     @Transactional
-    public void create(Menu menu) {
-        sessionFactory.getCurrentSession().persist(menu);
+    public void createMenu(Menu menu) {
+        sessionFactory.getCurrentSession().saveOrUpdate(menu);
     }
 
+    @Override
     @Transactional
-    public Menu findById(int id) {
+    public Menu findMenuById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Menu P WHERE P.id = :id");
         query.setParameter("id", id);
         return (Menu) query.uniqueResult();
     }
 
-    public Menu findByTitle(String menuTitle) {
+    @Override
+    @Transactional
+    public Menu findMenuByTitle(String menuTitle) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Menu P WHERE P.menuTitle = :menuTitle");
         query.setParameter("menuTitle", menuTitle);
         return (Menu) query.uniqueResult();
     }
 
+    @Override
     @Transactional
-    public List<Menu> getAll() {
+    public List<Menu> getAllMenu() {
         return sessionFactory.getCurrentSession().createQuery("select m from Menu m").list();
     }
 
+    @Override
     @Transactional
-    public void delete(int id) {
+    public void deleteMenu(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete Menu WHERE id = :id");
         query.setParameter("id", id);
         query.executeUpdate();
     }
 
+    @Override
     @Transactional
-    public void updateTitle(int id, String newMenuTitle) {
+    public void updateMenuTitle(int id, String newMenuTitle) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("update Menu set menuTitle = :menuTitle where id = :id");
         query.setParameter("menuTitle", newMenuTitle);
@@ -61,18 +68,24 @@ public class HMenuDao implements MenuDao {
         query.executeUpdate();
     }
 
-    /*@Transactional
+    @Override
+    @Transactional
     public List<Dish> getAllDishByMenuId(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "FROM Menu as m LEFT JOIN FETCH m.dishes WHERE d.id =" + id);
-                //"FROM Dish as d LEFT JOIN FETCH  d.ingredients WHERE d.id =" + id);
         Menu menu = (Menu) query.uniqueResult();
 
-        return new ArrayList<Dish>(menu.getDishes());
+        return new ArrayList<Dish>(menu.getDishesList());
     }
 
+    @Override
     @Transactional
     public void updateMenuDishes(int id, List<Dish> newDishes) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("update Menu set dishesList = :dishesList where id = :id");
+        query.setParameter("dishesList", newDishes);
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
 
-    }*/
 }

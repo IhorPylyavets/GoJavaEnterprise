@@ -25,12 +25,10 @@ public class InitDB {
     private EmployeeDao employeeDao;
 
     @Autowired
-    private IngredientDao ingredientDao;
-
-    @Autowired
     private MenuDao menuDao;
 
-
+    @Autowired
+    private IngredientDao ingredientDao;
 
     @Autowired
     private  WarehouseDao warehouseDao;
@@ -74,11 +72,6 @@ public class InitDB {
         ingredientDao.create(new Ingredient("sausage"));
         ingredientDao.create(new Ingredient("cucumbers"));
         ingredientDao.create(new Ingredient("olive"));
-
-        /*menuDao.create(new Menu("Menu Business Lunch"));
-        menuDao.create(new Menu("Buffet"));
-        menuDao.create(new Menu("Table d*hote menu"));
-        menuDao.create(new Menu("Menu a la carte"));*/
 
         categoryDao.create(new Category("meat"));
         categoryDao.create(new Category("fruit"));
@@ -127,17 +120,17 @@ public class InitDB {
         List<Dish> businessDishes = new ArrayList<>();
         businessDishes.add(dishDao.findDishByTitle("Olivie"));
         businessDishes.add(dishDao.findDishByTitle("Duck with apples"));
-        menuDao.create(new Menu("Menu Business Lunch", businessDishes));
+        menuDao.createMenu(new Menu("Menu Business Lunch", businessDishes));
         List<Dish> buffetDishes = new ArrayList<>();
         buffetDishes.add(dishDao.findDishByTitle("Greek salad"));
         buffetDishes.add(dishDao.findDishByTitle("Duck with apples"));
-        menuDao.create(new Menu("Buffet", buffetDishes));
+        menuDao.createMenu(new Menu("Buffet", buffetDishes));
         List<Dish> tableDishes = new ArrayList<>();
         tableDishes.add(dishDao.findDishByTitle("Greek salad"));
-        menuDao.create(new Menu("Table d*hote menu", tableDishes));
+        menuDao.createMenu(new Menu("Table d*hote menu", tableDishes));
         List<Dish> carteDishes = new ArrayList<>();
         carteDishes.add(dishDao.findDishByTitle("Duck with apples"));
-        menuDao.create(new Menu("Menu a la carte", carteDishes));
+        menuDao.createMenu(new Menu("Menu a la carte", carteDishes));
 
         deskDao.create(new Desk("First"));
         deskDao.create(new Desk("Second"));
@@ -159,10 +152,6 @@ public class InitDB {
         this.ingredientDao = ingredientDao;
     }
 
-    public void setMenuDao(MenuDao menuDao) {
-        this.menuDao = menuDao;
-    }
-
     public void setCategoryDao(CategoryDao categoryDao) {
         this.categoryDao = categoryDao;
     }
@@ -177,6 +166,10 @@ public class InitDB {
 
     public void setDeskDao(DeskDao deskDao) {
         this.deskDao = deskDao;
+    }
+
+    public void setMenuDao(MenuDao menuDao) {
+        this.menuDao = menuDao;
     }
 
     private Date stringToDate(String dateInString) {
