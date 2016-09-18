@@ -38,7 +38,7 @@
         <c:forEach var="order" items="${orders}">
             <tr>
                 <td><c:out value="${idCounter}"/></td>
-                <td>${order.employee.firstName} ${order.employee.lastName}</td>
+                <td>${order.waiter.firstName} ${order.waiter.lastName}</td>
                 <td>${order.desk.deskTitle}</td>
                 <td>${order.orderDate}</td>
                 <td>

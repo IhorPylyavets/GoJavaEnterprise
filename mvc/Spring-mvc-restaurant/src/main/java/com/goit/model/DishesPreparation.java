@@ -1,18 +1,19 @@
-/*
 package com.goit.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "DISHES_PREPARATION")
-public class DishesPreparation {
+public class DishesPreparation implements Serializable{
 
-    @Id
+    /*@Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "ID")*/
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
@@ -22,14 +23,23 @@ public class DishesPreparation {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_ID")
-    private Cook cook;
+    private Employee cook;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ORDER_ID")
-    private Orders order;
+    private Orders orderValue;
 
     @Column(name = "ORDER_DATE")
     private Timestamp datePreparation;
+
+    public DishesPreparation() {}
+
+    public DishesPreparation(Dish dish, Employee cook, Orders orderValue, Timestamp datePreparation) {
+        this.dish = dish;
+        this.cook = cook;
+        this.orderValue = orderValue;
+        this.datePreparation = datePreparation;
+    }
 
     public int getId() {
         return id;
@@ -47,20 +57,20 @@ public class DishesPreparation {
         this.dish = dish;
     }
 
-    public Cook getCook() {
+    public Employee getCook() {
         return cook;
     }
 
-    public void setCook(Cook cook) {
+    public void setCook(Employee cook) {
         this.cook = cook;
     }
 
-    public Orders getOrder() {
-        return order;
+    public Orders getOrderValue() {
+        return orderValue;
     }
 
-    public void setOrder(Orders order) {
-        this.order = order;
+    public void setOrderValue(Orders orderValue) {
+        this.orderValue = orderValue;
     }
 
     public Timestamp getDatePreparation() {
@@ -77,10 +87,31 @@ public class DishesPreparation {
                 "id=" + id +
                 ", dish=" + dish +
                 ", cook=" + cook +
-                ", order=" + order +
+                ", order=" + orderValue +
                 ", datePreparation=" + datePreparation +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DishesPreparation that = (DishesPreparation) o;
+
+        if (dish != null ? !dish.equals(that.dish) : that.dish != null) return false;
+        if (cook != null ? !cook.equals(that.cook) : that.cook != null) return false;
+        if (orderValue != null ? !orderValue.equals(that.orderValue) : that.orderValue != null) return false;
+        return datePreparation != null ? datePreparation.equals(that.datePreparation) : that.datePreparation == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = dish != null ? dish.hashCode() : 0;
+        result = 31 * result + (cook != null ? cook.hashCode() : 0);
+        result = 31 * result + (orderValue != null ? orderValue.hashCode() : 0);
+        result = 31 * result + (datePreparation != null ? datePreparation.hashCode() : 0);
+        return result;
+    }
 }
-*/

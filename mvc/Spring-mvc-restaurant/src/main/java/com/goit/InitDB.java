@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +40,12 @@ public class InitDB {
     @Autowired
     private DeskDao deskDao;
 
+    @Autowired
+    private OrderDao orderDao;
+
+    @Autowired
+    private DishesPreparationDao dishesPreparationDao;
+
     @PostConstruct
     public void init() {
         positionDao.create(new Position("waiter"));
@@ -49,7 +56,11 @@ public class InitDB {
 
         employeeDao.createEmployee(new Employee("Ivanov", "Ivan", stringToDate("1978-06-19"), "1234567890",
                 positionDao.findByTitle("waiter"), 20000.0F));
+        employeeDao.createEmployee(new Employee("Grot", "Piter", stringToDate("1978-06-19"), "1234567890",
+                positionDao.findByTitle("waiter"), 21000.0F));
         employeeDao.createEmployee(new Employee("Petrov", "Piter", stringToDate("1960-05-05"), "9876543210",
+                positionDao.findByTitle("cook"), 23000.0F));
+        employeeDao.createEmployee(new Employee("Berrens", "Saul", stringToDate("1960-05-05"), "9876543210",
                 positionDao.findByTitle("cook"), 23000.0F));
         employeeDao.createEmployee(new Employee("Green", "Alex", stringToDate("1980-05-13"), "09877763310",
                 positionDao.findByTitle("manager"), 33000.0F));
@@ -138,6 +149,33 @@ public class InitDB {
         deskDao.create(new Desk("Fourth"));
         deskDao.create(new Desk("Fifth"));
 
+        orderDao.createOrder(new Orders(employeeDao.findEmployeeByFullName("Ivanov", "Ivan"),
+                deskDao.findByTitle("First"), getTimestampNow()));
+        orderDao.createOrder(new Orders(employeeDao.findEmployeeByFullName("Grot", "Piter"),
+                deskDao.findByTitle("Fourth"), getTimestampNow()));
+
+        /*System.out.println("Waiters:");
+        List<Employee> waiters = employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("waiter"));
+        for (Employee e : waiters) {
+            System.out.println(e);
+        }*/
+
+        DishesPreparation dishesPreparation1 = new DishesPreparation();
+        dishesPreparation1.setDish(dishDao.findDishByTitle("Duck with apples"));
+        dishesPreparation1.setCook(employeeDao.findEmployeeByFullName("Petrov", "Piter"));
+        dishesPreparation1.setOrderValue(orderDao.findOrderById(1));
+        dishesPreparation1.setDatePreparation(getTimestampNow());
+        dishesPreparationDao.createDishesPreparation(dishesPreparation1);
+
+        DishesPreparation dishesPreparation2 = new DishesPreparation();
+        dishesPreparation2.setDish(dishDao.findDishByTitle("Greek salad"));
+        dishesPreparation2.setCook(employeeDao.findEmployeeByFullName("Petrov", "Piter"));
+        dishesPreparation2.setOrderValue(orderDao.findOrderById(1));
+        dishesPreparation2.setDatePreparation(getTimestampNow());
+        dishesPreparationDao.createDishesPreparation(dishesPreparation2);
+
+        //List<>
+
     }
 
     public void setPositionDao(PositionDao positionDao) {
@@ -172,6 +210,14 @@ public class InitDB {
         this.menuDao = menuDao;
     }
 
+    public void setOrderDao(OrderDao orderDao) {
+        this.orderDao = orderDao;
+    }
+
+    public void setDishesPreparationDao(DishesPreparationDao dishesPreparationDao) {
+        this.dishesPreparationDao = dishesPreparationDao;
+    }
+
     private Date stringToDate(String dateInString) {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -180,6 +226,11 @@ public class InitDB {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private Timestamp getTimestampNow() {
+        java.util.Date date= new java.util.Date();
+        return new Timestamp(date.getTime());
     }
 
 }

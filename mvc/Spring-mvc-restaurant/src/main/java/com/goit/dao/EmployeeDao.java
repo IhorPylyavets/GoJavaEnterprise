@@ -9,6 +9,7 @@ import java.util.List;
 public interface EmployeeDao {
     void createEmployee(Employee employee);
     Employee findEmployeeById(int id);
+    Employee findEmployeeByFullName(String lastName, String firstName);
     List<Employee> getAllEmployees();
     List<Employee> getAllEmployeesByPosition(Position position);
     void deleteEmployee(int id);

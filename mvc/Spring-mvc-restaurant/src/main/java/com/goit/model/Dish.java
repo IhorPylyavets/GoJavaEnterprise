@@ -20,7 +20,7 @@ public class Dish implements Serializable {
     @Column(name = "DISH_TITLE")
     private String dishTitle;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "dishes_to_ingredients",
             joinColumns = @JoinColumn(name = "dishId", referencedColumnName = "id"),

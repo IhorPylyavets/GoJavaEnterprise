@@ -33,7 +33,7 @@
     <bean id="orderService" class="com.goit.service.OrderService"/>
     <bean id="orderDao" class="com.goit.dao.hibernate.HOrderDao"/>
 
-    <!--<bean id="dishesPreparationService" class="com.goit.service.DishesPreparationService"/>
-    <bean id="dishesPreparationDao" class="com.goit.dao.hibernate.HDishesPreparationDao"/>-->
+    <bean id="dishesPreparationService" class="com.goit.service.DishesPreparationService"/>
+    <bean id="dishesPreparationDao" class="com.goit.dao.hibernate.HDishesPreparationDao"/>
 
 </beans>

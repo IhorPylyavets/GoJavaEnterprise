@@ -24,26 +24,6 @@ public class OrderController {
     private PositionService positionService;
     private DeskService deskService;
 
-    @Autowired
-    public void setOrderService(OrderService orderService) {
-        this.orderService = orderService;
-    }
-
-    @Autowired
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
-
-    @Autowired
-    public void setPositionService(PositionService positionService) {
-        this.positionService = positionService;
-    }
-
-    @Autowired
-    public void setDeskService(DeskService deskService) {
-        this.deskService = deskService;
-    }
-
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String showAllOrders(Model model) {
         model.addAttribute("orders", orderService.getAllOrders());
@@ -92,12 +72,46 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders", method = RequestMethod.POST)
+    public String saveOrUpdateOrders(@ModelAttribute("order_form") @Validated Orders orders,
+                                     BindingResult result, final RedirectAttributes redirectAttributes) {
+
+        System.out.println("saveOrUpdateOrders");
+        System.out.println(orders);
+        if (result.hasErrors()) {
+            return "orders/order_form";
+        } else {
+
+            redirectAttributes.addFlashAttribute("css", "success");
+            if(orders.getId() == 0){
+                redirectAttributes.addFlashAttribute("msg", "Orders added successfully!");
+
+                //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
+                orderService.createOrder(orders);
+
+            }else{
+                redirectAttributes.addFlashAttribute("msg", "Orders updated successfully!");
+                /*employeeService.updateEmployeeLastName(employee.getId(), employee.getLastName());
+                employeeService.updateEmployeeFirstName(employee.getId(), employee.getFirstName());
+                employeeService.updateEmployeeBirthday(employee.getId(), employee.getBirthday());
+                employeeService.updateEmployeePhone(employee.getId(), employee.getPhone());
+                employeeService.updateEmployeePositionId(employee.getId(),
+                        positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
+                employeeService.updateEmployeeSalary(employee.getId(), employee.getSalary());*/
+            }
+
+            return "redirect:/orders/" + orders.getId();
+        }
+
+    }
+
+    /*@RequestMapping(value = "/orders", method = RequestMethod.POST)
     public String saveOrUpdateOrder(@ModelAttribute("order_form") @Validated Orders order,
                                        BindingResult result, final RedirectAttributes redirectAttributes) {
 
         System.out.println(order);
 
         if (result.hasErrors()) {
+            System.out.println("saveOrUpdateOrder error");
             return "orders/order_form";
         } else {
 
@@ -111,23 +125,43 @@ public class OrderController {
 
             }else{
                 redirectAttributes.addFlashAttribute("msg", "Order updated successfully!");
-                /*orderService.updateOrderWaiterId(order.getId(), order.getWaiter());
+                *//*orderService.updateOrderWaiterId(order.getId(), order.getWaiter());
                 orderService.updateOrderDeskId(order.getId(), order.getDesk());
-                orderService.updateOrderDate(order.getId(), order.getOrderDate());*/
+                orderService.updateOrderDate(order.getId(), order.getOrderDate());*//*
 
 
-                /*employeeService.updateEmployeeLastName(employee.getId(), employee.getLastName());
+                *//*employeeService.updateEmployeeLastName(employee.getId(), employee.getLastName());
                 employeeService.updateEmployeeFirstName(employee.getId(), employee.getFirstName());
                 employeeService.updateEmployeeBirthday(employee.getId(), employee.getBirthday());
                 employeeService.updateEmployeePhone(employee.getId(), employee.getPhone());
                 employeeService.updateEmployeePositionId(employee.getId(),
                         positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
-                employeeService.updateEmployeeSalary(employee.getId(), employee.getSalary());*/
+                employeeService.updateEmployeeSalary(employee.getId(), employee.getSalary());*//*
             }
 
             return "redirect:/orders/" + order.getId();
         }
 
+    }*/
+
+    @Autowired
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    @Autowired
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @Autowired
+    public void setPositionService(PositionService positionService) {
+        this.positionService = positionService;
+    }
+
+    @Autowired
+    public void setDeskService(DeskService deskService) {
+        this.deskService = deskService;
     }
 
 }

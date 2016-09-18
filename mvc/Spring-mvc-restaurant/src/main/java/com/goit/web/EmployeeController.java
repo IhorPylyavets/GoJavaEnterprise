@@ -1,7 +1,6 @@
 package com.goit.web;
 
 import com.goit.model.Employee;
-import com.goit.model.Position;
 import com.goit.service.EmployeeService;
 import com.goit.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class EmployeeController {

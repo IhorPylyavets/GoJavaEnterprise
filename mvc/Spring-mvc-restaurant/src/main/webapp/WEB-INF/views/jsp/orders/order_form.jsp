@@ -30,11 +30,11 @@
 
         <form:hidden path="id" />
 
-        <spring:bind path="employee">
+        <spring:bind path="waiter">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <label class="col-sm-2 control-label">Employee</label>
                 <div class="col-sm-10">
-                    <form:select path="employee" class="form-control selcls">
+                    <form:select path="waiter" class="form-control selcls">
                         <form:option value="NONE" label="--- Select Waiter ---" />
                         <form:options items="${waiterList}" itemValue="id" itemLabel="lastName"/>
                     </form:select>
@@ -63,8 +63,6 @@
                 </div>
             </div>
         </spring:bind>
-
-
 
         <%--<div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

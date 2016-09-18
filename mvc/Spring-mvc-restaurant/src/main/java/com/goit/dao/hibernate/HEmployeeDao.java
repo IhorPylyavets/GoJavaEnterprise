@@ -34,6 +34,15 @@ public class HEmployeeDao implements EmployeeDao {
     }
 
     @Transactional
+    public Employee findEmployeeByFullName(String lastName, String firstName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select e from Employee e WHERE e.lastName = :lastName AND e.firstName = :firstName");
+        query.setParameter("lastName", lastName);
+        query.setParameter("firstName", firstName);
+        return (Employee) query.uniqueResult();
+    }
+
+    @Transactional
     public List<Employee> getAllEmployees() {
         return sessionFactory.getCurrentSession().createQuery("select e from Employee e").list();
     }
@@ -41,8 +50,8 @@ public class HEmployeeDao implements EmployeeDao {
     @Transactional
     public List<Employee> getAllEmployeesByPosition(Position position) {
         return sessionFactory.getCurrentSession()
-                .createQuery("select e from Employee e WHERE e.position.positionTitle = :positionTitle")
-                .setParameter("positionTitle", position.getPositionTitle())
+                .createQuery("select e from Employee e WHERE e.position = :position")
+                .setParameter("position", position)
                 .list();
     }
 

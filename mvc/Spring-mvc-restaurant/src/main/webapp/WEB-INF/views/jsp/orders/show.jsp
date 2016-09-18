@@ -30,7 +30,7 @@
 
     <div class="row">
         <label class="col-sm-2">WAITER</label>
-        <div class="col-sm-10">${order.employee.firstName} ${order.employee.lastName}</div>
+        <div class="col-sm-10">${order.waiter.firstName} ${order.waiter.lastName}</div>
     </div>
 
     <div class="row">

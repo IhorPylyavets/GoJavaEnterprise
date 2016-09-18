@@ -23,6 +23,11 @@ public class EmployeeService{
     }
 
     @Transactional
+    public Employee findEmployeeByFullName(String lastName, String firstName) {
+        return employeeDao.findEmployeeByFullName(lastName, firstName);
+    }
+
+    @Transactional
     public List<Employee> getAllEmployee() {
         return employeeDao.getAllEmployees();
     }
