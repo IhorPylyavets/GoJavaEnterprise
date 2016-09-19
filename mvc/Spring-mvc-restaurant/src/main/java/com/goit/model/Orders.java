@@ -15,7 +15,7 @@ public class Orders implements Serializable {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "WAITER_ID")
@@ -36,11 +36,11 @@ public class Orders implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -66,6 +66,10 @@ public class Orders implements Serializable {
 
     public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public boolean isNew() {
+        return (this.id == null);
     }
 
     @Override

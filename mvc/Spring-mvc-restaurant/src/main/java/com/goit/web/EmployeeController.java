@@ -1,5 +1,6 @@
 package com.goit.web;
 
+import com.goit.dao.PositionDao;
 import com.goit.model.Employee;
 import com.goit.service.EmployeeService;
 import com.goit.service.PositionService;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class EmployeeController {
 
     private EmployeeService employeeService;
-    private PositionService positionService;
+    private PositionDao positionDao;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public String showAllEmployees(Model model) {
@@ -51,7 +52,7 @@ public class EmployeeController {
     public String showUpdateEmployeeForm(@PathVariable("id") int id, Model model) {
         Employee employee = employeeService.findEmployeeById(id);
         model.addAttribute("employee_form", employee);
-        model.addAttribute("positionList", positionService.getAllPosition());
+        model.addAttribute("positionList", positionDao.getAll());
 
         return "employees/employee_form";
     }
@@ -60,7 +61,7 @@ public class EmployeeController {
     public String showCreateEmployeeForm(Model model) {
         Employee employee = new Employee();
         model.addAttribute("employee_form", employee);
-        model.addAttribute("positionList", positionService.getAllPosition());
+        model.addAttribute("positionList", positionDao.getAll());
 
         return "employees/employee_form";
     }
@@ -74,10 +75,10 @@ public class EmployeeController {
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
-            if(employee.getId() == 0){
+            if(employee.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Employee added successfully!");
 
-                employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
+                employee.setPosition(positionDao.findByTitle(employee.getPosition().getPositionTitle()));
                 employeeService.createEmployee(employee);
 
             }else{
@@ -87,7 +88,7 @@ public class EmployeeController {
                 employeeService.updateEmployeeBirthday(employee.getId(), employee.getBirthday());
                 employeeService.updateEmployeePhone(employee.getId(), employee.getPhone());
                 employeeService.updateEmployeePositionId(employee.getId(),
-                        positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
+                        positionDao.findByTitle(employee.getPosition().getPositionTitle()));
                 employeeService.updateEmployeeSalary(employee.getId(), employee.getSalary());
             }
 
@@ -102,7 +103,8 @@ public class EmployeeController {
     }
 
     @Autowired
-    public void setPositionService(PositionService positionService) {
-        this.positionService = positionService;
+    public void setPositionDao(PositionDao positionDao) {
+        this.positionDao = positionDao;
     }
+
 }

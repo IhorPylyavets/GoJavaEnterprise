@@ -11,17 +11,14 @@
 
 <div class="container">
 
-    <%--<c:choose>
-        <c:when test="${position_form['new']}">
-            <h1>Add Position</h1>
+    <c:choose>
+        <c:when test="${dishes_preparation_form['new']}">
+            <h1>Add DishesPreparation</h1>
         </c:when>
         <c:otherwise>
-            <h1>Update Position</h1>
+            <h1>Update DishesPreparation</h1>
         </c:otherwise>
     </c:choose>
-    <br />--%>
-
-    <h1>Create / Update DishesPreparation</h1>
     <br />
 
     <spring:url value="/dishes_preparations" var="dishes_preparationActionUrl" />
@@ -76,10 +73,10 @@
             </div>
         </spring:bind>
 
-        <%--<div class="form-group">
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <c:choose>
-                    <c:when test="${position_form['new']}">
+                    <c:when test="${dishes_preparation_form['new']}">
                         <button type="submit" class="btn-lg btn-primary pull-right">Add</button>
                     </c:when>
                     <c:otherwise>
@@ -87,9 +84,7 @@
                     </c:otherwise>
                 </c:choose>
             </div>
-        </div>--%>
-
-        <button type="submit" class="btn-lg btn-primary pull-right">Create / Update</button>
+        </div>
     </form:form>
 
 </div>

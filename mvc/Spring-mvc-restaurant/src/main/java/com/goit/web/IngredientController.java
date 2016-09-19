@@ -75,7 +75,7 @@ public class IngredientController {
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
-            if(ingredient.getId() == 0){
+            if(ingredient.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Ingredient added successfully!");
                 ingredientService.createIngredient(ingredient);
             }else{

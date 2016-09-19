@@ -1,5 +1,9 @@
 package com.goit.web;
 
+import com.goit.dao.DishDao;
+import com.goit.dao.EmployeeDao;
+import com.goit.dao.OrderDao;
+import com.goit.dao.PositionDao;
 import com.goit.model.DishesPreparation;
 import com.goit.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class DishesPreparationController {
 
     private DishesPreparationService dishesPreparationService;
-    private EmployeeService employeeService;
-    private PositionService positionService;
-    private DishService dishService;
-    private OrderService orderService;
+    private EmployeeDao employeeDao;
+    private PositionDao positionDao;
+    private DishDao dishDao;
+    private OrderDao orderDao;
 
     @RequestMapping(value = "/dishes_preparations", method = RequestMethod.GET)
     public String showAllDishesPreparation(Model model) {
@@ -53,9 +57,9 @@ public class DishesPreparationController {
     public String showUpdateDishesPreparationForm(@PathVariable("id") int id, Model model) {
         DishesPreparation dishesPreparation = dishesPreparationService.findDishesPreparationById(id);
         model.addAttribute("dishes_preparation_form", dishesPreparation);
-        model.addAttribute("cookList", employeeService.getAllEmployeesByPosition(positionService.findPositionByTitle("cook")));
-        model.addAttribute("dishList", dishService.getAllDish());
-        model.addAttribute("orderValuekList", orderService.getAllOrders());
+        model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
+        model.addAttribute("dishList", dishDao.getAllDish());
+        model.addAttribute("orderValuekList", orderDao.getAllOrders());
 
         return "dishes_preparations/dishes_preparation_form";
     }
@@ -64,9 +68,9 @@ public class DishesPreparationController {
     public String showCreateDishesPreparationForm(Model model) {
         DishesPreparation dishesPreparation = new DishesPreparation();
         model.addAttribute("dishes_preparation_form", dishesPreparation);
-        model.addAttribute("cookList", employeeService.getAllEmployeesByPosition(positionService.findPositionByTitle("cook")));
-        model.addAttribute("dishList", dishService.getAllDish());
-        model.addAttribute("orderValuekList", orderService.getAllOrders());
+        model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
+        model.addAttribute("dishList", dishDao.getAllDish());
+        model.addAttribute("orderValuekList", orderDao.getAllOrders());
 
         /*List<Dish> d = dishService.getAllDish();
         for (Dish q : d) {
@@ -80,12 +84,15 @@ public class DishesPreparationController {
     public String saveOrUpdateDishesPreparation(@ModelAttribute("dishes_preparation_form") @Validated DishesPreparation dishesPreparation,
                                                 BindingResult result, final RedirectAttributes redirectAttributes) {
 
+        System.out.println("dishesPreparation: " + dishesPreparation);
+
         if (result.hasErrors()) {
+            System.out.println("result.hasErrors()!!!");
             return "dishes_preparations/dishes_preparation_form";
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
-            if(dishesPreparation.getId() == 0){
+            if(dishesPreparation.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "DishesPreparation added successfully!");
 
                 //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
@@ -113,22 +120,23 @@ public class DishesPreparationController {
     }
 
     @Autowired
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public void setEmployeeDao(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
     }
 
     @Autowired
-    public void setPositionService(PositionService positionService) {
-        this.positionService = positionService;
+    public void setPositionDao(PositionDao positionDao) {
+        this.positionDao = positionDao;
     }
 
     @Autowired
-    public void setDishService(DishService dishService) {
-        this.dishService = dishService;
+    public void setDishDao(DishDao dishDao) {
+        this.dishDao = dishDao;
     }
 
     @Autowired
-    public void setOrderService(OrderService orderService) {
-        this.orderService = orderService;
+    public void setOrderDao(OrderDao orderDao) {
+        this.orderDao = orderDao;
     }
+
 }

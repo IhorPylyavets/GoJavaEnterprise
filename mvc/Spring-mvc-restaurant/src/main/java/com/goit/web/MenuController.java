@@ -1,5 +1,7 @@
 package com.goit.web;
 
+import com.goit.dao.DishDao;
+import com.goit.model.Dish;
 import com.goit.model.Menu;
 import com.goit.service.DishService;
 import com.goit.service.MenuService;
@@ -14,21 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 public class MenuController {
 
     private MenuService menuService;
-    private DishService dishService;
-
-    @Autowired
-    public void setMenuService(MenuService menuService) {
-        this.menuService = menuService;
-    }
-
-    @Autowired
-    public void setDishService(DishService dishService) {
-        this.dishService = dishService;
-    }
+    private DishDao dishDao;
 
     @RequestMapping(value = "/menus", method = RequestMethod.GET)
     public String showAllMenus(Model model) {
@@ -63,7 +57,7 @@ public class MenuController {
     public String showUpdateMenuForm(@PathVariable("id") int id, Model model) {
         Menu menu = menuService.findMenuById(id);
         model.addAttribute("menu_form", menu);
-        model.addAttribute("dishesAll", dishService.getAllDish());
+        model.addAttribute("dishesAll", dishDao.getAllDish());
 
         return "menus/menu_form";
     }
@@ -72,7 +66,7 @@ public class MenuController {
     public String showCreateMenuForm(Model model) {
         Menu menu = new Menu();
         model.addAttribute("menu_form", menu);
-        model.addAttribute("dishesAll", dishService.getAllDish());
+        model.addAttribute("dishesAll", dishDao.getAllDish());
 
         return "menus/menu_form";
     }
@@ -89,7 +83,7 @@ public class MenuController {
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
-            if (menu.getId() == 0){
+            if (menu.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Menu added successfully!");
                 /*dish.setCategory(categoryService.findCategoryByTitle(dish.getCategory().getCategoryTitle()));
                 dish.setIngredients(fixedSelectedIngredients(dish.getIngredients()));
@@ -109,5 +103,15 @@ public class MenuController {
             return "redirect:/menus/" + menu.getId();
         }
 
+    }
+
+    @Autowired
+    public void setMenuService(MenuService menuService) {
+        this.menuService = menuService;
+    }
+
+    @Autowired
+    public void setDishDao(DishDao dishDao) {
+        this.dishDao = dishDao;
     }
 }

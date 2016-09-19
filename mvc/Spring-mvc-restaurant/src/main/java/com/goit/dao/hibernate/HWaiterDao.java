@@ -6,17 +6,17 @@ import com.goit.model.Waiter;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-public class HWaiterDao implements WaiterDao {
+public class HWaiterDao extends HEmployeeDao {
 
     private SessionFactory sessionFactory;
 
     @Transactional
-    public void createEmployee(Employee employee) {
-        sessionFactory.getCurrentSession().saveOrUpdate(employee);
+    public Waiter findWaiterByFullName(String lastName, String firstName) {
+        return null;
     }
 
     @Override
-    public Waiter findWaiterByFullName(String lastName, String firstName) {
-        return null;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }

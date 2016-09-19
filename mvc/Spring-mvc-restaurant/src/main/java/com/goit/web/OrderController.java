@@ -1,5 +1,8 @@
 package com.goit.web;
 
+import com.goit.dao.DeskDao;
+import com.goit.dao.EmployeeDao;
+import com.goit.dao.PositionDao;
 import com.goit.model.Orders;
 import com.goit.service.DeskService;
 import com.goit.service.EmployeeService;
@@ -20,9 +23,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class OrderController {
 
     private OrderService orderService;
-    private EmployeeService employeeService;
-    private PositionService positionService;
-    private DeskService deskService;
+    private EmployeeDao employeeDao;
+    private PositionDao positionDao;
+    private DeskDao deskDao;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String showAllOrders(Model model) {
@@ -55,8 +58,8 @@ public class OrderController {
     public String showUpdateOrderForm(@PathVariable("id") int id, Model model) {
         Orders order = orderService.findOrderById(id);
         model.addAttribute("order_form", order);
-        model.addAttribute("waiterList", employeeService.getAllEmployeesByPosition(positionService.findPositionByTitle("waiter")));
-        model.addAttribute("deskList", deskService.getAll()); //getAllFreeDesk());
+        model.addAttribute("waiterList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("waiter")));
+        model.addAttribute("deskList", deskDao.getAll()); //getAllFreeDesk());
 
         return "orders/order_form";
     }
@@ -65,8 +68,8 @@ public class OrderController {
     public String showCreateOrderForm(Model model) {
         Orders order = new Orders();
         model.addAttribute("order_form", order);
-        model.addAttribute("waiterList", employeeService.getAllEmployeesByPosition(positionService.findPositionByTitle("waiter")));
-        model.addAttribute("deskList", deskService./*getAll());*/ getAllFreeDesk());
+        model.addAttribute("waiterList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("waiter")));
+        model.addAttribute("deskList", deskDao.getAll()); //getAllFreeDesk());
 
         return "orders/order_form";
     }
@@ -82,7 +85,7 @@ public class OrderController {
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
-            if(orders.getId() == 0){
+            if(orders.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Orders added successfully!");
 
                 //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
@@ -150,18 +153,17 @@ public class OrderController {
     }
 
     @Autowired
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public void setEmployeeDao(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
     }
 
     @Autowired
-    public void setPositionService(PositionService positionService) {
-        this.positionService = positionService;
+    public void setPositionDao(PositionDao positionDao) {
+        this.positionDao = positionDao;
     }
 
     @Autowired
-    public void setDeskService(DeskService deskService) {
-        this.deskService = deskService;
+    public void setDeskDao(DeskDao deskDao) {
+        this.deskDao = deskDao;
     }
-
 }

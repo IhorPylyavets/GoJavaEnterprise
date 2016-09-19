@@ -11,17 +11,14 @@
 
 <div class="container">
 
-    <%--<c:choose>
-        <c:when test="${position_form['new']}">
-            <h1>Add Position</h1>
+    <c:choose>
+        <c:when test="${menu_form['new']}">
+            <h1>Add Menu</h1>
         </c:when>
         <c:otherwise>
-            <h1>Update Position</h1>
+            <h1>Update Menu</h1>
         </c:otherwise>
     </c:choose>
-    <br />--%>
-
-    <h1>Create / Update Menu</h1>
     <br />
 
     <spring:url value="/menus" var="menuActionUrl" />
@@ -46,16 +43,16 @@
                 <div class="col-sm-10">
                     <form:select path="dishesList" items="${dishesAll}"
                                  multiple="true" size="5" class="form-control"
-                                 itemLabel="dishTitle" itemValue="dishTitle"/>
+                                 itemLabel="dishTitle" itemValue="id"/>
                     <form:errors path="dishesList" class="control-label" />
                 </div>
             </div>
         </spring:bind>
 
-        <%--<div class="form-group">
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <c:choose>
-                    <c:when test="${position_form['new']}">
+                    <c:when test="${menu_form['new']}">
                         <button type="submit" class="btn-lg btn-primary pull-right">Add</button>
                     </c:when>
                     <c:otherwise>
@@ -63,9 +60,7 @@
                     </c:otherwise>
                 </c:choose>
             </div>
-        </div>--%>
-
-        <button type="submit" class="btn-lg btn-primary pull-right">Create / Update</button>
+        </div>
     </form:form>
 
 </div>

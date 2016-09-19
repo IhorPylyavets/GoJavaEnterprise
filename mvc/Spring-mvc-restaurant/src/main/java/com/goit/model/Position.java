@@ -11,7 +11,7 @@ public class Position implements Serializable{
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @Column(name = "POSITION_TITLE")
     private String positionTitle;
@@ -23,11 +23,11 @@ public class Position implements Serializable{
         this.positionTitle = positionTitle;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -37,6 +37,10 @@ public class Position implements Serializable{
 
     public void setPositionTitle(String positionTitle) {
         this.positionTitle = positionTitle;
+    }
+
+    public boolean isNew() {
+        return (this.id == null);
     }
 
     @Override

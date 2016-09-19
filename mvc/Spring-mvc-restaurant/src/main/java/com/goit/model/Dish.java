@@ -15,7 +15,7 @@ public class Dish implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @Column(name = "DISH_TITLE")
     private String dishTitle;
@@ -52,11 +52,11 @@ public class Dish implements Serializable {
         this.weight = weight;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -106,6 +106,10 @@ public class Dish implements Serializable {
 
     public void setMenus(List<Menu> menus) {
         this.menus = menus;
+    }
+
+    public boolean isNew() {
+        return (this.id == null);
     }
 
     @Override

@@ -81,7 +81,7 @@ public class DeskController {
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
-            if(desk.getId() == 0){
+            if(desk.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Desk added successfully!");
                 System.out.println(desk);
 

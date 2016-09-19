@@ -11,7 +11,7 @@
 
 <div class="container">
 
-    <%--<c:choose>
+    <c:choose>
         <c:when test="${position_form['new']}">
             <h1>Add Position</h1>
         </c:when>
@@ -19,9 +19,6 @@
             <h1>Update Position</h1>
         </c:otherwise>
     </c:choose>
-    <br />--%>
-
-    <h1>Create / Update Position</h1>
     <br />
 
     <spring:url value="/positions" var="positionActionUrl" />
@@ -40,7 +37,7 @@
             </div>
         </spring:bind>
 
-        <%--<div class="form-group">
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <c:choose>
                     <c:when test="${position_form['new']}">
@@ -51,9 +48,7 @@
                     </c:otherwise>
                 </c:choose>
             </div>
-        </div>--%>
-
-        <button type="submit" class="btn-lg btn-primary pull-right">Create / Update</button>
+        </div>
     </form:form>
 
 </div>

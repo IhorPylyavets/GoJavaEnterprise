@@ -15,7 +15,7 @@ public class DishesPreparation implements Serializable{
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "DISHES_ID")
@@ -41,11 +41,11 @@ public class DishesPreparation implements Serializable{
         this.datePreparation = datePreparation;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -79,6 +79,10 @@ public class DishesPreparation implements Serializable{
 
     public void setDatePreparation(Timestamp datePreparation) {
         this.datePreparation = datePreparation;
+    }
+
+    public boolean isNew() {
+        return (this.id == null);
     }
 
     @Override

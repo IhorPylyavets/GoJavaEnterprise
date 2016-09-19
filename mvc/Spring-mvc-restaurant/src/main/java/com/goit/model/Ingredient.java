@@ -12,7 +12,7 @@ public class Ingredient implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @Column(name = "INGREDIENT_TITLE")
     private String ingredientTitle;
@@ -27,11 +27,11 @@ public class Ingredient implements Serializable{
         this.ingredientTitle = ingredientTitle;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,6 +49,10 @@ public class Ingredient implements Serializable{
 
     public void setDishes(List<Dish> dishes) {
         this.dishes = dishes;
+    }
+
+    public boolean isNew() {
+        return (this.id == null);
     }
 
     @Override

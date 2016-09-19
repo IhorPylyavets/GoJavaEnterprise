@@ -11,7 +11,7 @@ public class Warehouse implements Serializable{
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "INGREDIENT_ID")
@@ -28,11 +28,11 @@ public class Warehouse implements Serializable{
         this.amount = amount;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -50,6 +50,10 @@ public class Warehouse implements Serializable{
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+
+    public boolean isNew() {
+        return (this.id == null);
     }
 
     @Override

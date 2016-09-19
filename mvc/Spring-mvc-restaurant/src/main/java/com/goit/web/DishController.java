@@ -1,5 +1,6 @@
 package com.goit.web;
 
+import com.goit.dao.CategoryDao;
 import com.goit.dao.IngredientDao;
 import com.goit.model.Dish;
 import com.goit.model.Ingredient;
@@ -24,23 +25,8 @@ import java.util.List;
 public class DishController {
 
     private DishService dishService;
-    private IngredientService ingredientService;
-    private CategoryService categoryService;
-
-    @Autowired
-    public void setDishService(DishService dishService) {
-        this.dishService = dishService;
-    }
-
-    @Autowired
-    public void setIngredientService(IngredientService ingredientService) {
-        this.ingredientService = ingredientService;
-    }
-
-    @Autowired
-    public void setCategoryService(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
+    private IngredientDao ingredientDao;
+    private CategoryDao categoryDao;
 
     @RequestMapping(value = "/dishes", method = RequestMethod.GET)
     public String showAllDishes(Model model) {
@@ -75,8 +61,8 @@ public class DishController {
     public String showUpdateDishForm(@PathVariable("id") int id, Model model) {
         Dish dish = dishService.findDishById(id);
         model.addAttribute("dish_form", dish);
-        model.addAttribute("ingredientList", ingredientService.getAllIngredient());
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        model.addAttribute("ingredientList", ingredientDao.getAll());
+        model.addAttribute("categoryList", categoryDao.getAll());
 
         return "dishes/dish_form";
     }
@@ -85,8 +71,8 @@ public class DishController {
     public String showCreateDishForm(Model model) {
         Dish dish = new Dish();
         model.addAttribute("dish_form", dish);
-        model.addAttribute("ingredientList", ingredientService.getAllIngredient());
-        model.addAttribute("categoryList", categoryService.getAllCategories());
+        model.addAttribute("ingredientList", ingredientDao.getAll());
+        model.addAttribute("categoryList", categoryDao.getAll());
 
         return "dishes/dish_form";
     }
@@ -102,9 +88,9 @@ public class DishController {
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
-            if (dish.getId() == 0){
+            if (dish.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Dish added successfully!");
-                dish.setCategory(categoryService.findCategoryByTitle(dish.getCategory().getCategoryTitle()));
+                dish.setCategory(categoryDao.findByTitle(dish.getCategory().getCategoryTitle()));
                 dish.setIngredients(fixedSelectedIngredients(dish.getIngredients()));
                 dishService.createDish(dish);
 
@@ -112,7 +98,7 @@ public class DishController {
                 redirectAttributes.addFlashAttribute("msg", "Dish updated successfully!");
                 dishService.updateDishTitle(dish.getId(), dish.getDishTitle());
                 dishService.updateDishCategoryId(dish.getId(),
-                        categoryService.findCategoryByTitle(dish.getCategory().getCategoryTitle()));
+                        categoryDao.findByTitle(dish.getCategory().getCategoryTitle()));
                 dishService.updateDishPrice(dish.getId(), dish.getPrice());
                 dishService.updateDishWeight(dish.getId(), dish.getWeight());
 
@@ -124,10 +110,25 @@ public class DishController {
 
     }
 
+    @Autowired
+    public void setDishService(DishService dishService) {
+        this.dishService = dishService;
+    }
+
+    @Autowired
+    public void setIngredientDao(IngredientDao ingredientDao) {
+        this.ingredientDao = ingredientDao;
+    }
+
+    @Autowired
+    public void setCategoryDao(CategoryDao categoryDao) {
+        this.categoryDao = categoryDao;
+    }
+
     private List<Ingredient> fixedSelectedIngredients(List<Ingredient> ingredients) {
         List<Ingredient> ingredientsList = new ArrayList<>();
         for (Ingredient currentIngredient : ingredients) {
-            ingredientsList.add(ingredientService.findIngredientByTitle(currentIngredient.getIngredientTitle()));
+            ingredientsList.add(ingredientDao.findByTitle(currentIngredient.getIngredientTitle()));
         }
         return ingredientsList;
     }

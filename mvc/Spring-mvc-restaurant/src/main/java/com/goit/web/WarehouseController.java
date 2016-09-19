@@ -1,5 +1,6 @@
 package com.goit.web;
 
+import com.goit.dao.IngredientDao;
 import com.goit.model.Warehouse;
 import com.goit.service.IngredientService;
 import com.goit.service.WarehouseService;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class WarehouseController {
 
     private WarehouseService warehouseService;
-    private IngredientService ingredientService;
+    private IngredientDao ingredientDao;
 
     @RequestMapping(value = "/warehouses", method = RequestMethod.GET)
     public String showAllWarehouses(Model model) {
@@ -51,7 +52,7 @@ public class WarehouseController {
     public String showUpdateWarehouseForm(@PathVariable("id") int id, Model model) {
         Warehouse warehouse = warehouseService.findWarehouseById(id);
         model.addAttribute("warehouse_form", warehouse);
-        model.addAttribute("ingredientList", ingredientService.getAllIngredient());
+        model.addAttribute("ingredientList", ingredientDao.getAll());
 
         return "warehouses/warehouse_form";
     }
@@ -60,7 +61,7 @@ public class WarehouseController {
     public String showCreateWarehouseForm(Model model) {
         Warehouse warehouse = new Warehouse();
         model.addAttribute("warehouse_form", warehouse);
-        model.addAttribute("ingredientList", ingredientService.getAllIngredient());
+        model.addAttribute("ingredientList", ingredientDao.getAll());
 
         return "warehouses/warehouse_form";
     }
@@ -74,14 +75,14 @@ public class WarehouseController {
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
-            if (warehouse.getId() == 0) {
+            if (warehouse.isNew()) {
                 redirectAttributes.addFlashAttribute("msg", "Warehouse added successfully!");
-                warehouse.setIngredient(ingredientService.findIngredientByTitle(warehouse.getIngredient().getIngredientTitle()));
+                warehouse.setIngredient(ingredientDao.findByTitle(warehouse.getIngredient().getIngredientTitle()));
                 warehouseService.createWarehouse(warehouse);
             } else {
                 redirectAttributes.addFlashAttribute("msg", "Warehouse updated successfully!");
                 warehouseService.updateWarehouseIngredientId(warehouse.getId(),
-                        ingredientService.findIngredientByTitle(warehouse.getIngredient().getIngredientTitle()));
+                        ingredientDao.findByTitle(warehouse.getIngredient().getIngredientTitle()));
                 warehouseService.updateWarehouseAmount(warehouse.getId(), warehouse.getAmount());
             }
 
@@ -95,7 +96,8 @@ public class WarehouseController {
     }
 
     @Autowired
-    public void setIngredientService(IngredientService ingredientService) {
-        this.ingredientService = ingredientService;
+    public void setIngredientDao(IngredientDao ingredientDao) {
+        this.ingredientDao = ingredientDao;
     }
+
 }

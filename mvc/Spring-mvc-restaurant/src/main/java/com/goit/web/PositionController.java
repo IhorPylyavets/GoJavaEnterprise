@@ -77,7 +77,7 @@ public class PositionController {
             return "positions/position_form";
         } else {
             redirectAttributes.addFlashAttribute("css", "success");
-            if(position.getId() == 0){
+            if(position.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Position added successfully!");
                 positionService.createPosition(position);
             }else{
