@@ -9,6 +9,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.sql.Date;
 import java.util.List;
 
@@ -23,36 +27,65 @@ public class HEmployeeDao implements EmployeeDao {
 
     @Transactional
     public Employee findEmployeeById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+        Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
+        Predicate condition = criteriaBuilder.equal(employeeRoot.get("id"), id);
+        criteriaQuery.where(condition);
+        return (Employee) session.createQuery(criteriaQuery).getSingleResult();
         /*Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Employee E WHERE E.id = :id");
         query.setParameter("id", id);
         return (Employee) query.uniqueResult();*/
-        Employee employee = sessionFactory.getCurrentSession().get(Employee.class, id);
+        /*Employee employee = sessionFactory.getCurrentSession().get(Employee.class, id);
         if (employee == null)
             throw new RuntimeException("Can't find Employee by id = " + id);
-        return employee;
+        return employee;*/
     }
 
     @Transactional
     public Employee findEmployeeByFullName(String lastName, String firstName) {
         Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+        Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
+        Predicate conditionLastName = criteriaBuilder.equal(employeeRoot.get("lastName"), lastName);
+        Predicate conditionFirstName = criteriaBuilder.equal(employeeRoot.get("firstName"), firstName);
+        Predicate mainCondition = criteriaBuilder.and(conditionLastName, conditionFirstName);
+        criteriaQuery.where(mainCondition);
+        return (Employee) session.createQuery(criteriaQuery).getSingleResult();
+        /*Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select e from Employee e WHERE e.lastName = :lastName AND e.firstName = :firstName");
         query.setParameter("lastName", lastName);
         query.setParameter("firstName", firstName);
-        return (Employee) query.uniqueResult();
+        return (Employee) query.uniqueResult();*/
     }
 
     @Transactional
     public List<Employee> getAllEmployees() {
-        return sessionFactory.getCurrentSession().createQuery("select e from Employee e").list();
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+        Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
+        criteriaQuery.select(employeeRoot);
+        return session.createQuery(criteriaQuery).getResultList();
+        //return sessionFactory.getCurrentSession().createQuery("select e from Employee e").list();
     }
 
     @Transactional
     public List<Employee> getAllEmployeesByPosition(Position position) {
-        return sessionFactory.getCurrentSession()
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+        Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
+        Predicate condition = criteriaBuilder.equal(employeeRoot.get("position"), position);
+        criteriaQuery.where(condition);
+        return session.createQuery(criteriaQuery).getResultList();
+        /*return sessionFactory.getCurrentSession()
                 .createQuery("select e from Employee e WHERE e.position = :position")
                 .setParameter("position", position)
-                .list();
+                .list();*/
     }
 
     @Transactional
