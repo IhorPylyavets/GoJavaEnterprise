@@ -2,6 +2,7 @@ package com.goit.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,13 +17,13 @@ public class Menu implements Serializable {
     @Column(name = "MENU_TITLE")
     private String menuTitle;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER/*, cascade = CascadeType.ALL*/)
     @JoinTable(
             name = "menus_to_dishes",
             joinColumns = @JoinColumn(name = "menuId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "dishId", referencedColumnName = "id")
     )
-    private List<Dish> dishesList;
+    private List<Dish> dishesList = new ArrayList<>();
 
     public Menu() {
     }

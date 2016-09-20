@@ -2,7 +2,7 @@
 <div class="container">
 	<hr>
 	<footer>
-		<p>&copy; Ihor Pylyavets 2016</p>
+		<p>&copy; GoIt Ihor Pylyavets 2016</p>
 	</footer>
 </div>
 

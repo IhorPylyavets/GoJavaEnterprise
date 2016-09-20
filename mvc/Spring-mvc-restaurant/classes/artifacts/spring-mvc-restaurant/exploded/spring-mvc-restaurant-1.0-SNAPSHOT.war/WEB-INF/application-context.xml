@@ -44,5 +44,6 @@
 
     <bean id="dishesPreparationService" class="com.goit.service.DishesPreparationService"/>
     <bean id="dishesPreparationDao" class="com.goit.dao.hibernate.HDishesPreparationDao"/>
+    <bean class="com.goit.web.validators.DishesPreparationValidator" />
 
 </beans>

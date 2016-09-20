@@ -128,6 +128,11 @@ public class InitDB {
         greekSaladIngredients.add(ingredientDao.findByTitle("olive"));
         dishDao.createDish(new Dish("Greek salad", greekSaladIngredients, categoryDao.findByTitle("salads"), 30.0F, 180.0F));
 
+        /*List<Dish> dishList = dishDao.getAllDish();
+        for (Dish d : dishList) {
+            System.out.println(d);
+        }*/
+
         List<Dish> businessDishes = new ArrayList<>();
         businessDishes.add(dishDao.findDishByTitle("Olivie"));
         businessDishes.add(dishDao.findDishByTitle("Duck with apples"));
@@ -154,12 +159,6 @@ public class InitDB {
         orderDao.createOrder(new Orders(employeeDao.findEmployeeByFullName("Grot", "Piter"),
                 deskDao.findByTitle("Fourth"), getTimestampNow()));
 
-        /*System.out.println("Waiters:");
-        List<Employee> waiters = employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("waiter"));
-        for (Employee e : waiters) {
-            System.out.println(e);
-        }*/
-
         DishesPreparation dishesPreparation1 = new DishesPreparation();
         dishesPreparation1.setDish(dishDao.findDishByTitle("Duck with apples"));
         dishesPreparation1.setCook(employeeDao.findEmployeeByFullName("Petrov", "Piter"));
@@ -173,8 +172,6 @@ public class InitDB {
         dishesPreparation2.setOrderValue(orderDao.findOrderById(1));
         dishesPreparation2.setDatePreparation(getTimestampNow());
         dishesPreparationDao.createDishesPreparation(dishesPreparation2);
-
-        //List<>
 
     }
 

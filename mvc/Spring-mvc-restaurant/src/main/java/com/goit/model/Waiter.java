@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Waiter extends Employee {
 
-    @OneToMany(fetch = FetchType.LAZY)
+    /*@OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMPLOYEE_ID")
     @Fetch(FetchMode.JOIN)
     private List<Orders> orders;
@@ -42,5 +42,5 @@ public class Waiter extends Employee {
         sb.append("}\n");
 
         return sb.toString();
-    }
+    }*/
 }

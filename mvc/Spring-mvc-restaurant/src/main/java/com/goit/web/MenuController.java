@@ -15,6 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.beans.PropertyEditorSupport;
 import java.util.List;
 
 @Controller
@@ -29,6 +30,13 @@ public class MenuController {
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
         binder.addValidators(menuValidator);
+
+        binder.registerCustomEditor(Dish.class, "dishesList", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                setValue(dishDao.findDishByTitle(text));
+            }
+        });
     }
 
     @RequestMapping(value = "/menus", method = RequestMethod.GET)
@@ -82,29 +90,19 @@ public class MenuController {
     public String saveOrUpdateMenu(@ModelAttribute("menu_form") @Validated Menu menu,
                                    BindingResult result, final RedirectAttributes redirectAttributes) {
 
-        System.out.println("menu//// " + menu);
-
         if (result.hasErrors()) {
-            System.out.println("result.hasErrors()");
             return "menus/menu_form";
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
             if (menu.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Menu added successfully!");
-                /*dish.setCategory(categoryService.findCategoryByTitle(dish.getCategory().getCategoryTitle()));
-                dish.setIngredients(fixedSelectedIngredients(dish.getIngredients()));
-                dishService.createDish(dish);*/
+                menuService.createMenu(menu);
 
             } else {
                 redirectAttributes.addFlashAttribute("msg", "Menu updated successfully!");
-                /*dishService.updateDishTitle(dish.getId(), dish.getDishTitle());
-                dishService.updateDishCategoryId(dish.getId(),
-                        categoryService.findCategoryByTitle(dish.getCategory().getCategoryTitle()));
-                dishService.updateDishPrice(dish.getId(), dish.getPrice());
-                dishService.updateDishWeight(dish.getId(), dish.getWeight());
-
-                dishService.updateDistIngredients(dish.getId(), fixedSelectedIngredients(dish.getIngredients()));*/
+                menuService.updateMenuTitle(menu.getId(), menu.getMenuTitle());
+                menuService.updateMenuDishes(menu.getId(), menu.getDishesList());
             }
 
             return "redirect:/menus/" + menu.getId();

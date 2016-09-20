@@ -43,7 +43,7 @@
                 <div class="col-sm-10">
                     <form:select path="dishesList" items="${dishesAll}"
                                  multiple="true" size="5" class="form-control"
-                                 itemLabel="dishTitle" itemValue="id"/>
+                                 itemLabel="dishTitle" itemValue="dishTitle"/>
                     <form:errors path="dishesList" class="control-label" />
                 </div>
             </div>

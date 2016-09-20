@@ -26,7 +26,7 @@ public class Employee implements Serializable {
     @Column(name = "PHONE")
     private String phone;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne/*(cascade = CascadeType.ALL)*/
     @JoinColumn(name = "POSITION_ID")
     private Position position;
 
