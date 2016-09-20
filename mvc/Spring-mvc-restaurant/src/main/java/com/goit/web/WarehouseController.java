@@ -4,15 +4,14 @@ import com.goit.dao.IngredientDao;
 import com.goit.model.Warehouse;
 import com.goit.service.IngredientService;
 import com.goit.service.WarehouseService;
+import com.goit.web.validators.WarehouseValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -20,6 +19,14 @@ public class WarehouseController {
 
     private WarehouseService warehouseService;
     private IngredientDao ingredientDao;
+
+    @Autowired
+    private WarehouseValidator warehouseValidator;
+
+    @InitBinder
+    public void dataBinding(WebDataBinder binder) {
+        binder.addValidators(warehouseValidator);
+    }
 
     @RequestMapping(value = "/warehouses", method = RequestMethod.GET)
     public String showAllWarehouses(Model model) {
@@ -69,6 +76,8 @@ public class WarehouseController {
     @RequestMapping(value = "/warehouses", method = RequestMethod.POST)
     public String saveOrUpdateWarehouse(@ModelAttribute("warehouse_form") @Validated Warehouse warehouse,
                                        BindingResult result, final RedirectAttributes redirectAttributes) {
+
+        System.out.println(warehouse);
 
         if (result.hasErrors()) {
             return "warehouses/warehouse_form";

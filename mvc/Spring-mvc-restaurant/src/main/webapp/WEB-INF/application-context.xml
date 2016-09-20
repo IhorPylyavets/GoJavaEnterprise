@@ -8,32 +8,42 @@
 
     <bean id="positionService" class="com.goit.service.PositionService"/>
     <bean id="positionDao" class="com.goit.dao.hibernate.HPositionDao"/>
+    <bean class="com.goit.web.validators.PositionValidator"/>
 
     <bean id="employeeService" class="com.goit.service.EmployeeService"/>
     <bean id="employeeDao" class="com.goit.dao.hibernate.HEmployeeDao"/>
+    <bean class="com.goit.web.validators.EmployeeValidator" />
 
     <bean id="ingredientService" class="com.goit.service.IngredientService"/>
     <bean id="ingredientDao" class="com.goit.dao.hibernate.HIngredientDao"/>
+    <bean class="com.goit.web.validators.IngredientValidator" />
 
     <bean id="menuService" class="com.goit.service.MenuService"/>
     <bean id="menuDao" class="com.goit.dao.hibernate.HMenuDao"/>
+    <bean class="com.goit.web.validators.MenuValidator" />
 
     <bean id="categoryService" class="com.goit.service.CategoryService"/>
     <bean id="categoryDao" class="com.goit.dao.hibernate.HCategoryDao"/>
+    <bean class="com.goit.web.validators.CategoryValidator" />
 
     <bean id="warehouseServise" class="com.goit.service.WarehouseService"/>
     <bean id="warehouseDao" class="com.goit.dao.hibernate.HWarehouseDao"/>
+    <bean class="com.goit.web.validators.WarehouseValidator" />
 
     <bean id="dishService" class="com.goit.service.DishService"/>
     <bean id="dishDao" class="com.goit.dao.hibernate.HDishDao"/>
+    <bean class="com.goit.web.validators.DishValidator" />
 
     <bean id="deskService" class="com.goit.service.DeskService"/>
     <bean id="deskDao" class="com.goit.dao.hibernate.HDeskDao"/>
+    <bean class="com.goit.web.validators.DeskValidator" />
 
     <bean id="orderService" class="com.goit.service.OrderService"/>
     <bean id="orderDao" class="com.goit.dao.hibernate.HOrderDao"/>
+    <bean class="com.goit.web.validators.OrdersValidator" />
 
     <bean id="dishesPreparationService" class="com.goit.service.DishesPreparationService"/>
     <bean id="dishesPreparationDao" class="com.goit.dao.hibernate.HDishesPreparationDao"/>
+    <bean class="com.goit.web.validators.DishesPreparationValidator" />
 
 </beans>

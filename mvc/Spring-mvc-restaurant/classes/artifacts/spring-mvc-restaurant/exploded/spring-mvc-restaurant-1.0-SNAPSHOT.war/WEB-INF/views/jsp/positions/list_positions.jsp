@@ -21,7 +21,7 @@
 			</div>
 		</c:if>
 
-		<h1>All Position</h1>
+		<h1>All Positions</h1>
 
 		<table class="table table-striped">
 			<thead>
@@ -32,19 +32,21 @@
 				</tr>
 			</thead>
 
+			<c:set var="idCounter" value="1"/>
 			<c:forEach var="position" items="${positions}">
 				<tr>
-					<td>${position.id}</td>
+					<td><c:out value="${idCounter}"/></td>
 					<td>${position.positionTitle}</td>
 					<td>
 						<spring:url value="/positions/${position.id}" var="positionUrl" />
 						<spring:url value="/positions/${position.id}/delete" var="deleteUrl" />
 						<spring:url value="/positions/${position.id}/update" var="updateUrl" />
 
-						<button class="btn btn-info" onclick="location.href='${positionUrl}'">Query</button>
+						<button class="btn btn-info" onclick="location.href='${positionUrl}'">Select</button>
 						<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
 						<button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
 				</tr>
+				<c:set var="idCounter" value="${idCounter+1}"/>
 			</c:forEach>
 		</table>
 

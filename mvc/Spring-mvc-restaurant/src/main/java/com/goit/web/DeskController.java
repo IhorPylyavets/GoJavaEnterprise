@@ -3,15 +3,14 @@ package com.goit.web;
 import com.goit.model.Desk;
 import com.goit.model.DeskStatus;
 import com.goit.service.DeskService;
+import com.goit.web.validators.DeskValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
@@ -22,8 +21,11 @@ public class DeskController {
     private DeskService deskService;
 
     @Autowired
-    public void setDeskService(DeskService deskService) {
-        this.deskService = deskService;
+    private DeskValidator deskValidator;
+
+    @InitBinder
+    public void dataBinding(WebDataBinder binder) {
+        binder.addValidators(deskValidator);
     }
 
     @RequestMapping(value = "/desks", method = RequestMethod.GET)
@@ -74,7 +76,7 @@ public class DeskController {
     public String saveOrUpdateDesk(@ModelAttribute("desk_form") @Validated Desk desk,
                                        BindingResult result, final RedirectAttributes redirectAttributes) {
 
-
+        System.out.println(desk);
 
         if (result.hasErrors()) {
             return "desks/desk_form";
@@ -99,6 +101,11 @@ public class DeskController {
             return "redirect:/desks/" + desk.getId();
         }
 
+    }
+
+    @Autowired
+    public void setDeskService(DeskService deskService) {
+        this.deskService = deskService;
     }
 
 }

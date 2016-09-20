@@ -21,7 +21,18 @@
         </div>
     </c:if>
 
-    <h1>All Position</h1>
+    <h1>All Employees</h1>
+
+
+    <%--<div class="form-group ${status.error ? 'has-error' : ''}">
+        <label class="col-sm-2 control-label">Search by Position</label>
+        <div class="col-sm-10">
+            <form:select path="position.positionTitle" class="form-control selcls">
+                <form:option value="NONE" label="--- All ---" />
+                <form:options items="${positionList}" itemValue="positionTitle" itemLabel="positionTitle"/>
+            </form:select>
+        </div>
+    </div>--%>
 
     <table class="table table-striped">
         <thead>
@@ -34,9 +45,10 @@
         </tr>
         </thead>
 
+        <c:set var="idCounter" value="1"/>
         <c:forEach var="employee" items="${employees}">
             <tr>
-                <td>${employee.id}</td>
+                <td><c:out value="${idCounter}"/></td>
                 <td>${employee.lastName}</td>
                 <td>${employee.firstName}</td>
                 <td>${employee.position.positionTitle}</td>
@@ -45,10 +57,11 @@
                     <spring:url value="/employees/${employee.id}/delete" var="deleteUrl" />
                     <spring:url value="/employees/${employee.id}/update" var="updateUrl" />
 
-                    <button class="btn btn-info" onclick="location.href='${employeeUrl}'">Query</button>
+                    <button class="btn btn-info" onclick="location.href='${employeeUrl}'">Select</button>
                     <button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
                     <button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
             </tr>
+            <c:set var="idCounter" value="${idCounter+1}"/>
         </c:forEach>
     </table>
 

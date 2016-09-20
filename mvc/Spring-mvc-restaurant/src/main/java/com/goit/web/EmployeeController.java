@@ -3,23 +3,37 @@ package com.goit.web;
 import com.goit.dao.PositionDao;
 import com.goit.model.Employee;
 import com.goit.service.EmployeeService;
-import com.goit.service.PositionService;
+import com.goit.web.validators.EmployeeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class EmployeeController {
 
     private EmployeeService employeeService;
     private PositionDao positionDao;
+
+    @Autowired
+    private EmployeeValidator employeeValidator;
+
+    @InitBinder
+    public void dataBinding(WebDataBinder binder) {
+        binder.addValidators(employeeValidator);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, "birthday", new CustomDateEditor(dateFormat, true));
+    }
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public String showAllEmployees(Model model) {

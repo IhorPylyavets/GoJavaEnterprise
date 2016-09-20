@@ -8,16 +8,19 @@ import com.goit.service.DeskService;
 import com.goit.service.EmployeeService;
 import com.goit.service.OrderService;
 import com.goit.service.PositionService;
+import com.goit.web.validators.OrdersValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class OrderController {
@@ -26,6 +29,18 @@ public class OrderController {
     private EmployeeDao employeeDao;
     private PositionDao positionDao;
     private DeskDao deskDao;
+
+    @Autowired
+    private OrdersValidator ordersValidator;
+
+    @InitBinder
+    public void dataBinding(WebDataBinder binder) {
+        binder.addValidators(ordersValidator);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, "orderDate", new CustomDateEditor(dateFormat, true));
+    }
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String showAllOrders(Model model) {
