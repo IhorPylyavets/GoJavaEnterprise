@@ -65,7 +65,7 @@
 
         <spring:bind path="datePreparation">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <label class="col-sm-2 control-label">DishesPreparation DATE</label>
+                <label class="col-sm-2 control-label">DishesPreparationDate</label>
                 <div class="col-sm-10">
                     <form:input path="datePreparation" type="datetime-local" class="form-control " id="datePreparation"/>
                     <form:errors path="datePreparation" class="control-label" />

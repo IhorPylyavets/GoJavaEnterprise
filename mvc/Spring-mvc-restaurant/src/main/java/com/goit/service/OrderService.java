@@ -6,7 +6,7 @@ import com.goit.model.Employee;
 import com.goit.model.Orders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 
 public class OrderService {
@@ -48,7 +48,7 @@ public class OrderService {
     }
 
     @Transactional
-    public void updateOrderDate(int id, Timestamp newOrderDate) {
+    public void updateOrderDate(int id, Date newOrderDate) {
         orderDao.updateOrderDate(id, newOrderDate);
     }
 }

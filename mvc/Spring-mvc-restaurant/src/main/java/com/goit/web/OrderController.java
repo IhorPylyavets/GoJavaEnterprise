@@ -3,12 +3,9 @@ package com.goit.web;
 import com.goit.dao.DeskDao;
 import com.goit.dao.EmployeeDao;
 import com.goit.dao.PositionDao;
+import com.goit.model.Employee;
 import com.goit.model.Orders;
-import com.goit.model.Waiter;
-import com.goit.service.DeskService;
-import com.goit.service.EmployeeService;
 import com.goit.service.OrderService;
-import com.goit.service.PositionService;
 import com.goit.web.validators.OrdersValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,14 +18,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.beans.PropertyEditorSupport;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 public class OrderController {
 
     private OrderService orderService;
     private EmployeeDao employeeDao;
+    //private WaiterDao waiterDao;
     private PositionDao positionDao;
     private DeskDao deskDao;
 
@@ -39,16 +37,15 @@ public class OrderController {
     public void dataBinding(WebDataBinder binder) {
         binder.addValidators(ordersValidator);
 
-        binder.registerCustomEditor(Waiter.class, "waiter", new PropertyEditorSupport() {
+        binder.registerCustomEditor(Employee.class, "waiter", new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) {
-                System.out.println("test " + text);
-                System.out.println(employeeDao.findEmployeeById(Integer.parseInt(text)));
-                setValue((Waiter)employeeDao.findEmployeeById(Integer.parseInt(text)));
+                System.out.println(employeeDao.findEmployeeById(Integer.valueOf(text)));
+                setValue(employeeDao.findEmployeeById(Integer.valueOf(text)));
             }
         });
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, "orderDate", new CustomDateEditor(dateFormat, true));
     }
@@ -97,6 +94,9 @@ public class OrderController {
         model.addAttribute("waiterList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("waiter")));
         model.addAttribute("deskList", deskDao.getAll()); //getAllFreeDesk());
 
+        //List<Waiter> waiters = waiterDao.getAllWaiters();
+        //System.out.println(waiters.size());
+
         return "orders/order_form";
     }
 
@@ -104,9 +104,12 @@ public class OrderController {
     public String saveOrUpdateOrders(@ModelAttribute("order_form") @Validated Orders orders,
                                      BindingResult result, final RedirectAttributes redirectAttributes) {
 
+
+
         System.out.println("saveOrUpdateOrders");
         System.out.println(orders);
         if (result.hasErrors()) {
+            System.out.println("xxxxx");
             return "orders/order_form";
         } else {
 
@@ -114,8 +117,10 @@ public class OrderController {
             if(orders.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Orders added successfully!");
 
+                System.out.println(orders);
+
                 //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
-                orderService.createOrder(orders);
+                //orderService.createOrder(orders);
 
             }else{
                 redirectAttributes.addFlashAttribute("msg", "Orders updated successfully!");
@@ -133,46 +138,6 @@ public class OrderController {
 
     }
 
-    /*@RequestMapping(value = "/orders", method = RequestMethod.POST)
-    public String saveOrUpdateOrder(@ModelAttribute("order_form") @Validated Orders order,
-                                       BindingResult result, final RedirectAttributes redirectAttributes) {
-
-        System.out.println(order);
-
-        if (result.hasErrors()) {
-            System.out.println("saveOrUpdateOrder error");
-            return "orders/order_form";
-        } else {
-
-            redirectAttributes.addFlashAttribute("css", "success");
-            if(order.getId() == 0){
-                redirectAttributes.addFlashAttribute("msg", "Order added successfully!");
-
-                //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
-                //employeeService.createEmployee(employee);
-                orderService.createOrder(order);
-
-            }else{
-                redirectAttributes.addFlashAttribute("msg", "Order updated successfully!");
-                *//*orderService.updateOrderWaiterId(order.getId(), order.getWaiter());
-                orderService.updateOrderDeskId(order.getId(), order.getDesk());
-                orderService.updateOrderDate(order.getId(), order.getOrderDate());*//*
-
-
-                *//*employeeService.updateEmployeeLastName(employee.getId(), employee.getLastName());
-                employeeService.updateEmployeeFirstName(employee.getId(), employee.getFirstName());
-                employeeService.updateEmployeeBirthday(employee.getId(), employee.getBirthday());
-                employeeService.updateEmployeePhone(employee.getId(), employee.getPhone());
-                employeeService.updateEmployeePositionId(employee.getId(),
-                        positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
-                employeeService.updateEmployeeSalary(employee.getId(), employee.getSalary());*//*
-            }
-
-            return "redirect:/orders/" + order.getId();
-        }
-
-    }*/
-
     @Autowired
     public void setOrderService(OrderService orderService) {
         this.orderService = orderService;
@@ -182,6 +147,11 @@ public class OrderController {
     public void setEmployeeDao(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
+
+    /*@Autowired
+    public void setWaiterDao(WaiterDao waiterDao) {
+        this.waiterDao = waiterDao;
+    }*/
 
     @Autowired
     public void setPositionDao(PositionDao positionDao) {

@@ -2,7 +2,7 @@ package com.goit.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Entity
 @Table(name = "ORDERS")
@@ -15,22 +15,14 @@ public class Orders implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "WAITER_ID")
-    private Waiter waiter;
+    private Employee waiter;
 
     @ManyToOne
     @JoinColumn(name = "DESK_ID")
     private Desk desk;
 
     @Column(name = "ORDER_DATE")
-    private Timestamp orderDate;
-
-    public Orders() {}
-
-    public Orders(Waiter waiter, Desk desk, Timestamp orderDate) {
-        this.waiter = waiter;
-        this.desk = desk;
-        this.orderDate = orderDate;
-    }
+    private Date orderDate;
 
     public Integer getId() {
         return id;
@@ -40,11 +32,11 @@ public class Orders implements Serializable {
         this.id = id;
     }
 
-    public Waiter getWaiter() {
+    public Employee getWaiter() {
         return waiter;
     }
 
-    public void setWaiter(Waiter waiter) {
+    public void setWaiter(Employee waiter) {
         this.waiter = waiter;
     }
 
@@ -56,11 +48,11 @@ public class Orders implements Serializable {
         this.desk = desk;
     }
 
-    public Timestamp getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Timestamp orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -70,12 +62,11 @@ public class Orders implements Serializable {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Orders{" +
                 "id=" + id +
                 ", waiter=" + waiter +
                 ", desk=" + desk +
                 ", orderDate=" + orderDate +
                 '}';
     }
-
 }

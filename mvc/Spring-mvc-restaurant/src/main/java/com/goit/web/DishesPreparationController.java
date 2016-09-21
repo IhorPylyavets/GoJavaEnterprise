@@ -68,7 +68,7 @@ public class DishesPreparationController {
     public String showUpdateDishesPreparationForm(@PathVariable("id") int id, Model model) {
         DishesPreparation dishesPreparation = dishesPreparationService.findDishesPreparationById(id);
         model.addAttribute("dishes_preparation_form", dishesPreparation);
-        model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
+        //model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
         model.addAttribute("dishList", dishDao.getAllDish());
         model.addAttribute("orderValuekList", orderDao.getAllOrders());
 
@@ -79,7 +79,7 @@ public class DishesPreparationController {
     public String showCreateDishesPreparationForm(Model model) {
         DishesPreparation dishesPreparation = new DishesPreparation();
         model.addAttribute("dishes_preparation_form", dishesPreparation);
-        model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
+        //model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
         model.addAttribute("dishList", dishDao.getAllDish());
         model.addAttribute("orderValuekList", orderDao.getAllOrders());
 

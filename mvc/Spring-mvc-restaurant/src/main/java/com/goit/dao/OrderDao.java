@@ -4,7 +4,7 @@ import com.goit.model.Desk;
 import com.goit.model.Employee;
 import com.goit.model.Orders;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 
 public interface OrderDao {
@@ -14,5 +14,5 @@ public interface OrderDao {
     void deleteOrder(int id);
     void updateOrderWaiterId(int id, Employee newWaiter);
     void updateOrderDeskId(int id, Desk newDesk);
-    void updateOrderDate(int id, Timestamp newOrderDate);
+    void updateOrderDate(int id, Date newOrderDate);
 }

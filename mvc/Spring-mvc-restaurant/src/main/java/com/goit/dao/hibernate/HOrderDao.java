@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class HOrderDao implements OrderDao{
     }
 
     @Transactional
-    public void updateOrderDate(int id, Timestamp newOrderDate) {
+    public void updateOrderDate(int id, Date newOrderDate) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("update Orders set orderDate = :orderDate where id = :id");
         query.setParameter("orderDate", newOrderDate);

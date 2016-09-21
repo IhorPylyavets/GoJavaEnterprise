@@ -29,7 +29,7 @@
 
         <spring:bind path="waiter">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <label class="col-sm-2 control-label">Employee</label>
+                <label class="col-sm-2 control-label">Waiter</label>
                 <div class="col-sm-10">
                     <form:select path="waiter" class="form-control selcls">
                         <form:option value="NONE" label="--- Select Waiter ---" />
@@ -53,9 +53,9 @@
 
         <spring:bind path="orderDate">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <label class="col-sm-2 control-label">ORDER DATE</label>
+                <label class="col-sm-2 control-label">Birthday</label>
                 <div class="col-sm-10">
-                    <form:input path="orderDate" type="datetime-local" class="form-control " id="orderDate"/>
+                    <form:input path="orderDate" type="date" class="form-control " id="orderDate"/>
                     <form:errors path="orderDate" class="control-label" />
                 </div>
             </div>

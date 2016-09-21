@@ -1,9 +1,13 @@
+/*
 package com.goit.dao;
 
 import com.goit.model.Waiter;
 
-public interface WaiterDao {
+import java.util.List;
 
-    Waiter findWaiterByFullName(String lastName, String firstName);
+public interface WaiterDao extends EmployeeDao{
+
+    List<Waiter> getAllWaiters();
 
 }
+*/
