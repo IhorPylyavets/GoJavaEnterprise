@@ -15,7 +15,5 @@ public class DishesPreparationValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         DishesPreparation dishesPreparation = (DishesPreparation) target;
-
-
     }
 }

@@ -56,7 +56,7 @@ public class InitDB {
 
         employeeDao.createEmployee(new Employee("Ivanov", "Ivan", stringToDate("1978-06-19"), "1234567890",
                 positionDao.findByTitle("waiter"), 20000.0F));
-        employeeDao.createEmployee(new Employee("Grot", "Piter", stringToDate("1978-06-19"), "1234567890",
+        employeeDao.createEmployee(new Employee("Grot", "Piter", stringToDate("1978-06-19"), "123411190",
                 positionDao.findByTitle("waiter"), 21000.0F));
         employeeDao.createEmployee(new Employee("Petrov", "Piter", stringToDate("1960-05-05"), "9876543210",
                 positionDao.findByTitle("cook"), 23000.0F));
@@ -154,12 +154,12 @@ public class InitDB {
         deskDao.create(new Desk("Fourth"));
         deskDao.create(new Desk("Fifth"));
 
-        orderDao.createOrder(new Orders(employeeDao.findEmployeeByFullName("Ivanov", "Ivan"),
+        /*orderDao.createOrder(new Orders((Waiter)employeeDao.findEmployeeByFullName("Ivanov", "Ivan"),
                 deskDao.findByTitle("First"), getTimestampNow()));
-        orderDao.createOrder(new Orders(employeeDao.findEmployeeByFullName("Grot", "Piter"),
-                deskDao.findByTitle("Fourth"), getTimestampNow()));
+        orderDao.createOrder(new Orders((Waiter)employeeDao.findEmployeeByFullName("Grot", "Piter"),
+                deskDao.findByTitle("Fourth"), getTimestampNow()));*/
 
-        DishesPreparation dishesPreparation1 = new DishesPreparation();
+        /*DishesPreparation dishesPreparation1 = new DishesPreparation();
         dishesPreparation1.setDish(dishDao.findDishByTitle("Duck with apples"));
         dishesPreparation1.setCook(employeeDao.findEmployeeByFullName("Petrov", "Piter"));
         dishesPreparation1.setOrderValue(orderDao.findOrderById(1));
@@ -171,7 +171,7 @@ public class InitDB {
         dishesPreparation2.setCook(employeeDao.findEmployeeByFullName("Petrov", "Piter"));
         dishesPreparation2.setOrderValue(orderDao.findOrderById(1));
         dishesPreparation2.setDatePreparation(getTimestampNow());
-        dishesPreparationDao.createDishesPreparation(dishesPreparation2);
+        dishesPreparationDao.createDishesPreparation(dishesPreparation2);*/
 
     }
 

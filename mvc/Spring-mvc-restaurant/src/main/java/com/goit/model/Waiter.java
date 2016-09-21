@@ -12,9 +12,8 @@ import java.util.List;
 @Entity
 public class Waiter extends Employee {
 
-    /*@OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EMPLOYEE_ID")
-    @Fetch(FetchMode.JOIN)
+    @OneToMany(mappedBy = "waiter", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<Orders> orders;
 
     public List<Orders> getOrders() {
@@ -25,7 +24,7 @@ public class Waiter extends Employee {
         this.orders = orders;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Waiter {\n");

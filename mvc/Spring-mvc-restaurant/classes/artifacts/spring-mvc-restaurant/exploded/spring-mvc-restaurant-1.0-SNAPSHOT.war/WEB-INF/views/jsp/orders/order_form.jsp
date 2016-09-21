@@ -29,7 +29,7 @@
 
         <spring:bind path="waiter">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <label class="col-sm-2 control-label">Employee</label>
+                <label class="col-sm-2 control-label">Waiter</label>
                 <div class="col-sm-10">
                     <form:select path="waiter" class="form-control selcls">
                         <form:option value="NONE" label="--- Select Waiter ---" />

@@ -8,20 +8,16 @@ import java.sql.Timestamp;
 @Table(name = "ORDERS")
 public class Orders implements Serializable {
 
-    /*@Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    @Column(name = "ID")*/
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "WAITER_ID")
-    private Employee waiter;
+    private Waiter waiter;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "DESK_ID")
     private Desk desk;
 
@@ -30,7 +26,7 @@ public class Orders implements Serializable {
 
     public Orders() {}
 
-    public Orders(Employee waiter, Desk desk, Timestamp orderDate) {
+    public Orders(Waiter waiter, Desk desk, Timestamp orderDate) {
         this.waiter = waiter;
         this.desk = desk;
         this.orderDate = orderDate;
@@ -44,11 +40,11 @@ public class Orders implements Serializable {
         this.id = id;
     }
 
-    public Employee getWaiter() {
+    public Waiter getWaiter() {
         return waiter;
     }
 
-    public void setWaiter(Employee waiter) {
+    public void setWaiter(Waiter waiter) {
         this.waiter = waiter;
     }
 
@@ -82,24 +78,4 @@ public class Orders implements Serializable {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Orders orders = (Orders) o;
-
-        if (waiter != null ? !waiter.equals(orders.waiter) : orders.waiter != null) return false;
-        if (desk != null ? !desk.equals(orders.desk) : orders.desk != null) return false;
-        return orderDate != null ? orderDate.equals(orders.orderDate) : orders.orderDate == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = waiter != null ? waiter.hashCode() : 0;
-        result = 31 * result + (desk != null ? desk.hashCode() : 0);
-        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
-        return result;
-    }
 }

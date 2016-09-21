@@ -4,6 +4,7 @@ import com.goit.dao.DeskDao;
 import com.goit.dao.EmployeeDao;
 import com.goit.dao.PositionDao;
 import com.goit.model.Orders;
+import com.goit.model.Waiter;
 import com.goit.service.DeskService;
 import com.goit.service.EmployeeService;
 import com.goit.service.OrderService;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -36,6 +38,15 @@ public class OrderController {
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
         binder.addValidators(ordersValidator);
+
+        binder.registerCustomEditor(Waiter.class, "waiter", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                System.out.println("test " + text);
+                System.out.println(employeeDao.findEmployeeById(Integer.parseInt(text)));
+                setValue((Waiter)employeeDao.findEmployeeById(Integer.parseInt(text)));
+            }
+        });
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         dateFormat.setLenient(false);

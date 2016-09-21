@@ -12,3 +12,10 @@ out/
 *.ldb
 
 *.log
+
+/.git/
+/.idea/
+/target/
+/out/
+/logs/
+*.iml
