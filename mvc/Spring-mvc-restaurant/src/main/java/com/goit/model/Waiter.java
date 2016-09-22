@@ -30,7 +30,7 @@ public class Waiter extends Employee {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Waite {\n");
+        sb.append("Waiter {\n");
         sb.append("  ID = {\n").append(getId()).append("\n");
         sb.append("  lastName = {\n").append(getLastName()).append("\n");
         sb.append("  firstName = {\n").append(getFirstName()).append("\n");

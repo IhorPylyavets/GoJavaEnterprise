@@ -4,10 +4,14 @@ import com.goit.dao.DishDao;
 import com.goit.dao.EmployeeDao;
 import com.goit.dao.OrderDao;
 import com.goit.dao.PositionDao;
+import com.goit.model.Dish;
 import com.goit.model.DishesPreparation;
+import com.goit.model.Employee;
+import com.goit.model.Orders;
 import com.goit.service.*;
 import com.goit.web.validators.DishesPreparationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +19,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.beans.PropertyEditorSupport;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Controller
 public class DishesPreparationController {
@@ -32,9 +41,30 @@ public class DishesPreparationController {
     public void dataBinding(WebDataBinder binder) {
         binder.addValidators(dishesPreparationValidator);
 
-        /*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        binder.registerCustomEditor(Employee.class, "cook", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                setValue(employeeDao.findEmployeeById(Integer.valueOf(text)));
+            }
+        });
+
+        binder.registerCustomEditor(Dish.class, "dish", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                setValue(dishDao.findDishById(Integer.valueOf(text)));
+            }
+        });
+
+        binder.registerCustomEditor(Orders.class, "order", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                setValue(orderDao.findOrderById(Integer.valueOf(text)));
+            }
+        });
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, "orderDate", new CustomDateEditor(dateFormat, true));*/
+        binder.registerCustomEditor(Date.class, "datePreparation", new CustomDateEditor(dateFormat, true));
     }
 
     @RequestMapping(value = "/dishes_preparations", method = RequestMethod.GET)
@@ -68,9 +98,9 @@ public class DishesPreparationController {
     public String showUpdateDishesPreparationForm(@PathVariable("id") int id, Model model) {
         DishesPreparation dishesPreparation = dishesPreparationService.findDishesPreparationById(id);
         model.addAttribute("dishes_preparation_form", dishesPreparation);
-        //model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
+        model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
         model.addAttribute("dishList", dishDao.getAllDish());
-        model.addAttribute("orderValuekList", orderDao.getAllOrders());
+        model.addAttribute("orderList", orderDao.getAllOrders());
 
         return "dishes_preparations/dishes_preparation_form";
     }
@@ -79,14 +109,9 @@ public class DishesPreparationController {
     public String showCreateDishesPreparationForm(Model model) {
         DishesPreparation dishesPreparation = new DishesPreparation();
         model.addAttribute("dishes_preparation_form", dishesPreparation);
-        //model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
+        model.addAttribute("cookList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("cook")));
         model.addAttribute("dishList", dishDao.getAllDish());
-        model.addAttribute("orderValuekList", orderDao.getAllOrders());
-
-        /*List<Dish> d = dishService.getAllDish();
-        for (Dish q : d) {
-            System.out.println(q);
-        }*/
+        model.addAttribute("orderList", orderDao.getAllOrders());
 
         return "dishes_preparations/dishes_preparation_form";
     }

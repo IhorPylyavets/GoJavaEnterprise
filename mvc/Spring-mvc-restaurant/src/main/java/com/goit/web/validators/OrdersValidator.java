@@ -18,9 +18,9 @@ public class OrdersValidator implements Validator {
         Orders orders = (Orders) target;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "orderDate", null, "OrderDate is empty");
 
-        /*if (orders.getWaiter() .getIngredients().size() <= 0) {
-            errors.rejectValue("waiter", "", "Waiter is not valid");
-        }*/
+        if (orders.getDishesInOrder().size() <= 0) {
+            errors.rejectValue("dishesList", "", "DishesList is not correct");
+        }
 
         /*if (!orders.getDesk().getDeskStatus().equals("FREE")) {
             errors.rejectValue("desk", "", "Desk is not valid");

@@ -1,4 +1,3 @@
-/*
 package com.goit.model;
 
 import org.hibernate.annotations.Fetch;
@@ -13,9 +12,9 @@ import java.util.List;
 @Entity
 public class Cook extends Employee {
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EMPLOYEE_ID")
-    @Fetch(FetchMode.JOIN)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cook_id")
+    @Fetch(FetchMode.SELECT)
     private List<DishesPreparation> dishesPreparationList;
 
     public List<DishesPreparation> getDishesPreparationList() {
@@ -29,22 +28,17 @@ public class Cook extends Employee {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Waiter {\n");
-        sb.append(" id = ").append(getId()).append("\n");
-        sb.append(" name = ").append(getFirstName()).append("\n");
-        sb.append(" surname = ").append(getLastName()).append("\n");
-        sb.append(" orders = {\n");
-
-        for (DishesPreparation preparation : dishesPreparationList) {
-            sb.append("    ").append(preparation).append("\n" );
-        }
-
-        //dishesPreparationList.forEach(order -> sb.append("    ").append(order).append("\n" ));
-        sb.append("    }\n");
+        sb.append("Cook {\n");
+        sb.append("  ID = {\n").append(getId()).append("\n");
+        sb.append("  lastName = {\n").append(getLastName()).append("\n");
+        sb.append("  firstName = {\n").append(getFirstName()).append("\n");
+        sb.append("  birthday = {\n").append(getBirthday()).append("\n");
+        sb.append("  phone = {\n").append(getPhone()).append("\n");
+        sb.append("  salary = {\n").append(getSalary()).append("\n");
+        dishesPreparationList.forEach(dishesPreparation -> sb.append("    ").append(dishesPreparation).append("\n"));
+        sb.append("  }\n");
         sb.append("}\n");
-
         return sb.toString();
     }
 
 }
-*/
