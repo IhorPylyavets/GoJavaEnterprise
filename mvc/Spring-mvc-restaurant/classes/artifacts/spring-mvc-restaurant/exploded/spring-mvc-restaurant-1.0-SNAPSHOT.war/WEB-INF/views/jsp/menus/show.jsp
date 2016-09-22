@@ -37,7 +37,7 @@
         <label class="col-sm-2">DISHES</label>
         <div class="col-sm-10">
             [
-            <c:forEach items="${menu.dishesList}" var="dish" varStatus="stat">
+            <c:forEach items="${menu.dishesInMenu}" var="dish" varStatus="stat">
                 ${dish.dishTitle}
                 <c:if test="${!stat.last}">|</c:if>
             </c:forEach>

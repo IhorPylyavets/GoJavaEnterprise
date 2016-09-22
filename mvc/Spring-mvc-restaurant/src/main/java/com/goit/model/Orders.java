@@ -29,7 +29,7 @@ public class Orders implements Serializable {
     @Column(name = "ORDER_DATE")
     private Date orderDate;
 
-    @ManyToMany(fetch = FetchType.EAGER )
+    @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(
             name = "orders_to_dishes",

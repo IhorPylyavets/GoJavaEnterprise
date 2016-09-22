@@ -1,5 +1,8 @@
 package com.goit.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ public class Menu implements Serializable {
     @Column(name = "MENU_TITLE")
     private String menuTitle;
 
-    @ManyToMany(fetch = FetchType.EAGER/*, cascade = CascadeType.ALL*/)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "menus_to_dishes",
             joinColumns = @JoinColumn(name = "menuId", referencedColumnName = "id"),
