@@ -18,8 +18,8 @@ public class MenuValidator implements Validator {
         Menu menu = (Menu) target;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "menuTitle", "", "MenuTitle is empty");
 
-        /*if (menu.getDishesList().size() <= 0) {
+        if (menu.getDishesInMenu().size() <= 0) {
             errors.rejectValue("dishesList", "", "DishesList is not correct");
-        }*/
+        }
     }
 }

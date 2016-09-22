@@ -22,8 +22,8 @@ public class OrdersValidator implements Validator {
             errors.rejectValue("waiter", "", "Waiter is not valid");
         }*/
 
-        if (!orders.getDesk().getDeskStatus().equals("FREE")) {
+        /*if (!orders.getDesk().getDeskStatus().equals("FREE")) {
             errors.rejectValue("desk", "", "Desk is not valid");
-        }
+        }*/
     }
 }

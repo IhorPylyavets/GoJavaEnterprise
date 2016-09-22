@@ -2,6 +2,7 @@ package com.goit.service;
 
 import com.goit.dao.OrderDao;
 import com.goit.model.Desk;
+import com.goit.model.Dish;
 import com.goit.model.Employee;
 import com.goit.model.Orders;
 import org.springframework.transaction.annotation.Transactional;

@@ -23,14 +23,14 @@ public class Menu implements Serializable {
             joinColumns = @JoinColumn(name = "menuId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "dishId", referencedColumnName = "id")
     )
-    private List<Dish> dishesList = new ArrayList<>();
+    private List<Dish> dishesInMenu = new ArrayList<>();
 
     public Menu() {
     }
 
-    public Menu(String menuTitle, List<Dish> dishesList) {
+    public Menu(String menuTitle, List<Dish> dishesInMenu) {
         this.menuTitle = menuTitle;
-        this.dishesList = dishesList;
+        this.dishesInMenu = dishesInMenu;
     }
 
     public Integer getId() {
@@ -49,12 +49,12 @@ public class Menu implements Serializable {
         this.menuTitle = menuTitle;
     }
 
-    public List<Dish> getDishesList() {
-        return dishesList;
+    public List<Dish> getDishesInMenu() {
+        return dishesInMenu;
     }
 
-    public void setDishesList(List<Dish> dishesList) {
-        this.dishesList = dishesList;
+    public void setDishesInMenu(List<Dish> dishesInMenu) {
+        this.dishesInMenu = dishesInMenu;
     }
 
     public boolean isNew() {
@@ -69,14 +69,14 @@ public class Menu implements Serializable {
         Menu menu = (Menu) o;
 
         if (menuTitle != null ? !menuTitle.equals(menu.menuTitle) : menu.menuTitle != null) return false;
-        return dishesList != null ? dishesList.equals(menu.dishesList) : menu.dishesList == null;
+        return dishesInMenu != null ? dishesInMenu.equals(menu.dishesInMenu) : menu.dishesInMenu == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = menuTitle != null ? menuTitle.hashCode() : 0;
-        result = 31 * result + (dishesList != null ? dishesList.hashCode() : 0);
+        result = 31 * result + (dishesInMenu != null ? dishesInMenu.hashCode() : 0);
         return result;
     }
 
@@ -85,7 +85,7 @@ public class Menu implements Serializable {
         return "Menu{" +
                 "id=" + id +
                 ", menuTitle='" + menuTitle + '\'' +
-                ", dishesList=" + dishesList +
+                ", dishesInMenu=" + dishesInMenu +
                 '}';
     }
 }

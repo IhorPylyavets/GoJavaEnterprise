@@ -1,8 +1,10 @@
 package com.goit.web;
 
 import com.goit.dao.DeskDao;
+import com.goit.dao.DishDao;
 import com.goit.dao.EmployeeDao;
 import com.goit.dao.PositionDao;
+import com.goit.model.Desk;
 import com.goit.model.Employee;
 import com.goit.model.Orders;
 import com.goit.service.OrderService;
@@ -20,13 +22,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.beans.PropertyEditorSupport;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Controller
 public class OrderController {
 
     private OrderService orderService;
     private EmployeeDao employeeDao;
-    //private WaiterDao waiterDao;
     private PositionDao positionDao;
     private DeskDao deskDao;
 
@@ -40,7 +42,6 @@ public class OrderController {
         binder.registerCustomEditor(Employee.class, "waiter", new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) {
-                System.out.println(employeeDao.findEmployeeById(Integer.valueOf(text)));
                 setValue(employeeDao.findEmployeeById(Integer.valueOf(text)));
             }
         });
@@ -94,9 +95,6 @@ public class OrderController {
         model.addAttribute("waiterList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("waiter")));
         model.addAttribute("deskList", deskDao.getAll()); //getAllFreeDesk());
 
-        //List<Waiter> waiters = waiterDao.getAllWaiters();
-        //System.out.println(waiters.size());
-
         return "orders/order_form";
     }
 
@@ -105,22 +103,21 @@ public class OrderController {
                                      BindingResult result, final RedirectAttributes redirectAttributes) {
 
 
-
-        System.out.println("saveOrUpdateOrders");
-        System.out.println(orders);
         if (result.hasErrors()) {
-            System.out.println("xxxxx");
+            System.out.println("jdhfvblzsdf;vb; " + orders);
             return "orders/order_form";
         } else {
 
             redirectAttributes.addFlashAttribute("css", "success");
             if(orders.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "Orders added successfully!");
+                orders.setDesk(deskDao.findByTitle(orders.getDesk().getDeskTitle()));
+                orderService.createOrder(orders);
 
-                System.out.println(orders);
-
-                //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
-                //orderService.createOrder(orders);
+                List<Orders> ordersList = orderService.getAllOrders();
+                for (Orders o : ordersList) {
+                    System.out.println(o);
+                }
 
             }else{
                 redirectAttributes.addFlashAttribute("msg", "Orders updated successfully!");
@@ -147,11 +144,6 @@ public class OrderController {
     public void setEmployeeDao(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
-
-    /*@Autowired
-    public void setWaiterDao(WaiterDao waiterDao) {
-        this.waiterDao = waiterDao;
-    }*/
 
     @Autowired
     public void setPositionDao(PositionDao positionDao) {

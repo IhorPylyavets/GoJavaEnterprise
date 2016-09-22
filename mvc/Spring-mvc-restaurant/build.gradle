@@ -24,8 +24,4 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-web', version: '4.3.1.RELEASE'
     compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.1.RELEASE'
 
-// https://mvnrepository.com/artifact/commons-lang/commons-lang
-    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
-
-
 }

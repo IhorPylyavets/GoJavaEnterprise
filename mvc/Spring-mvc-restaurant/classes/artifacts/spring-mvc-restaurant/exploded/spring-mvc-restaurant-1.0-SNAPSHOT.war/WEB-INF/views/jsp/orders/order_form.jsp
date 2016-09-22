@@ -45,7 +45,7 @@
                 <div class="col-sm-10">
                     <form:select path="desk" class="form-control selcls">
                         <form:option value="NONE" label="--- Select Desk ---" />
-                        <form:options items="${deskList}" itemValue="id" itemLabel="deskTitle"/>
+                        <form:options items="${deskList}" itemValue="deskTitle" itemLabel="deskTitle"/>
                     </form:select>
                 </div>
             </div>
@@ -55,7 +55,7 @@
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <label class="col-sm-2 control-label">OrderDate</label>
                 <div class="col-sm-10">
-                    <form:input path="orderDate" type="datetime-local" class="form-control " id="orderDate"/>
+                    <form:input path="orderDate" type="date" class="form-control " id="orderDate"/>
                     <form:errors path="orderDate" class="control-label" />
                 </div>
             </div>

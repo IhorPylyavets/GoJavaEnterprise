@@ -38,8 +38,11 @@ public class Dish implements Serializable {
     @Column(name = "WEIGHT")
     private float weight;
 
-    @ManyToMany(mappedBy = "dishesList", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "dishesInMenu", cascade = CascadeType.ALL)
     private List<Menu> menus = new ArrayList<>();
+
+    /*@ManyToMany(mappedBy = "dishesInOrder", cascade = CascadeType.ALL)
+    private List<Orders> orderses = new ArrayList<>();*/
 
     public Dish() {
     }
@@ -107,6 +110,14 @@ public class Dish implements Serializable {
     public void setMenus(List<Menu> menus) {
         this.menus = menus;
     }
+
+    /*public List<Orders> getOrderses() {
+        return orderses;
+    }
+
+    public void setOrderses(List<Orders> orderses) {
+        this.orderses = orderses;
+    }*/
 
     public boolean isNew() {
         return (this.id == null);

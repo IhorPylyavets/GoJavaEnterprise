@@ -75,7 +75,7 @@ public class HMenuDao implements MenuDao {
                 "FROM Menu as m LEFT JOIN FETCH m.dishes WHERE d.id =" + id);
         Menu menu = (Menu) query.uniqueResult();
 
-        return new ArrayList<Dish>(menu.getDishesList());
+        return new ArrayList<Dish>(menu.getDishesInMenu());
     }
 
     @Override

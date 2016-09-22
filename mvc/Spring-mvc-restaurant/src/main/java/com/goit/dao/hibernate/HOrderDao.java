@@ -2,6 +2,7 @@ package com.goit.dao.hibernate;
 
 import com.goit.dao.OrderDao;
 import com.goit.model.Desk;
+import com.goit.model.Dish;
 import com.goit.model.Employee;
 import com.goit.model.Orders;
 import org.hibernate.Session;
@@ -11,9 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
-public class HOrderDao implements OrderDao{
+public class HOrderDao implements OrderDao {
 
     private SessionFactory sessionFactory;
 
@@ -73,5 +75,23 @@ public class HOrderDao implements OrderDao{
         query.setParameter("id", id);
         query.executeUpdate();
     }
+
+    /*@Transactional
+    public List<Dish> getAllDishByOrderId(int id) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "FROM Orders as m LEFT JOIN FETCH m.dishes WHERE d.id =" + id);
+        Orders orders = (Orders) query.uniqueResult();
+
+        return new ArrayList<Dish>(orders.getDishesInOrder());
+    }
+
+    @Transactional
+    public void updateOrderDishes(int id, List<Dish> newDishes) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("update Orders set dishes = :dishes where id = :id");
+        query.setParameter("dishes", newDishes);
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }*/
 
 }

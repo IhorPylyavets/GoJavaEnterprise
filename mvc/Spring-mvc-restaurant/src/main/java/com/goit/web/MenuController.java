@@ -90,6 +90,8 @@ public class MenuController {
     public String saveOrUpdateMenu(@ModelAttribute("menu_form") @Validated Menu menu,
                                    BindingResult result, final RedirectAttributes redirectAttributes) {
 
+        System.out.println(menu);
+
         if (result.hasErrors()) {
             return "menus/menu_form";
         } else {
@@ -102,7 +104,7 @@ public class MenuController {
             } else {
                 redirectAttributes.addFlashAttribute("msg", "Menu updated successfully!");
                 menuService.updateMenuTitle(menu.getId(), menu.getMenuTitle());
-                menuService.updateMenuDishes(menu.getId(), menu.getDishesList());
+                menuService.updateMenuDishes(menu.getId(), menu.getDishesInMenu());
             }
 
             return "redirect:/menus/" + menu.getId();
