@@ -1,8 +1,12 @@
 package com.goit.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,13 +29,23 @@ public class Orders implements Serializable {
     @Column(name = "ORDER_DATE")
     private Date orderDate;
 
-    /*@ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER )
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(
             name = "orders_to_dishes",
             joinColumns = @JoinColumn(name = "orderId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "dishId", referencedColumnName = "id")
     )
-    private List<Dish> dishesInOrder;*/
+    private List<Dish> dishesInOrder = new ArrayList<>();
+
+    public Orders() {}
+
+    public Orders(Employee waiter, Desk desk, Date orderDate, List<Dish> dishesInOrder) {
+        this.waiter = waiter;
+        this.desk = desk;
+        this.orderDate = orderDate;
+        this.dishesInOrder = dishesInOrder;
+    }
 
     public Integer getId() {
         return id;
@@ -65,6 +79,14 @@ public class Orders implements Serializable {
         this.orderDate = orderDate;
     }
 
+    public List<Dish> getDishesInOrder() {
+        return dishesInOrder;
+    }
+
+    public void setDishesInOrder(List<Dish> dishesInOrder) {
+        this.dishesInOrder = dishesInOrder;
+    }
+
     public boolean isNew() {
         return (this.id == null);
     }
@@ -76,6 +98,7 @@ public class Orders implements Serializable {
                 ", waiter=" + waiter +
                 ", desk=" + desk +
                 ", orderDate=" + orderDate +
+                ", dishesInOrder=" + dishesInOrder +
                 '}';
     }
 
@@ -88,7 +111,8 @@ public class Orders implements Serializable {
 
         if (waiter != null ? !waiter.equals(orders.waiter) : orders.waiter != null) return false;
         if (desk != null ? !desk.equals(orders.desk) : orders.desk != null) return false;
-        return orderDate != null ? orderDate.equals(orders.orderDate) : orders.orderDate == null;
+        if (orderDate != null ? !orderDate.equals(orders.orderDate) : orders.orderDate != null) return false;
+        return dishesInOrder != null ? dishesInOrder.equals(orders.dishesInOrder) : orders.dishesInOrder == null;
 
     }
 
@@ -97,6 +121,7 @@ public class Orders implements Serializable {
         int result = waiter != null ? waiter.hashCode() : 0;
         result = 31 * result + (desk != null ? desk.hashCode() : 0);
         result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
+        result = 31 * result + (dishesInOrder != null ? dishesInOrder.hashCode() : 0);
         return result;
     }
 }

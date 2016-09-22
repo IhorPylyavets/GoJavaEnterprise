@@ -24,7 +24,7 @@ public interface OrderDao {
 
     void updateOrderDate(int id, Date newOrderDate);
 
-    /*List<Dish> getAllDishByOrderId(int id);
+    List<Dish> getAllDishByOrderId(int id);
 
-    void updateOrderDishes(int id, List<Dish> newDishes);*/
+    void updateOrderDishes(int id, List<Dish> newDishes);
 }

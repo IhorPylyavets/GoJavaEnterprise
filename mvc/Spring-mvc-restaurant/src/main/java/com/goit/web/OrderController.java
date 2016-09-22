@@ -5,6 +5,7 @@ import com.goit.dao.DishDao;
 import com.goit.dao.EmployeeDao;
 import com.goit.dao.PositionDao;
 import com.goit.model.Desk;
+import com.goit.model.Dish;
 import com.goit.model.Employee;
 import com.goit.model.Orders;
 import com.goit.service.OrderService;
@@ -31,6 +32,7 @@ public class OrderController {
     private EmployeeDao employeeDao;
     private PositionDao positionDao;
     private DeskDao deskDao;
+    private DishDao dishDao;
 
     @Autowired
     private OrdersValidator ordersValidator;
@@ -43,6 +45,13 @@ public class OrderController {
             @Override
             public void setAsText(String text) {
                 setValue(employeeDao.findEmployeeById(Integer.valueOf(text)));
+            }
+        });
+
+        binder.registerCustomEditor(Dish.class, "dishesInOrder", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                setValue(dishDao.findDishByTitle(text));
             }
         });
 
@@ -84,6 +93,7 @@ public class OrderController {
         model.addAttribute("order_form", order);
         model.addAttribute("waiterList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("waiter")));
         model.addAttribute("deskList", deskDao.getAll()); //getAllFreeDesk());
+        model.addAttribute("dishesAll", dishDao.getAllDish());
 
         return "orders/order_form";
     }
@@ -94,6 +104,7 @@ public class OrderController {
         model.addAttribute("order_form", order);
         model.addAttribute("waiterList", employeeDao.getAllEmployeesByPosition(positionDao.findByTitle("waiter")));
         model.addAttribute("deskList", deskDao.getAll()); //getAllFreeDesk());
+        model.addAttribute("dishesAll", dishDao.getAllDish());
 
         return "orders/order_form";
     }
@@ -113,11 +124,6 @@ public class OrderController {
                 redirectAttributes.addFlashAttribute("msg", "Orders added successfully!");
                 orders.setDesk(deskDao.findByTitle(orders.getDesk().getDeskTitle()));
                 orderService.createOrder(orders);
-
-                List<Orders> ordersList = orderService.getAllOrders();
-                for (Orders o : ordersList) {
-                    System.out.println(o);
-                }
 
             }else{
                 redirectAttributes.addFlashAttribute("msg", "Orders updated successfully!");
@@ -153,5 +159,10 @@ public class OrderController {
     @Autowired
     public void setDeskDao(DeskDao deskDao) {
         this.deskDao = deskDao;
+    }
+
+    @Autowired
+    public void setDishDao(DishDao dishDao) {
+        this.dishDao = dishDao;
     }
 }

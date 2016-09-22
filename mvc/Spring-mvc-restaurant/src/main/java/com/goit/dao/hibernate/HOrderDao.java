@@ -76,7 +76,7 @@ public class HOrderDao implements OrderDao {
         query.executeUpdate();
     }
 
-    /*@Transactional
+    @Transactional
     public List<Dish> getAllDishByOrderId(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "FROM Orders as m LEFT JOIN FETCH m.dishes WHERE d.id =" + id);
@@ -92,6 +92,6 @@ public class HOrderDao implements OrderDao {
         query.setParameter("dishes", newDishes);
         query.setParameter("id", id);
         query.executeUpdate();
-    }*/
+    }
 
 }

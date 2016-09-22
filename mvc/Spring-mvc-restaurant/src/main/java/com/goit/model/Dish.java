@@ -41,8 +41,8 @@ public class Dish implements Serializable {
     @ManyToMany(mappedBy = "dishesInMenu", cascade = CascadeType.ALL)
     private List<Menu> menus = new ArrayList<>();
 
-    /*@ManyToMany(mappedBy = "dishesInOrder", cascade = CascadeType.ALL)
-    private List<Orders> orderses = new ArrayList<>();*/
+    @ManyToMany(mappedBy = "dishesInOrder", cascade = CascadeType.ALL)
+    private List<Orders> orderses = new ArrayList<>();
 
     public Dish() {
     }
@@ -111,13 +111,13 @@ public class Dish implements Serializable {
         this.menus = menus;
     }
 
-    /*public List<Orders> getOrderses() {
+    public List<Orders> getOrderses() {
         return orderses;
     }
 
     public void setOrderses(List<Orders> orderses) {
         this.orderses = orderses;
-    }*/
+    }
 
     public boolean isNew() {
         return (this.id == null);
@@ -147,7 +147,8 @@ public class Dish implements Serializable {
         if (dishTitle != null ? !dishTitle.equals(dish.dishTitle) : dish.dishTitle != null) return false;
         if (ingredients != null ? !ingredients.equals(dish.ingredients) : dish.ingredients != null) return false;
         if (category != null ? !category.equals(dish.category) : dish.category != null) return false;
-        return menus != null ? menus.equals(dish.menus) : dish.menus == null;
+        if (menus != null ? !menus.equals(dish.menus) : dish.menus != null) return false;
+        return orderses != null ? orderses.equals(dish.orderses) : dish.orderses == null;
 
     }
 
@@ -159,6 +160,7 @@ public class Dish implements Serializable {
         result = 31 * result + (price != +0.0f ? Float.floatToIntBits(price) : 0);
         result = 31 * result + (weight != +0.0f ? Float.floatToIntBits(weight) : 0);
         result = 31 * result + (menus != null ? menus.hashCode() : 0);
+        result = 31 * result + (orderses != null ? orderses.hashCode() : 0);
         return result;
     }
 }

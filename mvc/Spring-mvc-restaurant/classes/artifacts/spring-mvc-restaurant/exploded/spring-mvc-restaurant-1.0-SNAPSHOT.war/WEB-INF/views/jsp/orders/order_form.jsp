@@ -61,6 +61,18 @@
             </div>
         </spring:bind>
 
+        <spring:bind path="dishesInOrder">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <label class="col-sm-2 control-label">Dishes</label>
+                <div class="col-sm-10">
+                    <form:select path="dishesInOrder" items="${dishesAll}"
+                                 multiple="true" size="5" class="form-control"
+                                 itemLabel="dishTitle" itemValue="dishTitle"/>
+                    <form:errors path="dishesInOrder" class="control-label" />
+                </div>
+            </div>
+        </spring:bind>
+
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <c:choose>

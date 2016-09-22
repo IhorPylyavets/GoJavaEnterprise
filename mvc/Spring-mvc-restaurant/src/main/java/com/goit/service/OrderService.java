@@ -52,4 +52,14 @@ public class OrderService {
     public void updateOrderDate(int id, Date newOrderDate) {
         orderDao.updateOrderDate(id, newOrderDate);
     }
+
+    @Transactional
+    public List<Dish> getAllDishByOrderId(int id) {
+        return orderDao.getAllDishByOrderId(id);
+    }
+
+    @Transactional
+    public void updateOrderDishes(int id, List<Dish> newDishes) {
+        orderDao.updateOrderDishes(id, newDishes);
+    }
 }
