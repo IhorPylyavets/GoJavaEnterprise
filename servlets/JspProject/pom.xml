@@ -24,7 +24,6 @@
                 <configuration>
                     <webXml>src/main/resources/WEB_INF/web.xml</webXml>
                     <warName>goit</warName>
-
                 </configuration>
             </plugin>
         </plugins>

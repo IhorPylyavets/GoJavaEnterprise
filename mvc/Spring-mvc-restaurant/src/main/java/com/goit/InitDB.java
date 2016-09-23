@@ -66,6 +66,8 @@ public class InitDB {
                 positionDao.findByTitle("manager"), 33000.0F));
         employeeDao.createEmployee(new Employee("Teddy", "BigTeddy", stringToDate("1989-06-19"), "05088221797",
                 positionDao.findByTitle("hookah"), 35000.0F));
+        employeeDao.createEmployee(new Employee("Grot", "Emeli", stringToDate("1983-02-28"), "9988352",
+                positionDao.findByTitle("hookah"), 19060.0F));
         employeeDao.createEmployee(new Employee("Petrov", "Vasilii", stringToDate("1976-05-21"), "06777991102",
                 positionDao.findByTitle("security guard"), 29000.0F));
 

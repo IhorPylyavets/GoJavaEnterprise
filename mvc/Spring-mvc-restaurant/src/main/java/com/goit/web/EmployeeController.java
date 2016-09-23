@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class EmployeeController {
@@ -38,12 +40,20 @@ public class EmployeeController {
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public String showAllEmployees(Model model) {
         model.addAttribute("employees", employeeService.getAllEmployee());
+
+        return "employees/list_employees";
+    }
+
+    @RequestMapping(value = "/employees/search", method = RequestMethod.GET)
+    public String findEmployeeByLastName(@RequestParam("lastName")String lastName, Model model) {
+        model.addAttribute("employees", employeeService.findEmployeeByName(lastName));
         return "employees/list_employees";
     }
 
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
     public String showEmployee(@PathVariable("id") int id, Model model) {
         Employee employee = employeeService.findEmployeeById(id);
+        System.out.println("showEmployee " + id);
         if (employee == null) {
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Employee not found");
