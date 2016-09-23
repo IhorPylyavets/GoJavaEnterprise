@@ -23,7 +23,7 @@
 
     <h1>All Employees</h1>
 
-    <form class="form-inline pull-right">
+    <form action="/employees/search/${name}" class="form-inline pull-right">
         <div class="form-group">
             <input type="text" class="form-control" id="lastName" name="lastName" placeholder="employee lastName">
         </div>

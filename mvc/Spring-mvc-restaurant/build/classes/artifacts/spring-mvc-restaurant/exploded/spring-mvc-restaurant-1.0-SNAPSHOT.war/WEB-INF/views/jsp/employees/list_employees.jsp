@@ -23,16 +23,13 @@
 
     <h1>All Employees</h1>
 
-
-    <%--<div class="form-group ${status.error ? 'has-error' : ''}">
-        <label class="col-sm-2 control-label">Search by Position</label>
-        <div class="col-sm-10">
-            <form:select path="position.positionTitle" class="form-control selcls">
-                <form:option value="NONE" label="--- All ---" />
-                <form:options items="${positionList}" itemValue="positionTitle" itemLabel="positionTitle"/>
-            </form:select>
+    <form action="/employees/search/${name}" class="form-inline pull-right">
+        <div class="form-group">
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="employee lastName">
         </div>
-    </div>--%>
+        <spring:url value="/employees/search/${lastName}" var="urlSearchEmployees" />
+        <button class="btn btn-primary" onclick="location.href='${urlSearchEmployees}'">Search by LastName</button>
+    </form>
 
     <table class="table table-striped">
         <thead>

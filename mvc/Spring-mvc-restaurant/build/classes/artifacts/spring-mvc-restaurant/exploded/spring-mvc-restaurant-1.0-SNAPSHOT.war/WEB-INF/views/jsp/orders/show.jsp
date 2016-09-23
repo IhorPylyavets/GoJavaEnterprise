@@ -43,6 +43,18 @@
         <div class="col-sm-10">${order.orderDate}</div>
     </div>
 
+    <div class="row">
+        <label class="col-sm-2">DISHES</label>
+        <div class="col-sm-10">
+            [
+            <c:forEach items="${order.dishesInOrder}" var="dish" varStatus="stat">
+                ${dish.dishTitle}
+                <c:if test="${!stat.last}">|</c:if>
+            </c:forEach>
+            ]
+        </div>
+    </div>
+
 </div>
 
 <jsp:include page="../fragments/footer.jsp" />

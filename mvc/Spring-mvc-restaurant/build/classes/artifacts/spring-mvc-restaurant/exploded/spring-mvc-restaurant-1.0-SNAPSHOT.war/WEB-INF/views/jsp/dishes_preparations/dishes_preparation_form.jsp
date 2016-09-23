@@ -33,7 +33,7 @@
                 <div class="col-sm-10">
                     <form:select path="dish" class="form-control selcls">
                         <form:option value="NONE" label="--- Select Dish ---" />
-                        <form:options items="${dish}" itemValue="id" itemLabel="dishTitle"/>
+                        <form:options items="${dishList}" itemValue="id" itemLabel="dishTitle"/>
                     </form:select>
                 </div>
             </div>
@@ -41,7 +41,7 @@
 
         <spring:bind path="cook">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <label class="col-sm-2 control-label">Cook</label>
+                <label class="col-sm-2 control-label">Waiter</label>
                 <div class="col-sm-10">
                     <form:select path="cook" class="form-control selcls">
                         <form:option value="NONE" label="--- Select Cook ---" />
@@ -51,13 +51,13 @@
             </div>
         </spring:bind>
 
-        <spring:bind path="orderValue">
+        <spring:bind path="order">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <label class="col-sm-2 control-label">Order</label>
                 <div class="col-sm-10">
-                    <form:select path="orderValue" class="form-control selcls">
+                    <form:select path="order" class="form-control selcls">
                         <form:option value="NONE" label="--- Select Order ---" />
-                        <form:options items="${orderValuekList}" itemValue="id" itemLabel="id"/>
+                        <form:options items="${orderList}" itemValue="id" itemLabel="id"/>
                     </form:select>
                 </div>
             </div>
@@ -67,7 +67,7 @@
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <label class="col-sm-2 control-label">DishesPreparationDate</label>
                 <div class="col-sm-10">
-                    <form:input path="datePreparation" type="datetime-local" class="form-control " id="datePreparation"/>
+                    <form:input path="datePreparation" type="date" class="form-control " id="datePreparation"/>
                     <form:errors path="datePreparation" class="control-label" />
                 </div>
             </div>

@@ -37,14 +37,14 @@
             </div>
         </spring:bind>
 
-        <spring:bind path="dishesList">
+        <spring:bind path="dishesInMenu">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <label class="col-sm-2 control-label">Dishes</label>
                 <div class="col-sm-10">
-                    <form:select path="dishesList" items="${dishesAll}"
+                    <form:select path="dishesInMenu" items="${dishesAll}"
                                  multiple="true" size="5" class="form-control"
                                  itemLabel="dishTitle" itemValue="dishTitle"/>
-                    <form:errors path="dishesList" class="control-label" />
+                    <form:errors path="dishesInMenu" class="control-label" />
                 </div>
             </div>
         </spring:bind>
