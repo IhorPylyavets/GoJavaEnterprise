@@ -51,7 +51,6 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
     public String showEmployee(@PathVariable("id") int id, Model model) {
         Employee employee = employeeService.findEmployeeById(id);
-        System.out.println("showEmployee " + id);
         if (employee == null) {
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Employee not found");

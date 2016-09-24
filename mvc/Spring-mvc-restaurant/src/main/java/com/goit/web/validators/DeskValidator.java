@@ -18,8 +18,5 @@ public class DeskValidator implements Validator {
         Desk desk = (Desk) target;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "deskTitle", "", "DeskTitle is empty");
 
-        if (desk.getDeskStatus() != null) {
-            errors.rejectValue("deskStatus", "", "DeskStatus is not valid");
-        }
     }
 }

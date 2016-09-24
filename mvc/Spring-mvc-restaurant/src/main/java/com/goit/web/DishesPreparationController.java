@@ -8,7 +8,7 @@ import com.goit.model.Dish;
 import com.goit.model.DishesPreparation;
 import com.goit.model.Employee;
 import com.goit.model.Orders;
-import com.goit.service.*;
+import com.goit.service.DishesPreparationService;
 import com.goit.web.validators.DishesPreparationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -23,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.beans.PropertyEditorSupport;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 @Controller
 public class DishesPreparationController {
@@ -130,8 +129,6 @@ public class DishesPreparationController {
             redirectAttributes.addFlashAttribute("css", "success");
             if(dishesPreparation.isNew()){
                 redirectAttributes.addFlashAttribute("msg", "DishesPreparation added successfully!");
-
-                //employee.setPosition(positionService.findPositionByTitle(employee.getPosition().getPositionTitle()));
                 dishesPreparationService.createDishesPreparation(dishesPreparation);
 
             }else{

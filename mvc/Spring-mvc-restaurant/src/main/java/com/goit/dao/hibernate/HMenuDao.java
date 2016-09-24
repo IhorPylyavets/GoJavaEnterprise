@@ -81,11 +81,13 @@ public class HMenuDao implements MenuDao {
     @Override
     @Transactional
     public void updateMenuDishes(int id, List<Dish> newDishes) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("update Menu set dishesList = :dishesList where id = :id");
-        query.setParameter("dishesList", newDishes);
+        // !!! not work
+
+        /*Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("update Menu set dishesInMenu = :dishesInMenu where id = :id");
+        query.setParameter("dishesInMenu", newDishes);
         query.setParameter("id", id);
-        query.executeUpdate();
+        query.executeUpdate();*/
     }
 
 }

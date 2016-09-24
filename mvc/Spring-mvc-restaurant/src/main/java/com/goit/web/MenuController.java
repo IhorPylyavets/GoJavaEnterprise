@@ -3,7 +3,6 @@ package com.goit.web;
 import com.goit.dao.DishDao;
 import com.goit.model.Dish;
 import com.goit.model.Menu;
-import com.goit.service.DishService;
 import com.goit.service.MenuService;
 import com.goit.web.validators.MenuValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.beans.PropertyEditorSupport;
-import java.util.List;
 
 @Controller
 public class MenuController {
@@ -31,7 +29,7 @@ public class MenuController {
     public void dataBinding(WebDataBinder binder) {
         binder.addValidators(menuValidator);
 
-        binder.registerCustomEditor(Dish.class, "dishesList", new PropertyEditorSupport() {
+        binder.registerCustomEditor(Dish.class, "dishesInMenu", new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) {
                 setValue(dishDao.findDishByTitle(text));
@@ -90,8 +88,6 @@ public class MenuController {
     public String saveOrUpdateMenu(@ModelAttribute("menu_form") @Validated Menu menu,
                                    BindingResult result, final RedirectAttributes redirectAttributes) {
 
-        System.out.println(menu);
-
         if (result.hasErrors()) {
             return "menus/menu_form";
         } else {
@@ -102,6 +98,7 @@ public class MenuController {
                 menuService.createMenu(menu);
 
             } else {
+                //System.out.println("menu for update: " + menu);
                 redirectAttributes.addFlashAttribute("msg", "Menu updated successfully!");
                 menuService.updateMenuTitle(menu.getId(), menu.getMenuTitle());
                 menuService.updateMenuDishes(menu.getId(), menu.getDishesInMenu());
