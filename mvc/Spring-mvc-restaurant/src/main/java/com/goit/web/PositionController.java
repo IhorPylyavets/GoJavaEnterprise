@@ -12,8 +12,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Map;
-
 @Controller
 public class PositionController {
 
@@ -25,11 +23,6 @@ public class PositionController {
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
         binder.addValidators(positionValidator);
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String main(Map<String, Object> model) {
-        return "redirect:/positions";
     }
 
     @RequestMapping(value = "/positions", method = RequestMethod.GET)

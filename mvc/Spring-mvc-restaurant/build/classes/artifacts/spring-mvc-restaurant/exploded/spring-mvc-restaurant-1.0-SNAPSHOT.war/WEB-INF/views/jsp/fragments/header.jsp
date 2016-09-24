@@ -10,6 +10,7 @@
 </head>
 
 <spring:url value="/" var="urlHome" />
+<spring:url value="/positions" var="urlPosition" />
 <spring:url value="/employees" var="urlEmployee" />
 <spring:url value="/ingredients" var="urlIngredient" />
 <spring:url value="/menus" var="urlMenu" />
@@ -23,7 +24,10 @@
 <nav class="navbar navbar-inverse ">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="${urlHome}">Positions</a>
+			<a class="navbar-brand" href="${urlHome}">GoIt PUB</a>
+		</div>
+		<div class="navbar-header">
+			<a class="navbar-brand" href="${urlPosition}">Positions</a>
 		</div>
 		<div class="navbar-header">
 			<a class="navbar-brand" href="${urlEmployee}">Employees</a>
