@@ -44,7 +44,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employees/search", method = RequestMethod.GET)
     public String findEmployeeByLastName(@RequestParam("lastName")String lastName, Model model) {
-        model.addAttribute("employees", employeeService.findEmployeeByName(lastName));
+        model.addAttribute("employees", employeeService.findEmployeeByLastName(lastName));
         return "employees/list_employees";
     }
 

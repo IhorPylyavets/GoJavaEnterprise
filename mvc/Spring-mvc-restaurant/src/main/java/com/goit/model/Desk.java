@@ -1,5 +1,7 @@
 package com.goit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -52,6 +54,7 @@ public class Desk implements Serializable {
         this.deskStatus = deskStatus;
     }
 
+    @JsonIgnore
     public boolean isNew() {
         return (this.id == null);
     }

@@ -48,12 +48,23 @@ public class HEmployeeDao implements EmployeeDao {
     }
 
     @Transactional
-    public List<Employee> findEmployeeByName(String lastName) {
+    public List<Employee> findEmployeeByLastName(String lastName) {
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
         Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
         Predicate condition = criteriaBuilder.equal(employeeRoot.get(LAST_NAME), lastName);
+        criteriaQuery.where(condition);
+        return session.createQuery(criteriaQuery).getResultList();
+    }
+
+    @Transactional
+    public List<Employee> findEmployeeByFirstName(String firstName) {
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+        Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
+        Predicate condition = criteriaBuilder.equal(employeeRoot.get(FIRST_NAME), firstName);
         criteriaQuery.where(condition);
         return session.createQuery(criteriaQuery).getResultList();
     }

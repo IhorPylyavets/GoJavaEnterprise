@@ -1,5 +1,7 @@
 package com.goit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -39,6 +41,7 @@ public class Category implements Serializable{
         this.categoryTitle = categoryTitle;
     }
 
+    @JsonIgnore
     public boolean isNew() {
         return (this.id == null);
     }

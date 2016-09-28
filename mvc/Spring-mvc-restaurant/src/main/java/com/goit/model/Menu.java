@@ -1,7 +1,6 @@
 package com.goit.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -60,6 +59,7 @@ public class Menu implements Serializable {
         this.dishesInMenu = dishesInMenu;
     }
 
+    @JsonIgnore
     public boolean isNew() {
         return (this.id == null);
     }

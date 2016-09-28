@@ -18,8 +18,13 @@ public class EmployeeService{
     }
 
     @Transactional
-    public List<Employee> findEmployeeByName(String lastName) {
-        return employeeDao.findEmployeeByName(lastName);
+    public List<Employee> findEmployeeByLastName(String lastName) {
+        return employeeDao.findEmployeeByLastName(lastName);
+    }
+
+    @Transactional
+    public List<Employee> findEmployeeByFirstName(String firstName) {
+        return employeeDao.findEmployeeByFirstName(firstName);
     }
 
     @Transactional

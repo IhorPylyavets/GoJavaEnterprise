@@ -1,18 +1,13 @@
 package com.goit.web;
 
 import com.goit.model.Employee;
+import com.goit.model.EmployeeSimple;
 import com.goit.model.Menu;
-import com.goit.model.Orders;
-import com.goit.model.Position;
 import com.goit.service.EmployeeService;
 import com.goit.service.MenuService;
 import com.goit.service.OrderService;
-import com.goit.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +20,6 @@ public class RestaurantRestController {
     private EmployeeService employeeService;
     private OrderService orderService;
 
-    /*@RequestMapping(value = "/rest/menus", method = RequestMethod.GET)
-    public List<Menu> menus(Map<String, Object> model) {
-        return menuService.getAllMenu();
-    }*/
-
     @RequestMapping(value = "/rest/menus/menusTitle", method = RequestMethod.GET)
     public List<String> menusTitle(Map<String, Object> model) {
         List<Menu> menus = menuService.getAllMenu();
@@ -40,24 +30,45 @@ public class RestaurantRestController {
         return menusTitle;
     }
 
-    /*@RequestMapping(value = "/rest/{id}", method = RequestMethod.GET)
-    public Menu menu(@PathVariable int id) {
-        return menuService.findMenuById(id);
-    }*/
-
-    @RequestMapping(value = "/rest/orders", method = RequestMethod.GET)
-    public List<Orders> orders(Map<String, Object> model) {
-        return orderService.getAllOrders();
-    }
-
     @RequestMapping(value = "/rest/employees", method = RequestMethod.GET)
-    public List<Employee> employees(Map<String, Object> model) {
-        return employeeService.getAllEmployee();
+    public List<EmployeeSimple> employees(Map<String, Object> model) {
+        List<Employee> employees = employeeService.getAllEmployee();
+        List<EmployeeSimple> employeeSimples = new ArrayList<>();
+
+        for (Employee employee : employees) {
+            EmployeeSimple simple = new EmployeeSimple();
+            simple.setId(employee.getId());
+            simple.setFirstName(employee.getFirstName());
+            simple.setLastName(employee.getLastName());
+
+            employeeSimples.add(simple);
+        }
+
+        return employeeSimples;
     }
 
     @RequestMapping(value = "/rest/employees/{id}", method = RequestMethod.GET)
-    public Employee employee(@PathVariable int id) {
+    public Employee employeeById(@PathVariable int id) {
         return employeeService.findEmployeeById(id);
+    }
+
+    @RequestMapping(value = "/rest/employees/by_lastName", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Employee> employeeByLastName(@RequestParam("lastName") String lastName) {
+        return employeeService.findEmployeeByLastName(lastName);
+    }
+
+    @RequestMapping(value = "/rest/employees/by_firstName", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Employee> employeeByFirstName(@RequestParam("firstName") String firstName) {
+        return employeeService.findEmployeeByFirstName(firstName);
+    }
+
+    @RequestMapping(value = "/rest/employees/by_fullName", method = RequestMethod.GET)
+    @ResponseBody
+    public Employee employeeByFullName(@RequestParam("lastName") String lastName,
+                                       @RequestParam("firstName") String firstName) {
+        return employeeService.findEmployeeByFullName(lastName, firstName);
     }
 
     @Autowired
@@ -74,4 +85,5 @@ public class RestaurantRestController {
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
+
 }

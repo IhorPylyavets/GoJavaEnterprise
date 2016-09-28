@@ -1,9 +1,8 @@
 package com.goit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +118,7 @@ public class Dish implements Serializable {
         this.orderses = orderses;
     }
 
+    @JsonIgnore
     public boolean isNew() {
         return (this.id == null);
     }

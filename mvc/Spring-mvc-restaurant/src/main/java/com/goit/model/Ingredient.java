@@ -1,5 +1,7 @@
 package com.goit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,6 +53,7 @@ public class Ingredient implements Serializable{
         this.dishes = dishes;
     }
 
+    @JsonIgnore
     public boolean isNew() {
         return (this.id == null);
     }

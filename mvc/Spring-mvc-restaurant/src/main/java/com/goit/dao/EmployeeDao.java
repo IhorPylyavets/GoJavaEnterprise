@@ -12,7 +12,9 @@ public interface EmployeeDao {
 
     Employee findEmployeeById(int id);
 
-    List<Employee> findEmployeeByName(String lastName);
+    List<Employee> findEmployeeByLastName(String lastName);
+
+    List<Employee> findEmployeeByFirstName(String firstName);
 
     Employee findEmployeeByFullName(String lastName, String firstName);
 
