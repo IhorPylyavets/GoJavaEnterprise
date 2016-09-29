@@ -37,9 +37,11 @@ public class Dish implements Serializable {
     @Column(name = "WEIGHT")
     private float weight;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "dishesInMenu", cascade = CascadeType.ALL)
     private List<Menu> menus = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "dishesInOrder", cascade = CascadeType.ALL)
     private List<Orders> orderses = new ArrayList<>();
 

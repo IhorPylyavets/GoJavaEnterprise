@@ -19,6 +19,7 @@ public class Ingredient implements Serializable{
     @Column(name = "INGREDIENT_TITLE")
     private String ingredientTitle;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "ingredients", cascade = CascadeType.ALL)
     private List<Dish> dishes = new ArrayList<>();
 

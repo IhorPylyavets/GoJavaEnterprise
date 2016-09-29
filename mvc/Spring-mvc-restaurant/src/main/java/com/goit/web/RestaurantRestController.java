@@ -3,6 +3,7 @@ package com.goit.web;
 import com.goit.model.Employee;
 import com.goit.model.EmployeeSimple;
 import com.goit.model.Menu;
+import com.goit.model.Orders;
 import com.goit.service.EmployeeService;
 import com.goit.service.MenuService;
 import com.goit.service.OrderService;
@@ -20,6 +21,12 @@ public class RestaurantRestController {
     private EmployeeService employeeService;
     private OrderService orderService;
 
+    //rest for menus
+    @RequestMapping(value = "/rest/menus", method = RequestMethod.GET)
+    public List<Menu> menus(Map<String, Object> model) {
+        return menuService.getAllMenu();
+    }
+
     @RequestMapping(value = "/rest/menus/menusTitle", method = RequestMethod.GET)
     public List<String> menusTitle(Map<String, Object> model) {
         List<Menu> menus = menuService.getAllMenu();
@@ -30,6 +37,29 @@ public class RestaurantRestController {
         return menusTitle;
     }
 
+    @RequestMapping(value = "/rest/menus/{id}", method = RequestMethod.GET)
+    public Menu menuById(@PathVariable int id) {
+        return menuService.findMenuById(id);
+    }
+
+    @RequestMapping(value = "/rest/menus/by_menuTitle", method = RequestMethod.GET)
+    @ResponseBody
+    public Menu menuByTitle(@RequestParam("menuTitle") String menuTitle) {
+        return menuService.findMenuByTitle(menuTitle);
+    }
+
+    //rest for menus
+    @RequestMapping(value = "/rest/orders", method = RequestMethod.GET)
+    public List<Orders> orders(Map<String, Object> model) {
+        return orderService.getAllOrders();
+    }
+
+    @RequestMapping(value = "/rest/orders/{id}", method = RequestMethod.GET)
+    public Orders ordersById(@PathVariable int id) {
+        return orderService.findOrderById(id);
+    }
+
+    //rest for menus
     @RequestMapping(value = "/rest/employees", method = RequestMethod.GET)
     public List<EmployeeSimple> employees(Map<String, Object> model) {
         List<Employee> employees = employeeService.getAllEmployee();
